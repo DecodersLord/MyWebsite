@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" type="text/css" href="style.css" /> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script>
+    tailwind.config = {
+        theme: {
+        extend: {
+            fontFamily: {
+            'press-start': ['"Press Start 2P"', 'cursive']
+            },
+            colors: {
+                'mid-blue': '#1967e7',
+            },
+            backgroundImage: theme => ({
+            'pixel-pattern': "url('/img/pixel-pattern.png')"
+            })
+        }
+        },
+        variants: {},
+        plugins: []
+    }
+    </script>
+
+</head>
+<body class="bg-gray-900 text-white font-press-start bg-pixel-pattern">
+    <nav class="mx-auto h-20 items-center bg-gray-900 px-8 py-2 text-center text-lg text-white">
+        <div class="container mx-auto flex h-full items-center justify-between">
+            <!-- Set height to 'h-full' -->
+            <a href="#" class="text-lg font-semibold">Priyank Sevak</a>
+            <div class="hidden md:block">
+            <div class="mt-auto text-center">
+                <a href="#skills_section" class="mx-2 font-bold" onclick="blink(this)">Skills</a>
+                <a href="#projects" class="mx-2">Projects</a>
+                <a href="#experience" class="mx-2">Experience</a>
+            </div>
+            </div>
+            <div class="md:hidden">
+            <button id="menuButton" class="focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            </div>
+        </div>
+        <div id="menu" class="mt-2 hidden md:hidden">
+            <a href="#skills_section" class="block py-1 text-white hover:bg-gray-100 hover:text-gray-700">Skills</a>
+            <a href="#experience" class="block py-1 text-white hover:bg-gray-100 hover:text-gray-700">Experience</a>
+            <a href="#projects" class="block py-1 text-white hover:bg-gray-100 hover:text-gray-700">Projects</a>
+        </div>
+    </nav>
+
+    <!-- ... -->
+    <section class="container mx-auto p-6">
+        <h2 class="text-2xl font-bold mb-5">Summary</h2>
+        <div class="flex lg:flex-row sm:flex-col md:flex-col">
+            <img src="../assets/player.png" alt="" class="h-64">
+            <div class="flex flex-col m-8 gap-6">
+                <h1>Diving into the binary seas, I navigate as a software engineer, crafting websites with the finesse of a web developer and the strategic thinking of a game master.</h1>
+                <div class="grid grid-cols-4 gap-28">
+                    <div class="flex flex-col w-full h-full items-center justify-center">
+                        <img src="../assets/Shield.png" alt="">
+                        <h2 class="text-center">Resilient</h2>
+                        <p></p>
+                    </div>
+                    <div class="flex flex-col w-full h-full items-center justify-center">
+                        <img src="../assets/group-white.png" alt="">
+                        <h2 class="text-center">Team Player</h2>
+                        <p></p>
+                    </div>
+                    <div class="flex flex-col w-full h-full items-center justify-center">
+                        <img src="../assets/bulb-2.png" alt="">
+                        <h2 class="text-center">Critical Thinker</h2>
+                        <p></p>
+                    </div>
+                    <div class="flex flex-col w-full h-full items-center justify-center">
+                        <img src="../assets/motivated.png" alt="" class="h-50">
+                        <h2 class="text-center mt-2">Self Motivated</h2>
+                        <p></p>
+                    </div>
+
+                </div>
+            </div>
+            
+        </div>
+        
+    </section>
+    <section id="skills_section" class="container mx-auto p-6">
+        <h2 class="text-2xl font-bold mb-5">Skills</h2>
+        <div class="grid grid-cols-4 gap-4">
+        <div class="col-span-1 space-y-1">
+            <button class="w-full py-2 px-4 bg-mid-blue text-white rounded hover:bg-blue-700 focus:outline-none" id="FrontEnd" onclick="updateSkills('FrontEnd')">FrontEnd</button>
+            <button class="w-full py-2 px-4 bg-mid-blue text-white rounded hover:bg-blue-700 focus:outline-none" id="Backend" onclick="updateSkills('Backend')">Backend</button>
+            <button class="w-full py-2 px-4 bg-mid-blue text-white rounded hover:bg-blue-700 focus:outline-none" id="DevOps" onclick="updateSkills('DevOps')">DevOps</button>
+            <button class="w-full py-2 px-4 bg-mid-blue text-white rounded hover:bg-blue-700 focus:outline-none" id="Database" onclick="updateSkills('Database')">Database</button>
+        </div>
+        <div id="skills" class="col-span-3 space-y-1">
+            <!-- Skills will be inserted here -->
+        </div>
+    </section>
+
+
+    <section id="projects" class="container mx-auto p-6">
+        <h2 class="text-2xl font-bold mb-5">Projects</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+            <div class="flex flex-col justify-center items-center bg-[url('../assets/meta-gradient-dark.png')] bg-cover p-4 rounded transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
+                <!-- <img src="project_image.jpg" alt="Project 1" class="w-full h-32 object-cover mb-2"> -->
+                <h3 class="text-center text-blue-600">Asset Management</h3>
+                <p class="text-center mt-6">Modifying various aspects of <a href="https://github.com/snipe/snipe-it" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline decoration-sky-500">SnipeIT</a> project to help manage company assets.</p>
+                <div class="flex flex-row gap-2 mt-auto"> 
+                    <!-- <a href="https://www.google.com" class="block w-1/2 py-2 mt-4 text-center bg-blue-600 rounded">View Project</a> -->
+                    <a href="https://github.com/DecodersLord/AssetManagement" target="_blank"  rel="noopener noreferrer" class="block px-2 py-2 mt-4 text-center bg-blue-600 rounded">View Source</a>
+                </div>
+            </div>
+            <div class="flex flex-col justify-center items-center bg-[url('../assets/meta-gradient-dark.png')] bg-cover p-4 rounded transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
+                <!-- <img src="project_image.jpg" alt="Project 1" class="w-full h-32 object-cover mb-2"> -->
+                <h3 class="text-center text-blue-600">Chat application</h3>
+                <p class="text-center mt-6">A Basic Chat App that allows users to chat with each other in real time.</p>
+                <div class="flex flex-row gap-2 mt-auto"> 
+                    <a href="https://one00x-assignment-1-chat-app.onrender.com" target="_blank" rel="noopener noreferrer" class="block px-2 py-2 mt-4 text-center bg-blue-600 rounded">View Project</a>
+                    <a href="https://github.com/DecodersLord/chat-app" target="_blank" rel="noopener noreferrer" class="block px-2 py-2 mt-4 text-center bg-blue-600 rounded">View Source</a>
+                </div>
+            </div>
+            <div class="flex flex-col justify-center items-center bg-[url('../assets/meta-gradient-dark.png')] bg-cover p-4 rounded transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
+                <!-- <img src="project_image.jpg" alt="Project 1" class="w-full h-32 object-cover mb-2"> -->
+                <h3 class="text-center text-blue-600">Fitness Digital</h3>
+                <p class="text-center mt-6">Developed and launched an E-commerce website for a fitness equipment and tracker company,
+                                        resulting in a 40% increase in online sales and a 25% growth in customer base within the first year.</p>
+                <div class="flex flex-row gap-2 mt-auto"> 
+                    <!-- <a href="https://one00x-assignment-1-chat-app.onrender.com" class="block px-2 py-2 mt-4 text-center bg-blue-600 rounded">View Project</a> -->
+                    <a href="https://drive.google.com/file/d/1Xm-k_7PvqZKN7DmiS-FlQ1ySQBbRLUi2/view" rel="noopener noreferrer" target="_blank" class="block px-2 py-2 mt-4 text-center bg-blue-600 rounded">View Source</a>
+                </div>
+            </div>
+            
+        </div>
+        
+    </section>
+    <section id="experience" class="container mx-auto p-6">
+        <h2 class="text-2xl font-bold mb-5">Experience</h2>
+
+        <div class="flex flex-col md:flex-row">
+            <!-- Timeline -->
+            <div class="md:mr-8 relative w-1/3">
+                <div class="relative md:flex">
+                    <div class="md:w-full">
+                        <div class="mt-2 mb-36">
+                            <div class="font-semibold">Sept 2021 - Present</div>
+                            <div class="text-gray-600">Current Job</div>
+                        </div>
+                        <div class="mt-2 mb-32">
+                            <div class="font-semibold">March 2021 - Sept 2021</div>
+                        </div>
+                        <div class="mt-2">
+                            <div class="font-semibold">Jan 2021 - Feb 2021</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Experience Details -->
+            <div class="relative border-l-2 w-full">
+                <div class="mb-4 ml-8 relative">
+                    <span class="bg-blue-600 ring-black absolute left-0 top-0 mt-2 -ml-11 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-offset-slate-900	"></span>
+                    <h2 class="text-xl font-bold pl-8 text-blue-600">Assistance Services Group – A Sykes Company</h2>
+                    <h3 class="text-md font-bold pl-8">Software Engineer | London, ON</h3>
+                    <ul class="text-sm font-bold pl-8 pt-4 list-image-[url('../assets/next.png')]">
+                        <li>Led end-to-end SDLC processes</li>
+                        <li>Enhanced user experience by 25%</li>
+                        <li>Exemplary problem-solving skills</li>
+                        <li>Maintained high productivity under tight deadlines</li>
+                        <li>Streamlined API integration with Salesforce</li>
+                    </ul>
+                </div>
+                <div class="mb-4 ml-8 relative">
+                <span class="bg-blue-600 ring-black absolute left-0 top-0 mt-2 -ml-11 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-offset-slate-900	"></span>
+                    <h2 class="text-xl font-bold pl-8 text-blue-600">Assistance Services Group – A Sykes Company</h2>
+                    <h3 class="text-md font-bold pl-8">Technical Support Specialist | London, ON</h3>
+                    <ul class="text-sm font-bold pl-8 pt-4 list-image-[url('../assets/next.png')]">
+                        <li>Developed company's Asset Management Tool</li>
+                        <li>Resolved complex client issues effectively</li>
+                        <li>Proactive follow-up on specialized problems</li>
+                        <li>Improved support, increased issue resolution by 10%</li>
+                    </ul>
+                </div>
+                <div class="mb-4 ml-8 relative">
+                <span class="bg-blue-600 ring-black absolute left-0 top-0 mt-2 -ml-11 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-offset-slate-900	"></span>
+                    <h2 class="text-xl font-bold pl-8 text-blue-600">Randstad – TD Canada Trust</h2>
+                    <h3 class="text-md font-bold pl-8">IT Operational Analyst I (Technical Support) | London, ON</h3>
+                    <ul class="text-sm font-bold pl-8 pt-4 list-image-[url('../assets/next.png')]">
+                        <li>Assisted users with remote login and password resets</li>
+                        <li>Documented incidents and activities for issue tracking</li>
+                        <li>Resolved 40-50 inbound calls, focusing on access-related issues</li>
+                    </ul>
+                </div>
+                <!-- Add more experience details as needed -->
+            </div>
+        </div>
+    </section>
+<!-- ... -->
+<script src="script.js"></script>
+</body>
+</html>
