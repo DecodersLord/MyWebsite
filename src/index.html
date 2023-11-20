@@ -9,15 +9,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
+    
     <script>
+    
     tailwind.config = {
         theme: {
         extend: {
             fontFamily: {
-            'press-start': ['"Press Start 2P"', 'cursive']
+            'press-start': ['"Press Start 2P"', 'cursive'],
+            'space' : ['"Space Grotesk"','sans-serif']
             },
             colors: {
                 'mid-blue': '#1967e7',
+            },
+            height: {
+                'half-screen': '50vh',
+                'quater-screen': '78vh'
             },
             backgroundImage: theme => ({
             'pixel-pattern': "url('/img/pixel-pattern.png')"
@@ -30,16 +38,17 @@
     </script>
 
 </head>
-<body class="bg-gray-900 text-white font-press-start bg-pixel-pattern">
-    <nav class="mx-auto h-20 items-center bg-gray-900 px-8 py-2 text-center text-lg text-white">
+<body class="bg-gray-900 text-white font-press-start leading-8 text-2xl">
+    <nav class="fixed top-0 mx-auto h-20 w-full items-center bg-gray-900 px-8 py-2 text-center text-white z-50">
         <div class="container mx-auto flex h-full items-center justify-between">
             <!-- Set height to 'h-full' -->
-            <a href="#" class="text-lg font-semibold">Priyank Sevak</a>
+            <a href="#" class="font-semibold">Priyank Sevak</a>
             <div class="hidden md:block">
             <div class="mt-auto text-center">
                 <a href="#skills_section" class="mx-2 font-bold" onclick="blink(this)">Skills</a>
                 <a href="#projects" class="mx-2">Projects</a>
                 <a href="#experience" class="mx-2">Experience</a>
+                <a href="#experience" class="mx-2">Contact Me</a>
             </div>
             </div>
             <div class="md:hidden">
@@ -54,16 +63,25 @@
             <a href="#skills_section" class="block py-1 text-white hover:bg-gray-100 hover:text-gray-700">Skills</a>
             <a href="#experience" class="block py-1 text-white hover:bg-gray-100 hover:text-gray-700">Experience</a>
             <a href="#projects" class="block py-1 text-white hover:bg-gray-100 hover:text-gray-700">Projects</a>
+            <a href="#projects" class="block py-1 text-white hover:bg-gray-100 hover:text-gray-700">Contact Me</a>
         </div>
     </nav>
 
+
     <!-- ... -->
-    <section class="container mx-auto p-6">
-        <h2 class="text-2xl font-bold mb-5">Summary</h2>
-        <div class="flex lg:flex-row sm:flex-col md:flex-col">
-            <img src="../assets/player.png" alt="" class="h-64">
+    <section class="container mx-auto p-6 mt-16 min-h-screen">
+        <div class="flex lg:flex-col sm:flex-col md:flex-col">
+            <div class="flex flex-row gap-6 h-half-screen">
+                <div class="flex flex-shrink-0 px-4 items-center justify-center">
+                    <img src="../assets/profile-pic.jpeg" alt="..." class="shadow rounded-full max-w-full h-auto align-middle border-white border-4">
+                </div>
+                <div class="flex justify-center items-center">
+                    <h1>Diving into the binary seas, I navigate as a software engineer, crafting websites with the finesse of a web developer and the strategic thinking of a game master.</h1>
+                </div>
+            </div>
+
             <div class="flex flex-col m-8 gap-6">
-                <h1>Diving into the binary seas, I navigate as a software engineer, crafting websites with the finesse of a web developer and the strategic thinking of a game master.</h1>
+                
                 <div class="grid grid-cols-4 gap-28">
                     <div class="flex flex-col w-full h-full items-center justify-center">
                         <img src="../assets/Shield.png" alt="">
@@ -92,35 +110,91 @@
         </div>
         
     </section>
-    <section id="skills_section" class="container mx-auto p-6">
-        <h2 class="text-2xl font-bold mb-5">Skills</h2>
-        <div class="grid grid-cols-4 gap-4">
-        <div class="col-span-1 space-y-1">
-            <button class="w-full py-2 px-4 bg-mid-blue text-white rounded hover:bg-blue-700 focus:outline-none" id="FrontEnd" onclick="updateSkills('FrontEnd')">FrontEnd</button>
-            <button class="w-full py-2 px-4 bg-mid-blue text-white rounded hover:bg-blue-700 focus:outline-none" id="Backend" onclick="updateSkills('Backend')">Backend</button>
-            <button class="w-full py-2 px-4 bg-mid-blue text-white rounded hover:bg-blue-700 focus:outline-none" id="DevOps" onclick="updateSkills('DevOps')">DevOps</button>
-            <button class="w-full py-2 px-4 bg-mid-blue text-white rounded hover:bg-blue-700 focus:outline-none" id="Database" onclick="updateSkills('Database')">Database</button>
+    <section id="skills_section" class="container mx-auto p-6 min-h-screen flex flex-col justify-start pt-24 mt-[-24px]">
+        <div class="flex flex-start">
+            <h2 class="text-center text-2xl font-bold mb-5">Skills</h2>
         </div>
-        <div id="skills" class="col-span-3 space-y-1">
-            <!-- Skills will be inserted here -->
-        </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 h-quater-screen w-full">
+                <div class="flex flex-col justify-start items-center bg-white border border-4 border-indigo-700 rounded-lg shadow dark:bg-gray-800 bg-cover p-4 rounded transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
+                    <h3 class="text-center top-0 text-blue-600">Front End</h3>
+                    <div class="grid mt-6 grid-cols-3 gap-4"> 
+                        <div class="flex flex-col justify-center items-center gap-4">
+                            <h3 class="text-sm" >HTML</h3>
+                            <img src="../assets/html-5.png" alt="" class="w-36 h-36">
+                        </div>
+                        <div class="flex flex-col justify-center items-center gap-4">
+                            <h3 class="text-sm">CSS</h3>
+                            <img src="../assets/css-3.png" alt="" class="w-36 h-36">
+                        </div>
+                        <div class="flex flex-col justify-center items-center gap-4">
+                            <h3 class="w-fit text-sm">Tailwind</h3>
+                            <img src="../assets/tailwind.png" alt="" class="w-36 h-36">
+                        </div>
+                        <div class="flex flex-col justify-center items-center gap-4 ">
+                            <h3 class="w-fit text-sm">Javascript</h3>
+                            <img src="../assets/JS.png" alt="" class="w-36 h-36">
+                        </div>
+                        <div class="flex flex-col justify-center items-center gap-4">
+                            <h3 class="w-fit text-sm">React</h3>
+                            <img src="../assets/react.png" alt="" class="w-42 h-36">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col justify-start items-center bg-white border border-4 border-indigo-700 rounded-lg shadow dark:bg-gray-800 bg-cover p-4 rounded transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
+                    <h3 class="text-center top-0 text-blue-600">Back End</h3>
+                    <div class="grid mt-6 grid-cols-3 gap-4"> 
+                        <div class="flex flex-col justify-center items-center gap-4">
+                            <h3 class="text-sm" >Node.js</h3>
+                            <img src="../assets/nodejs.png" alt="" class="w-36 h-36">
+                        </div>
+                        <div class="flex flex-col justify-center items-center gap-4">
+                            <h3 class="text-sm">Python</h3>
+                            <img src="../assets/python.png" alt="" class="w-36 h-36">
+                        </div>
+                        <div class="flex flex-col justify-center items-center gap-4">
+                            <h3 class="w-fit text-sm">Postgres</h3>
+                            <img src="../assets/postgres.png" alt="" class="w-36 h-36">
+                        </div>
+                        <div class="flex flex-col justify-center items-center gap-4 ">
+                            <h3 class="w-fit text-sm">MongoDB</h3>
+                            <img src="../assets/mongo.png" alt="" class="w-36 h-36">
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col justify-start items-center bg-white border border-4 border-indigo-700 rounded-lg shadow dark:bg-gray-800 bg-cover p-4 rounded transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
+                    <h3 class="text-center top-0 text-blue-600">DevOps</h3>
+                    <div class="grid mt-6 grid-cols-3 gap-4"> 
+                        <div class="flex flex-col justify-center items-center gap-4">
+                            <h3 class="text-sm" >GIT</h3>
+                            <img src="../assets/git.png" alt="" class="w-36 h-36">
+                        </div>
+                        <div class="flex flex-col justify-center items-center gap-4">
+                            <h3 class="text-sm">Docker</h3>
+                            <img src="../assets/docker.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+
     </section>
 
 
-    <section id="projects" class="container mx-auto p-6">
+    <section id="projects" class="container mx-auto p-6 min-h-screen flex flex-col justify-start pt-24 mt-[-24px]">
         <h2 class="text-2xl font-bold mb-5">Projects</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            <div class="flex flex-col justify-center items-center bg-[url('../assets/meta-gradient-dark.png')] bg-cover p-4 rounded transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
-                <!-- <img src="project_image.jpg" alt="Project 1" class="w-full h-32 object-cover mb-2"> -->
+            <div class="flex flex-col justify-center items-center bg-white border border-4 border-indigo-700 rounded-lg shadow dark:bg-gray-800  bg-cover p-4 rounded transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
+                
                 <h3 class="text-center text-blue-600">Asset Management</h3>
                 <p class="text-center mt-6">Modifying various aspects of <a href="https://github.com/snipe/snipe-it" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline decoration-sky-500">SnipeIT</a> project to help manage company assets.</p>
                 <div class="flex flex-row gap-2 mt-auto"> 
-                    <!-- <a href="https://www.google.com" class="block w-1/2 py-2 mt-4 text-center bg-blue-600 rounded">View Project</a> -->
+                
                     <a href="https://github.com/DecodersLord/AssetManagement" target="_blank"  rel="noopener noreferrer" class="block px-2 py-2 mt-4 text-center bg-blue-600 rounded">View Source</a>
                 </div>
             </div>
-            <div class="flex flex-col justify-center items-center bg-[url('../assets/meta-gradient-dark.png')] bg-cover p-4 rounded transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
-                <!-- <img src="project_image.jpg" alt="Project 1" class="w-full h-32 object-cover mb-2"> -->
+            <div class="flex flex-col justify-center items-center bg-white border border-4 border-indigo-700 rounded-lg shadow dark:bg-gray-800  bg-cover p-4 rounded transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
+            
                 <h3 class="text-center text-blue-600">Chat application</h3>
                 <p class="text-center mt-6">A Basic Chat App that allows users to chat with each other in real time.</p>
                 <div class="flex flex-row gap-2 mt-auto"> 
@@ -128,13 +202,13 @@
                     <a href="https://github.com/DecodersLord/chat-app" target="_blank" rel="noopener noreferrer" class="block px-2 py-2 mt-4 text-center bg-blue-600 rounded">View Source</a>
                 </div>
             </div>
-            <div class="flex flex-col justify-center items-center bg-[url('../assets/meta-gradient-dark.png')] bg-cover p-4 rounded transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
-                <!-- <img src="project_image.jpg" alt="Project 1" class="w-full h-32 object-cover mb-2"> -->
+            <div class="flex flex-col justify-center items-center bg-white border border-4 border-indigo-700 rounded-lg shadow dark:bg-gray-800 bg-cover p-4 rounded transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
+            
                 <h3 class="text-center text-blue-600">Fitness Digital</h3>
                 <p class="text-center mt-6">Developed and launched an E-commerce website for a fitness equipment and tracker company,
                                         resulting in a 40% increase in online sales and a 25% growth in customer base within the first year.</p>
                 <div class="flex flex-row gap-2 mt-auto"> 
-                    <!-- <a href="https://one00x-assignment-1-chat-app.onrender.com" class="block px-2 py-2 mt-4 text-center bg-blue-600 rounded">View Project</a> -->
+                    
                     <a href="https://drive.google.com/file/d/1Xm-k_7PvqZKN7DmiS-FlQ1ySQBbRLUi2/view" rel="noopener noreferrer" target="_blank" class="block px-2 py-2 mt-4 text-center bg-blue-600 rounded">View Source</a>
                 </div>
             </div>
@@ -142,7 +216,7 @@
         </div>
         
     </section>
-    <section id="experience" class="container mx-auto p-6">
+    <section id="experience" class="container mx-auto p-6 min-h-screen flex flex-col justify-start pt-24 mt-[-24px]">
         <h2 class="text-2xl font-bold mb-5">Experience</h2>
 
         <div class="flex flex-col md:flex-row">
@@ -168,10 +242,10 @@
             <div class="relative border-l-2 w-full">
                 <div class="mb-4 ml-8 relative">
                     <span class="bg-blue-600 ring-black absolute left-0 top-0 mt-2 -ml-11 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-offset-slate-900	"></span>
-                    <h2 class="text-xl font-bold pl-8 text-blue-600">Assistance Services Group – A Sykes Company</h2>
-                    <h3 class="text-md font-bold pl-8">Software Engineer | London, ON</h3>
+                    <h2 class="font-bold pl-8 text-blue-600">Software Engineer</h2>
+                    <h3 class="font-bold pl-8">Assistance Services Group – A Sykes Company | London, ON</h3>
                     <ul class="text-sm font-bold pl-8 pt-4 list-image-[url('../assets/next.png')]">
-                        <li>Led end-to-end SDLC processes</li>
+                        <li> > Led end-to-end SDLC processes</li>
                         <li>Enhanced user experience by 25%</li>
                         <li>Exemplary problem-solving skills</li>
                         <li>Maintained high productivity under tight deadlines</li>
@@ -180,9 +254,9 @@
                 </div>
                 <div class="mb-4 ml-8 relative">
                 <span class="bg-blue-600 ring-black absolute left-0 top-0 mt-2 -ml-11 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-offset-slate-900	"></span>
-                    <h2 class="text-xl font-bold pl-8 text-blue-600">Assistance Services Group – A Sykes Company</h2>
-                    <h3 class="text-md font-bold pl-8">Technical Support Specialist | London, ON</h3>
-                    <ul class="text-sm font-bold pl-8 pt-4 list-image-[url('../assets/next.png')]">
+                    <h2 class="font-bold pl-8 text-blue-600">Technical Support Specialist </h2>
+                    <h3 class="font-bold pl-8">Assistance Services Group – A Sykes Company | London, ON</h3>
+                    <ul class="text-sm font-bold pl-8 leading-8 list-image-[url('../assets/next.png')]">
                         <li>Developed company's Asset Management Tool</li>
                         <li>Resolved complex client issues effectively</li>
                         <li>Proactive follow-up on specialized problems</li>
@@ -191,8 +265,8 @@
                 </div>
                 <div class="mb-4 ml-8 relative">
                 <span class="bg-blue-600 ring-black absolute left-0 top-0 mt-2 -ml-11 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-offset-slate-900	"></span>
-                    <h2 class="text-xl font-bold pl-8 text-blue-600">Randstad – TD Canada Trust</h2>
-                    <h3 class="text-md font-bold pl-8">IT Operational Analyst I (Technical Support) | London, ON</h3>
+                    <h2 class=" font-bold pl-8 text-blue-600">IT Operational Analyst I (Technical Support)</h2>
+                    <h3 class="font-bold pl-8">Randstad – TD Canada Trust | London, ON</h3>
                     <ul class="text-sm font-bold pl-8 pt-4 list-image-[url('../assets/next.png')]">
                         <li>Assisted users with remote login and password resets</li>
                         <li>Documented incidents and activities for issue tracking</li>
