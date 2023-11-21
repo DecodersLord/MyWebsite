@@ -22,53 +22,62 @@ function expandCard(cardId) {
 
 
 let selectedItemName = 'FrontEnd';
-const skills = {
-        FrontEnd: {'HTML': 90, 'CSS': 85,'TailwindCSS': 85, 'JavaScript': 80, 'React': 50},
-        Backend: {'Node.js': 80, 'Python': 70, 'Java': 75},
-        DevOps: {'Git': 70, 'Docker': 25},
-        Database: {'Postgres': 70, 'MongoDB': 85}
-    };
+const skills = [
+        
+        {'name': 'HTML', 'url': '../assets/html-5.png'},
+        {'name': 'CSS', 'url': '../assets/css-3.png'},
+        {'name': 'tailwind', 'url': '../assets/tailwind.png'},
+        {'name': 'javascript', 'url': '../assets/JS.png'},
+        {'name': 'React', 'url': '../assets/react.png'},
+        {'name': 'Node.js', 'url': '../assets/nodejs.png'},
+        {'name': 'Python', 'url': '../assets/python.png'},
+        {'name': 'Postgres', 'url': '../assets/postgres.png'},
+        {'name': 'MongoDB', 'url': '../assets/mongo.png'},
+        {'name': 'Git', 'url': '../assets/git.png'},
+        {'name': 'Docker', 'url': '../assets/docker.png'},
+    ]
 
-    function updateSkills(category) {
-        if(selectedItemName != null){
-            document.getElementById(selectedItemName).classList.remove('h-40');
-        }
-        selectedItemName = category;
-        selectedItem = document.getElementById(category);
-        selectedItem.classList.add('h-40');
-        const skillsDiv = document.getElementById('skills');
+const softSkills = [
+    {'name' : 'Resilient', 'url' : '../assets/html-5.png', 'detail' : 'As a software developer, my resilience enables me to adapt to new technologies and bounce back from project setbacks with renewed determination.'},
+    {'name' : 'Team Player', 'url' : '../assets/html-5.png', 'detail' : 'Being a team player, I believe in collaborative problem-solving and actively seek input from my peers to deliver high-quality software solutions.'},
+    {'name' : 'Critical Thinker', 'url' : '../assets/html-5.png', 'detail' : 'My critical thinking skills allow me to anticipate potential challenges in software development and devise effective strategies to address them.'},
+    {'name' : 'Self Motivated', 'url' : '../assets/html-5.png', 'detail' : 'Driven by self-motivation, I continuously seek opportunities to enhance my coding skills and stay updated with the latest industry trends.'}
+    
+]
+    function updateSkills() {
+        const skillsDiv = document.getElementById('skills-list');
         skillsDiv.innerHTML = '';
-        for (const [skill, proficiency] of Object.entries(skills[category])) {
+        skills.forEach((skill) => {
             const skillDiv = document.createElement('div');
-            skillDiv.className = 'py-2';
             skillDiv.innerHTML = `
-                <div class="flex justify-between">
-                    <span>${skill}</span>
-                    <span>${proficiency}%</span>
-                </div>
-                <div class="w-full bg-gray-200 rounded-full h-2">
-                    <div class="bg-mid-blue h-2 rounded-full" style="width: ${proficiency}%"></div>
-                </div>
+                <li class="bg-gray-800 p-4 rounded-lg flex gap-8 my-2  mx-2 border border-4 border-border-color">
+                    <img src=${skill.url} alt="" class="h-10 w-10">
+                    
+                    <h2 class="font-bold text-center mb-1">${skill.name}</h2>
+                </li>
             `;
             skillsDiv.appendChild(skillDiv);
-        }
+        });
+    }
+
+    function updateSoftSkills(){
+        const skillsDiv = document.getElementById('soft-skills-list');
+        skillsDiv.innerHTML = '';
+        softSkills.forEach((softSkills) => {
+            const skillDiv = document.createElement('div');
+            skillDiv.innerHTML = `
+                <li class="bg-gray-800 p-4 rounded-lg flex gap-6 mb-2 mx-2 border border-4 border-border-color">
+                    <img src=${softSkills.url} alt="" class="w-32 h-32">
+                    <div class="flex flex-col">
+                        <h2 class="flex font-bold mb-1 text-border-color">${softSkills.name}</h2>
+                        <p>${softSkills.detail}</p>
+                    </div>
+                </li>
+            `;
+            skillsDiv.appendChild(skillDiv);
+        });
     }
 
     // Default to FrontEnd skills
-    updateSkills('FrontEnd');
-
-const jobDetails = {
-event1: 'Job details for Frontend Engineer at Trinkerr',
-event2: 'Job details for SDE Intern at NeoCamp',
-// Add more job details as needed
-};
-
-document.querySelectorAll('.event').forEach(event => {
-event.addEventListener('click', function() {
-    const jobId = this.id;
-    document.getElementById('jobDetails').innerText = jobDetails[jobId];
-});
-});
-
-// Default to first job details
-document.getElementById('jobDetails').innerText = jobDetails.event1;
+updateSkills();
+updateSoftSkills();
