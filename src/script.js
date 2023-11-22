@@ -50,10 +50,10 @@ const softSkills = [
         skills.forEach((skill) => {
             const skillDiv = document.createElement('div');
             skillDiv.innerHTML = `
-                <li class="bg-gray-800 p-4 rounded-lg flex gap-8 my-2  mx-2 border border-4 border-border-color">
+                <li class="bg-gray-800 p-4 rounded-lg flex flex-wrap gap-8 my-2  mx-2 border border-2 border-border-color">
                     <img src=${skill.url} alt="" class="h-10 w-10">
                     
-                    <h2 class="font-bold text-center mb-1">${skill.name}</h2>
+                    <h2 class="break-all font-bold text-center mb-1">${skill.name}</h2>
                 </li>
             `;
             skillsDiv.appendChild(skillDiv);
@@ -66,11 +66,11 @@ const softSkills = [
         softSkills.forEach((softSkills) => {
             const skillDiv = document.createElement('div');
             skillDiv.innerHTML = `
-                <li class="bg-gray-800 p-4 rounded-lg flex gap-6 mb-2 mx-2 border border-4 border-border-color">
+                <li class="bg-gray-800 p-4 rounded-lg flex gap-6 mb-2 mx-2 border border-2 border-border-color">
                     <img src=${softSkills.url} alt="" class="w-32 h-32">
                     <div class="flex flex-col">
-                        <h2 class="flex font-bold mb-1 text-border-color">${softSkills.name}</h2>
-                        <p>${softSkills.detail}</p>
+                        <h2 class="break-all flex font-bold mb-1 text-border-color">${softSkills.name}</h2>
+                        <p class="break-keep">${softSkills.detail}</p>
                     </div>
                 </li>
             `;
