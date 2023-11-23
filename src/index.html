@@ -4,75 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" type="text/css" href="style.css" /> 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
-    
-    <script>
-    
-    tailwind.config = {
-        theme: {
-        extend: {
-            fontFamily: {
-            'press-start': ['"Press Start 2P"', 'cursive'],
-            'space' : ['"Space Grotesk"','sans-serif']
-            },
-            colors: {
-                'mid-blue': '#1967e7',
-                'div-1-color': '#282a36',
-                'div-2-color': '#21222c',
-                'border-color': '#7359f8',
-                'nav-color': '#373251'
-
-            },
-            height: {
-                'half-screen': '50vh',
-                'quater-screen': '78vh'
-            },
-            screens: {
-                    'sm': {'min': '640px', 'max': '767px'},
-                    // => @media (min-width: 640px and max-width: 767px) { ... }
-
-                    'md': {'min': '768px', 'max': '1023px'},
-                    // => @media (min-width: 768px and max-width: 1023px) { ... }
-
-                    'lg': {'min': '1024px', 'max': '1279px'},
-                    // => @media (min-width: 1024px and max-width: 1279px) { ... }
-
-                    'xl': {'min': '1280px', 'max': '1535px'},
-                    // => @media (min-width: 1280px and max-width: 1535px) { ... }
-
-                    '2xl': {'min': '1536px'},
-                    // => @media (min-width: 1536px) { ... }
-            },
-            backgroundImage: theme => ({
-            'pixel-pattern': "url('/img/pixel-pattern.png')"
-            })
-        }
-        },
-        variants: {},
-        plugins: []
-    }
-    </script>
+    <link href="../dist/output.css" rel="stylesheet">
 
 </head>
-<body class="text-white font-space text-base text-xl">
+<body class="text-white font-space text-xl">
     <nav class="fixed top-0 mx-auto h-20 w-full items-center bg-nav-color px-8 py-2 text-center text-white z-50">
         <div class="container mx-auto flex h-full items-center justify-between">
             <!-- Set height to 'h-full' -->
-            <a href="#" class="font-semibold">Priyank Sevak</a>
-            <div class="sm:hidden md:block lg:block">
-            <div class="mt-auto text-center">
-                <a href="#skills_section" class="mx-2 font-bold" onclick="blink(this)">Skills</a>
-                <a href="#projects_section" class="mx-2">Projects</a>
-                <a href="#experience_section" class="mx-2">Experience</a>
-                <a href="#experience" class="mx-2">Contact Me</a>
+            <a href="#" class="font-semibold text-3xl">Priyank Sevak</a>
+            <div class="hidden md:block lg:block xl:block 2xl:block">
+                <div class="mt-auto text-center">
+                    <a href="#skills_section" class="mx-2 font-bold" onclick="blink(this)">Skills</a>
+                    <a href="#projects_section" class="mx-2">Projects</a>
+                    <a href="#experience_section" class="mx-2">Experience</a>
+                    <a href="#experience" class="mx-2">Contact Me</a>
+                </div>
             </div>
-            </div>
-            <div class="hidden md:hidden lg:hidden">
+            <div class="block md:hidden lg:hidden xl:hidden 2xl:hidden">
                 <button id="menuButton" class="focus:outline-none">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -80,11 +33,11 @@
                 </button>
             </div>
         </div>
-        <div id="menu" class="mt-2 hidden md:hidden lg:hidden">
-            <a href="#skills_section" class="block py-1 text-white hover:bg-gray-100 hover:text-gray-700">Skills</a>
-            <a href="#experience" class="block py-1 text-white hover:bg-gray-100 hover:text-gray-700">Experience</a>
-            <a href="#projects" class="block py-1 text-white hover:bg-gray-100 hover:text-gray-700">Projects</a>
-            <a href="#projects" class="block py-1 text-white hover:bg-gray-100 hover:text-gray-700">Contact Me</a>
+        <div id="menu" class="mt-2 w-full hidden md:hidden lg:hidden xl:hidden 2xl:hidden">
+            <a href="#skills_section" class="block py-1  bg-nav-color text-white">Skills</a>
+            <a href="#projects_section" class="block py-1 bg-nav-color text-white">Projects</a>
+            <a href="#experience_section" class="block py-1 bg-nav-color text-white">Experience</a>
+            <a href="#experience" class="block py-1 bg-nav-color text-white">Contact Me</a>
         </div>
     </nav>
 
@@ -135,7 +88,7 @@
             <section id="projects_section" class="bg-div-1-color container mx-auto p-6 flex flex-col justify-start pt-24 mt-[-24px] shadow-2xl">
                 <h2 class="text-4xl font-bold mb-4">Projects</h2>
                 <div class="grid grid-cols-3 gap-4">
-                    <div class="flex flex-col justify-center items-center bg-white border border-2 border-border-color rounded-lg shadow dark:bg-gray-800  bg-cover p-4 rounded transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
+                    <div class="flex flex-col justify-center items-center bg-white  border-2 border-nav-color rounded-lg shadow dark:bg-gray-800  bg-cover p-4  transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
                         
                         <h3 class="text-center text-border-color">Asset Management</h3>
                         <p class="text-center mt-6">Modifying various aspects of <a href="https://github.com/snipe/snipe-it" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline decoration-sky-500">SnipeIT</a> project to help manage company assets.</p>
@@ -144,7 +97,7 @@
                             <a href="https://github.com/DecodersLord/AssetManagement" target="_blank"  rel="noopener noreferrer" class="block px-2 py-2 mt-4 text-center bg-border-color rounded">View Source</a>
                         </div>
                     </div>
-                    <div class="flex flex-col justify-center items-center bg-white border border-2 border-border-color rounded-lg shadow dark:bg-gray-800  bg-cover p-4 rounded transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
+                    <div class="flex flex-col justify-center items-center bg-white  border-2 border-nav-color rounded-lg shadow dark:bg-gray-800  bg-cover p-4  transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
                     
                         <h3 class="text-center text-border-color">Chat application</h3>
                         <p class="text-center mt-6">A Basic Chat App that allows users to chat with each other in real time.</p>
@@ -153,7 +106,7 @@
                             <a href="https://github.com/DecodersLord/chat-app" target="_blank" rel="noopener noreferrer" class="block px-2 py-2 mt-4 text-center bg-border-color rounded">View Source</a>
                         </div>
                     </div>
-                    <div class="flex flex-col justify-center items-center bg-white border border-2 border-border-color rounded-lg shadow dark:bg-gray-800 bg-cover p-4 rounded transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
+                    <div class="flex flex-col justify-center items-center bg-white border-2 border-nav-color rounded-lg shadow dark:bg-gray-800 bg-cover p-4 transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
                     
                         <h3 class="text-center text-border-color">Fitness Digital</h3>
                         <p class="text-center mt-6">Developed and launched an E-commerce website for a fitness equipment and tracker company,
@@ -168,61 +121,78 @@
             <section id="experience_section" class="bg-div-1-color container mx-auto p-6 flex flex-col justify-start pt-24 mt-[-24px] shadow-2xl">
                 <h2 class="text-4xl font-bold mb-4">Experience</h2>
 
-                <div class="flex sm:flex-col md:flex-row lg:flex-row">
-                    <!-- Timeline -->
-                    <div class="mr-8 relative w-1/3">
-                        <div class="relative flex">
-                            <div class="w-full">
-                                <div class="mt-2 mb-48">
-                                    <div class="font-semibold">Sept 2021 - Present</div>
-                                    <div class="text-border-color">Current Job</div>
-                                </div>
-                                <div class="mb-48">
-                                    <div class="font-semibold">March 2021 - Sept 2021</div>
-                                </div>
-                                <div>
-                                    <div class="font-semibold">Jan 2021 - Feb 2021</div>
+                <div class="flex flex-col w-full">
+                    <!-- Timeline Item 1 -->
+                    <div class="flex items-start">
+                        <div class="pt-2 w-1/4">
+                            <p class="font-semibold">Sept 2021 - Present</p>
+                            <p class="text-border-color">Current Job</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute left-9 top-0 bottom-0 border-2 bg-white"></div>
+                            <div class="flex items-center mb-3">
+                                <div class="z-10 bg-border-color ring-black absolute left-6 top-0 mt-2 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-offset-slate-900"></div>
+                                <div class="ml-12 mb-8 pr-4 pl-16">
+                                    <h3 class="text-3xl font-bold text-border-color">Software Engineer</h3>
+                                    <p class="font-bold">Assistance Services Group – A Sykes Company | London, ON</p>
+                                    <ul class="font-bold list-none pt-4 leading-8 space-y-1">
+                                        <li> > Led end-to-end SDLC processes</li>
+                                        <li> > Enhanced user experience by 25%</li>
+                                        <li> > Exemplary problem-solving skills</li>
+                                        <li> > Maintained high productivity under tight deadlines</li>
+                                        <li> > Streamlined API integration with Salesforce</li>
+                                    </ul>
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
 
-                    <!-- Experience Details -->
-                    <div class="relative border-l-2 w-full">
-                        <div class="mb-4 ml-8 relative">
-                            <span class="bg-border-color ring-black absolute left-0 top-0 mt-2 -ml-11 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-offset-slate-900	"></span>
-                            <h2 class="text-3xl font-bold pl-8 text-border-color">Software Engineer</h2>
-                            <h3 class="font-bold pl-8">Assistance Services Group – A Sykes Company | London, ON</h3>
-                            <ul class="font-bold pl-8 pt-4 leading-8 list-image-[url('../assets/next.png')]">
-                                <li> > Led end-to-end SDLC processes</li>
-                                <li> > Enhanced user experience by 25%</li>
-                                <li> > Exemplary problem-solving skills</li>
-                                <li> > Maintained high productivity under tight deadlines</li>
-                                <li> > Streamlined API integration with Salesforce</li>
-                            </ul>
+                    <!-- Timeline Item 2 -->
+                    <div class="flex items-start">
+                        <div class="pt-2 w-1/4">
+                            <p class="font-semibold">March 2021 - Sept 2021</p>
                         </div>
-                        <div class="mb-4 ml-8 relative">
-                        <span class="bg-border-color ring-black absolute left-0 top-0 mt-2 -ml-11 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-offset-slate-900	"></span>
-                            <h2 class="text-3xl font-bold pl-8 text-border-color">Technical Support Specialist </h2>
-                            <h3 class="font-bold pl-8">Assistance Services Group – A Sykes Company | London, ON</h3>
-                            <ul class="font-bold pl-8 pt-4 leading-8 list-image-[url('../assets/next.png')]">
-                                <li> > Developed company's Asset Management Tool</li>
-                                <li> > Resolved complex client issues effectively</li>
-                                <li> > Proactive follow-up on specialized problems</li>
-                                <li> > Improved support, increased issue resolution by 10%</li>
-                            </ul>
+                        <div class="relative">
+                            <div class="absolute left-9 top-0 bottom-0 border-2 bg-white"></div>
+                            <div class="flex items-center mb-3">
+                                <div class="z-10 bg-border-color ring-black absolute left-6 top-0 mt-2 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-offset-slate-900"></div>
+                                <div class="ml-12 mb-8 pr-4 pl-16">
+                                    <h3 class="text-3xl font-bold text-border-color">Technical Support Specialist</h3>
+                                    <p class="font-bold">Assistance Services Group – A Sykes Company | London, ON</p>
+                                    <ul class="font-bold list-none pt-4 leading-8 space-y-1">
+                                        <li> > Developed company's Asset Management Tool</li>
+                                        <li> > Resolved complex client issues effectively</li>
+                                        <li> > Proactive follow-up on specialized problems</li>
+                                        <li> > Improved support, increased issue resolution by 10%</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
                         </div>
-                        <div class="mb-4 ml-8 relative">
-                        <span class="bg-border-color ring-black absolute left-0 top-0 mt-2 -ml-11 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-offset-slate-900	"></span>
-                            <h2 class="text-3xl font-bold pl-8 text-border-color">IT Operational Analyst I (Technical Support)</h2>
-                            <h3 class="font-bold pl-8">Randstad – TD Canada Trust | London, ON</h3>
-                            <ul class="font-bold pl-8 pt-4 leading-8 list-image-[url('../assets/next.png')]">
-                                <li> > Assisted users with remote login and password resets</li>
-                                <li> > Documented incidents and activities for issue tracking</li>
-                                <li> > Resolved 40-50 inbound calls, focusing on access-related issues</li>
-                            </ul>
+                    </div>
+
+                    <!-- Timeline Item 3 -->
+                    <div class="flex items-start">
+                        <div class="pt-2 w-1/4">
+                            <p class="font-semibold">Jan 2021 - Feb 2021</p>
                         </div>
-                        <!-- Add more experience details as needed -->
+                        <div class="relative">
+                            <div class="absolute left-9 top-0 bottom-0 border-2 bg-white"></div>
+                            <div class="flex items-center mb-3">
+                                <div class="z-10 bg-border-color ring-black absolute left-6 top-0 mt-2 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-offset-slate-900"></div>
+                                <div class="ml-12 mb-8 pr-4 pl-16">
+                                    <h3 class="text-3xl font-bold text-border-color">IT Operational Analyst I (Technical Support)</h3>
+                                    <p class="font-bold">Randstad – TD Canada Trust | London, ON</p>
+                                    <ul class="font-bold list-none pt-4 leading-8 space-y-1">
+                                        <li> > Assisted users with remote login and password resets</li>
+                                        <li> > Documented incidents and activities for issue tracking</li>
+                                        <li> > Resolved 40-50 inbound calls, focusing on access-related issues</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                        </div>
                     </div>
                 </div>
             </section>
