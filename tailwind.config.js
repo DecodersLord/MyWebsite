@@ -19,6 +19,9 @@ module.exports = {
                 'half-screen': '50vh',
                 'quater-screen': '78vh'
             },
+            width:{
+                'sidebar': '13rem'
+            },
             screens: {
                     'sm': {'min': '640px', 'max': '767px'},
                     // => @media (min-width: 640px and max-width: 767px) { ... }
@@ -36,7 +39,7 @@ module.exports = {
                     // => @media (min-width: 1536px) { ... }
             },
             inset: {
-              '6' : '1.6rem'
+                '6' : '1.6rem'
             }
         }
         },

@@ -1,6 +1,12 @@
 document.getElementById('menuButton').addEventListener('click', function() {
-            document.getElementById('menu').classList.toggle('hidden');
-        });
+    document.getElementById('menu').classList.toggle('hidden');
+});
+
+document.querySelectorAll('#menu a').forEach(function(menuItem) {
+    menuItem.addEventListener('click', function() {
+        document.getElementById('menu').classList.add('hidden');
+    });
+});
 
 function blink(element) {
     element.classList.add('blink');
@@ -50,7 +56,7 @@ const softSkills = [
         skills.forEach((skill) => {
             const skillDiv = document.createElement('div');
             skillDiv.innerHTML = `
-                <li class="bg-gray-800 p-4 rounded-lg flex flex-wrap gap-8 my-2  mx-2  border-2 border-nav-color">
+                <li class="bg-gray-800 p-4 rounded-lg flex flex-col items-center justify-center flex-wrap gap-8 my-2  mx-2  border-2 border-nav-color 2xl:flex-row">
                     <img src=${skill.url} alt="" class="h-10 w-10">
                     
                     <h2 class="break-all font-bold text-center mb-1">${skill.name}</h2>

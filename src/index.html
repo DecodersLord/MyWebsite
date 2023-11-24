@@ -12,10 +12,9 @@
     <link href="../dist/output.css" rel="stylesheet">
 
 </head>
-<body class="text-white font-space text-xl">
-    <nav class="fixed top-0 mx-auto h-20 w-full items-center bg-nav-color px-8 py-2 text-center text-white z-50">
+<body class="text-white font-space text-xl m-0 overflow-y-scroll no-scrollbar">
+    <nav class="fixed top-0 mx-auto h-20 items-center bg-nav-color px-8 py-2 text-center text-white z-50 w-full md:w-full lg:w-full xl:w-full 2xl:w-full">
         <div class="container mx-auto flex h-full items-center justify-between">
-            <!-- Set height to 'h-full' -->
             <a href="#" class="font-semibold text-3xl">Priyank Sevak</a>
             <div class="hidden md:block lg:block xl:block 2xl:block">
                 <div class="mt-auto text-center">
@@ -33,22 +32,22 @@
                 </button>
             </div>
         </div>
-        <div id="menu" class="mt-2 w-full hidden md:hidden lg:hidden xl:hidden 2xl:hidden">
-            <a href="#skills_section" class="block py-1  bg-nav-color text-white">Skills</a>
-            <a href="#projects_section" class="block py-1 bg-nav-color text-white">Projects</a>
-            <a href="#experience_section" class="block py-1 bg-nav-color text-white">Experience</a>
-            <a href="#experience" class="block py-1 bg-nav-color text-white">Contact Me</a>
+        <div id="menu" class="mt-2 hidden bg-nav-color text-white md:hidden lg:hidden xl:hidden 2xl:hidden">
+            <a href="#skills_section" class="block py-1">Skills</a>
+            <a href="#projects_section" class="block py-1">Projects</a>
+            <a href="#experience_section" class="block py-1">Experience</a>
+            <a href="#experience" class="block py-1 ">Contact Me</a>
         </div>
     </nav>
 
     <div class="flex flex-row min-h-screen">
-        <section class="bg-div-2-color container mx-auto p-6 mt-16 flex-grow w-[13rem]">
+        <section class="bg-div-2-color container mx-auto p-6 mt-16 hidden md:flex md:w-sidebar lg:flex lg:w-sidebar xl:flex xl:w-sidebar 2xl:flex 2xl:w-sidebar">
             <!-- Your content for the first div here -->
         </section>
-        <section class="flex flex-col flex-grow">
+        <section class="flex flex-col flex-grow sm:w-full md:w-full">
             <section id="summary_section" class="bg-div-1-color container mx-auto p-6 mt-8 shadow-2xl">
-                <div class="flex flex-col">
-                    <div class="flex flex-row gap-6 h-half-screen">
+                <div class="flex flex-col sm:flex-col">
+                    <div class="flex flex-col gap-6 h-half-screen md:flex-col lg:flex-row xl:flex-row 2xl:flex-row">
                         <div class="flex flex-shrink-0 px-4 items-center justify-center">
                             <img src="../assets/profile-pic.jpeg" alt="..." class="shadow-2xl rounded-full max-w-full h-auto align-middle border-nav-color border-2">
                         </div>
@@ -56,9 +55,9 @@
                             <h1>Diving into the binary seas, I navigate as a software engineer, crafting websites with the finesse of a web developer and the strategic thinking of a game master.</h1>
                         </div>
                     </div>
-                    <div class="flex items-center justify-start w-full">
+                    <div class="flex items-center justify-start w-full mt-16 sm:mt-72">
                     
-                        <ul id="soft-skills-list" class="grid grid-cols-2 list-none w-full">
+                        <ul id="soft-skills-list" class="flex flex-col list-none w-full xl:grid 2xl:grid xl:grid-cols-2 2xl:grid-cols-2">
                             
                             <!-- Repeat this section for each app --> 
                             <!-- End repeat -->
@@ -74,7 +73,7 @@
                     <h1 class="text-4xl font-bold mb-4">Skills</h1>
                     <div class="flex items-center justify-center">
                     
-                        <ul id="skills-list" class="grid grid-cols-5 list-none">
+                        <ul id="skills-list" class="grid grid-cols-2 list-none xl:grid-cols-5 2xl:grid-cols-6">
                             
                             <!-- Repeat this section for each app --> 
                             
@@ -87,7 +86,7 @@
             </section>
             <section id="projects_section" class="bg-div-1-color container mx-auto p-6 flex flex-col justify-start pt-24 mt-[-24px] shadow-2xl">
                 <h2 class="text-4xl font-bold mb-4">Projects</h2>
-                <div class="grid grid-cols-3 gap-4">
+                <div class="flex flex-col xl:grid xl:grid-cols-3 gap-4">
                     <div class="flex flex-col justify-center items-center bg-white  border-2 border-nav-color rounded-lg shadow dark:bg-gray-800  bg-cover p-4  transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
                         
                         <h3 class="text-center text-border-color">Asset Management</h3>
@@ -175,6 +174,28 @@
                     <!-- Timeline Item 3 -->
                     <div class="flex items-start">
                         <div class="pt-2 w-1/4">
+                            <p class="font-semibold">March 2021 - Sept 2021</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute left-9 top-0 bottom-0 border-2 bg-white"></div>
+                            <div class="flex items-center mb-3">
+                                <div class="z-10 bg-border-color ring-black absolute left-6 top-0 mt-2 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-offset-slate-900"></div>
+                                <div class="ml-12 mb-8 pr-4 pl-16">
+                                    <h3 class="text-3xl font-bold text-border-color">Technical Support Specialist</h3>
+                                    <p class="font-bold">Assistance Services Group – A Sykes Company | London, ON</p>
+                                    <ul class="font-bold list-none pt-4 leading-8 space-y-1">
+                                        <li> > Developed company's Asset Management Tool</li>
+                                        <li> > Resolved complex client issues effectively</li>
+                                        <li> > Proactive follow-up on specialized problems</li>
+                                        <li> > Improved support, increased issue resolution by 10%</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="pt-2 w-1/4">
                             <p class="font-semibold">Jan 2021 - Feb 2021</p>
                         </div>
                         <div class="relative">
@@ -198,7 +219,7 @@
             </section>
         </section>
         
-        <section class="bg-div-2-color  mx-auto p-6 mt-16 flex-grow w-[13rem]">
+        <section class="bg-div-2-color  mx-auto p-6 mt-16 flex-grow hidden md:flex md:w-sidebar lg:flex lg:w-sidebar xl:flex xl:w-sidebar 2xl:flex 2xl:w-sidebar">
             <!-- Your content for the third div here -->
         </section>
     </div>
