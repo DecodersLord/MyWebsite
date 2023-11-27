@@ -20,7 +20,8 @@ module.exports = {
                 'quater-screen': '78vh'
             },
             width:{
-                'sidebar': '13rem'
+                'sidebar': '13%',
+                'main-content': '75%'
             },
             screens: {
                     'sm': {'min': '640px', 'max': '767px'},
@@ -40,6 +41,21 @@ module.exports = {
             },
             inset: {
                 '6' : '1.6rem'
+            },
+            keyframes: {
+                'fade-in-down': {
+                    '0%': {
+                        opacity: '0',
+                        transform: 'translateY(-10px)'
+                    },
+                    '100%': {
+                        opacity: '1',
+                        transform: 'translateY(0)'
+                    },
+                }
+            },
+            animation: {
+                'fade-in-down': 'fade-in-down 0.5s ease-out'
             }
         }
         },

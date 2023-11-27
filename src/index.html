@@ -13,8 +13,8 @@
 
 </head>
 <body class="text-white font-space text-xl m-0 overflow-y-scroll no-scrollbar">
-    <nav class="fixed top-0 mx-auto h-20 items-center bg-nav-color px-8 py-2 text-center text-white z-50 w-full md:w-full lg:w-full xl:w-full 2xl:w-full">
-        <div class="container mx-auto flex h-full items-center justify-between">
+    <nav class="fixed top-0 mx-auto h-20 items-center bg-nav-color py-2 text-center text-white z-50 w-full md:w-full lg:w-full xl:w-full 2xl:w-full">
+        <div class="container mx-auto flex h-full px-8 items-center justify-between">
             <a href="#" class="font-semibold text-3xl">Priyank Sevak</a>
             <div class="hidden md:block lg:block xl:block 2xl:block">
                 <div class="mt-auto text-center">
@@ -24,15 +24,18 @@
                     <a href="#experience" class="mx-2">Contact Me</a>
                 </div>
             </div>
-            <div class="block md:hidden lg:hidden xl:hidden 2xl:hidden">
-                <button id="menuButton" class="focus:outline-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
+            <div class="block md:hidden lg:hidden xl:hidden 2xl:hidden" x-data="{ open: false }">
+                <button id="menuButton" class="w-10 h-10 relative focus:outline-none" @click="open = !open">
+                    <span class="sr-only">Open main menu</span>
+                    <div class="block w-5 absolute left-1/2 top-1/2   transform  -translate-x-1/2 -translate-y-1/2">
+                        <span aria-hidden="true" class="block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out" :class="{'rotate-45': open,' -translate-y-1.5': !open }"></span>
+                        <span aria-hidden="true" class="block absolute  h-0.5 w-5 bg-current   transform transition duration-500 ease-in-out" :class="{'opacity-0': open } "></span>
+                        <span aria-hidden="true" class="block absolute  h-0.5 w-5 bg-current transform  transition duration-500 ease-in-out" :class="{'-rotate-45': open, ' translate-y-1.5': !open}"></span>
+                    </div>
                 </button>
             </div>
         </div>
-        <div id="menu" class="mt-2 hidden bg-nav-color text-white md:hidden lg:hidden xl:hidden 2xl:hidden">
+        <div id="menu" class="hidden bg-nav-color h-screen w-screen overflow-hidden px-0 flex flex-col items-center justify-center space-y-8 bg-opacity-95 animate-fade-in-down text-white md:hidden lg:hidden xl:hidden 2xl:hidden">
             <a href="#skills_section" class="block py-1">Skills</a>
             <a href="#projects_section" class="block py-1">Projects</a>
             <a href="#experience_section" class="block py-1">Experience</a>
@@ -44,8 +47,8 @@
         <section class="bg-div-2-color container mx-auto p-6 mt-16 hidden md:flex md:w-sidebar lg:flex lg:w-sidebar xl:flex xl:w-sidebar 2xl:flex 2xl:w-sidebar">
             <!-- Your content for the first div here -->
         </section>
-        <section class="flex flex-col flex-grow sm:w-full md:w-full">
-            <section id="summary_section" class="bg-div-1-color container mx-auto p-6 mt-8 shadow-2xl">
+        <section class="bg-div-1-color flex flex-col flex-grow sm:w-full md:w-full lg:w-full xl:w-full 2xl:w-main-content">
+            <section id="summary_section" class="bg-div-1-color mx-auto p-6 mt-24 lg:mt-8 xl:mt-8 2xl:mt-8 shadow-2xl">
                 <div class="flex flex-col sm:flex-col">
                     <div class="flex flex-col gap-6 h-half-screen md:flex-col lg:flex-row xl:flex-row 2xl:flex-row">
                         <div class="flex flex-shrink-0 px-4 items-center justify-center">
@@ -68,8 +71,8 @@
                 
                 </div>
             </section>
-            <section id="skills_section" class="bg-div-1-color container mx-auto p-6 flex flex-col justify-start pt-24 mt-[-24px] shadow-2xl">
-                <div class="container mx-auto px-4 py-5">
+            <section id="skills_section" class="bg-div-1-color container  mx-auto p-6 flex flex-col justify-start pt-24 mt-[-24px] shadow-2xl">
+                <div class="mx-auto px-4 py-5">
                     <h1 class="text-4xl font-bold mb-4">Skills</h1>
                     <div class="flex items-center justify-center">
                     
@@ -84,9 +87,9 @@
                     </div>
                 </div>
             </section>
-            <section id="projects_section" class="bg-div-1-color container mx-auto p-6 flex flex-col justify-start pt-24 mt-[-24px] shadow-2xl">
+            <section id="projects_section" class="bg-div-1-color  mx-auto p-6 flex flex-col justify-start pt-24 mt-[-24px] shadow-2xl">
                 <h2 class="text-4xl font-bold mb-4">Projects</h2>
-                <div class="flex flex-col xl:grid xl:grid-cols-3 gap-4">
+                <div class="flex flex-col xl:grid xl:grid-cols-3 2xl:grid 2xl:grid-cols-3 gap-4">
                     <div class="flex flex-col justify-center items-center bg-white  border-2 border-nav-color rounded-lg shadow dark:bg-gray-800  bg-cover p-4  transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
                         
                         <h3 class="text-center text-border-color">Asset Management</h3>
@@ -117,13 +120,13 @@
                     </div>
                 </div>
             </section>
-            <section id="experience_section" class="bg-div-1-color container mx-auto p-6 flex flex-col justify-start pt-24 mt-[-24px] shadow-2xl">
+            <section id="experience_section" class="bg-div-1-color container  mx-auto p-6 flex flex-col justify-start pt-24 mt-[-24px] shadow-2xl">
                 <h2 class="text-4xl font-bold mb-4">Experience</h2>
 
                 <div class="flex flex-col w-full">
                     <!-- Timeline Item 1 -->
                     <div class="flex items-start">
-                        <div class="pt-2 w-1/4">
+                        <div class="pt-2 w-1/4 break-keep">
                             <p class="font-semibold">Sept 2021 - Present</p>
                             <p class="text-border-color">Current Job</p>
                         </div>
@@ -148,7 +151,7 @@
                     </div>
 
                     <!-- Timeline Item 2 -->
-                    <div class="flex items-start">
+                    <div class="flex items-start break-keep">
                         <div class="pt-2 w-1/4">
                             <p class="font-semibold">March 2021 - Sept 2021</p>
                         </div>
@@ -194,27 +197,7 @@
                             
                         </div>
                     </div>
-                    <div class="flex items-start">
-                        <div class="pt-2 w-1/4">
-                            <p class="font-semibold">Jan 2021 - Feb 2021</p>
-                        </div>
-                        <div class="relative">
-                            <div class="absolute left-9 top-0 bottom-0 border-2 bg-white"></div>
-                            <div class="flex items-center mb-3">
-                                <div class="z-10 bg-border-color ring-black absolute left-6 top-0 mt-2 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-offset-slate-900"></div>
-                                <div class="ml-12 mb-8 pr-4 pl-16">
-                                    <h3 class="text-3xl font-bold text-border-color">IT Operational Analyst I (Technical Support)</h3>
-                                    <p class="font-bold">Randstad – TD Canada Trust | London, ON</p>
-                                    <ul class="font-bold list-none pt-4 leading-8 space-y-1">
-                                        <li> > Assisted users with remote login and password resets</li>
-                                        <li> > Documented incidents and activities for issue tracking</li>
-                                        <li> > Resolved 40-50 inbound calls, focusing on access-related issues</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
+                    
                 </div>
             </section>
         </section>
@@ -227,5 +210,6 @@
 
 <!-- ... -->
 <script src="script.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 </body>
 </html>
