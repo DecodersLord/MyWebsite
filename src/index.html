@@ -15,8 +15,8 @@
 <body class="text-white font-space text-xl m-0 overflow-y-scroll no-scrollbar">
     <nav class="fixed top-0 mx-auto h-20 items-center bg-nav-color py-2 text-center text-white z-50 w-full md:w-full lg:w-full xl:w-full 2xl:w-full">
         <div class="container mx-auto flex h-full px-8 items-center justify-between">
-            <a href="#" class="font-semibold text-3xl">Priyank Sevak</a>
-            <div class="hidden md:block lg:block xl:block 2xl:block">
+            <a href="#" id="typewriter" class="font-semibold text-3xl">Priyank Sevak</a>
+            <div class="hidden md:hidden lg:block xl:block 2xl:block">
                 <div class="mt-auto text-center">
                     <a href="#skills_section" class="mx-2 font-bold" onclick="blink(this)">Skills</a>
                     <a href="#projects_section" class="mx-2">Projects</a>
@@ -24,7 +24,7 @@
                     <a href="#experience" class="mx-2">Contact Me</a>
                 </div>
             </div>
-            <div class="block md:hidden lg:hidden xl:hidden 2xl:hidden" x-data="{ open: false }">
+            <div class="block lg:hidden xl:hidden 2xl:hidden" x-data="{ open: false }">
                 <button id="menuButton" class="w-10 h-10 relative focus:outline-none" @click="open = !open">
                     <span class="sr-only">Open main menu</span>
                     <div class="block w-5 absolute left-1/2 top-1/2   transform  -translate-x-1/2 -translate-y-1/2">
@@ -35,20 +35,22 @@
                 </button>
             </div>
         </div>
-        <div id="menu" class="hidden bg-nav-color h-screen w-screen overflow-hidden px-0 flex flex-col items-center justify-center space-y-8 bg-opacity-95 animate-fade-in-down text-white md:hidden lg:hidden xl:hidden 2xl:hidden">
-            <a href="#skills_section" class="block py-1">Skills</a>
-            <a href="#projects_section" class="block py-1">Projects</a>
-            <a href="#experience_section" class="block py-1">Experience</a>
-            <a href="#experience" class="block py-1 ">Contact Me</a>
+        <div id="menu" class="hidden bg-nav-color h-screen w-screen overflow-hidden z-50 px-0 flex flex-col items-center justify-center space-y-8 animate-fade-in-down text-white lg:hidden xl:hidden 2xl:hidden" x-show="open" @click.away="open = false" style="pointer-events: auto;">
+            <a href="#summary_section" class="block py-1 menu-item">Summary</a>
+            <a href="#skills_section" class="block py-1 menu-item">Skills</a>
+            <a href="#projects_section" class="block py-1 menu-item">Projects</a>
+            <a href="#experience_section" class="block py-1 menu-item">Experience</a>
+            <a href="#experience" class="block py-1 menu-item">Contact Me</a>
         </div>
     </nav>
 
+
     <div class="flex flex-row min-h-screen">
         <section class="bg-div-2-color container mx-auto p-6 mt-16 hidden md:flex md:w-sidebar lg:flex lg:w-sidebar xl:flex xl:w-sidebar 2xl:flex 2xl:w-sidebar">
-            <!-- Your content for the first div here -->
+            <!-- content for the first div here -->
         </section>
         <section class="bg-div-1-color flex flex-col flex-grow sm:w-full md:w-full lg:w-full xl:w-full 2xl:w-main-content">
-            <section id="summary_section" class="bg-div-1-color mx-auto p-6 mt-24 lg:mt-8 xl:mt-8 2xl:mt-8 shadow-2xl">
+            <section id="summary_section" class="bg-div-1-color container mx-auto p-6 flex flex-col justify-start pt-24 mt-4 shadow-2xl lg:pt-8 xl:pt-8 2xl:pt-8">
                 <div class="flex flex-col sm:flex-col">
                     <div class="flex flex-col gap-6 h-half-screen md:flex-col lg:flex-row xl:flex-row 2xl:flex-row">
                         <div class="flex flex-shrink-0 px-4 items-center justify-center">
@@ -60,14 +62,14 @@
                     </div>
                     <div class="flex items-center justify-start w-full mt-16 sm:mt-72">
                     
-                        <ul id="soft-skills-list" class="flex flex-col list-none w-full xl:grid 2xl:grid xl:grid-cols-2 2xl:grid-cols-2">
+                        <ul id="soft-skills-list" class="hidden flex-col list-none w-full md:flex lg:flex xl:grid 2xl:grid xl:grid-cols-2 2xl:grid-cols-2">
                             
                             <!-- Repeat this section for each app --> 
                             <!-- End repeat -->
                         </ul>
                     
                     </div>
-                    
+
                 
                 </div>
             </section>
@@ -126,7 +128,7 @@
                 <div class="flex flex-col w-full">
                     <!-- Timeline Item 1 -->
                     <div class="flex items-start">
-                        <div class="pt-2 w-1/4 break-keep">
+                        <div class="pt-2 w-1/2 break-keep lg:w-1/4 xl:w-1/4 2xl:w-1/4">
                             <p class="font-semibold">Sept 2021 - Present</p>
                             <p class="text-border-color">Current Job</p>
                         </div>
@@ -134,9 +136,9 @@
                             <div class="absolute left-9 top-0 bottom-0 border-2 bg-white"></div>
                             <div class="flex items-center mb-3">
                                 <div class="z-10 bg-border-color ring-black absolute left-6 top-0 mt-2 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-offset-slate-900"></div>
-                                <div class="ml-12 mb-8 pr-4 pl-16">
+                                <div class="ml-12 mb-8 pl-4 md:pr-4 md:pl-16 lg:pr-4 lg:pl-16 xl:pr-4 xl:pl-16 2xl:pr-4 2xl:pl-16">
                                     <h3 class="text-3xl font-bold text-border-color">Software Engineer</h3>
-                                    <p class="font-bold">Assistance Services Group – A Sykes Company | London, ON</p>
+                                    <p class="font-bold pt-4">Assistance Services Group – A Sykes Company | London, ON</p>
                                     <ul class="font-bold list-none pt-4 leading-8 space-y-1">
                                         <li> > Led end-to-end SDLC processes</li>
                                         <li> > Enhanced user experience by 25%</li>
@@ -151,17 +153,17 @@
                     </div>
 
                     <!-- Timeline Item 2 -->
-                    <div class="flex items-start break-keep">
-                        <div class="pt-2 w-1/4">
+                    <div class="flex items-start">
+                        <div class="pt-2 w-1/2 break-keep lg:w-1/4 xl:w-1/4 2xl:w-1/4">
                             <p class="font-semibold">March 2021 - Sept 2021</p>
                         </div>
                         <div class="relative">
                             <div class="absolute left-9 top-0 bottom-0 border-2 bg-white"></div>
                             <div class="flex items-center mb-3">
                                 <div class="z-10 bg-border-color ring-black absolute left-6 top-0 mt-2 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-offset-slate-900"></div>
-                                <div class="ml-12 mb-8 pr-4 pl-16">
+                                <div class="ml-12 mb-8 pl-4 md:pr-4 md:pl-16 lg:pr-4 lg:pl-16 xl:pr-4 xl:pl-16 2xl:pr-4 2xl:pl-16">
                                     <h3 class="text-3xl font-bold text-border-color">Technical Support Specialist</h3>
-                                    <p class="font-bold">Assistance Services Group – A Sykes Company | London, ON</p>
+                                    <p class="font-bold pt-4">Assistance Services Group – A Sykes Company | London, ON</p>
                                     <ul class="font-bold list-none pt-4 leading-8 space-y-1">
                                         <li> > Developed company's Asset Management Tool</li>
                                         <li> > Resolved complex client issues effectively</li>
@@ -176,16 +178,16 @@
 
                     <!-- Timeline Item 3 -->
                     <div class="flex items-start">
-                        <div class="pt-2 w-1/4">
-                            <p class="font-semibold">March 2021 - Sept 2021</p>
+                        <div class="pt-2 w-1/2 break-keep lg:w-1/4 xl:w-1/4 2xl:w-1/4">
+                            <p class="font-semibold">Jan 2021 - Feb 2021</p>
                         </div>
                         <div class="relative">
-                            <div class="absolute left-9 top-0 bottom-0 border-2 bg-white"></div>
+                            <div class="absolute top-0 bottom-0 border-2 bg-white left-[1.95rem] md:left-7 lg:left-8 xl:left-9 2xl:left-9"></div>
                             <div class="flex items-center mb-3">
-                                <div class="z-10 bg-border-color ring-black absolute left-6 top-0 mt-2 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-offset-slate-900"></div>
-                                <div class="ml-12 mb-8 pr-4 pl-16">
-                                    <h3 class="text-3xl font-bold text-border-color">Technical Support Specialist</h3>
-                                    <p class="font-bold">Assistance Services Group – A Sykes Company | London, ON</p>
+                                <div class="z-10 bg-border-color ring-black absolute top-0 mt-2 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-offset-slate-900 left-[1.3rem] md:left-4 lg:left-4 xl:left-6 2xl:left-6"></div>
+                                <div class="ml-12 mb-8 pl-4 md:pr-4 md:pl-16 lg:pr-4 lg:pl-16 xl:pr-4 xl:pl-16 2xl:pr-4 2xl:pl-16">
+                                    <h3 class="text-3xl font-bold text-border-color">IT Operation Analyst I</h3>
+                                    <p class="font-bold w-full pt-4">Randstad  -  TD Canada Trust   |    London, ON   </p>
                                     <ul class="font-bold list-none pt-4 leading-8 space-y-1">
                                         <li> > Developed company's Asset Management Tool</li>
                                         <li> > Resolved complex client issues effectively</li>
@@ -196,14 +198,12 @@
                             </div>
                             
                         </div>
-                    </div>
-                    
                 </div>
             </section>
         </section>
         
         <section class="bg-div-2-color  mx-auto p-6 mt-16 flex-grow hidden md:flex md:w-sidebar lg:flex lg:w-sidebar xl:flex xl:w-sidebar 2xl:flex 2xl:w-sidebar">
-            <!-- Your content for the third div here -->
+            <!-- content for the third div here -->
         </section>
     </div>
     <!-- ... -->

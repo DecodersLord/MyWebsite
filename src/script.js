@@ -1,12 +1,27 @@
-document.getElementById('menuButton').addEventListener('click', function() {
-    document.getElementById('menu').classList.toggle('hidden');
-});
-
-document.querySelectorAll('#menu a').forEach(function(menuItem) {
+document.querySelectorAll('.menu-item').forEach(function(menuItem) {
     menuItem.addEventListener('click', function() {
-        document.getElementById('menu').classList.add('hidden');
+        document.getElementById('menuButton').click();
     });
 });
+
+
+document.getElementById('menuButton').addEventListener('click', function() {
+    document.getElementById('menu').classList.toggle('hidden');
+   // document.getElementById('overlay').classList.toggle('hidden');
+});
+
+const openMenu = () => {
+    // Add overflow-hidden class to the body
+    document.body.classList.add('overflow-hidden');
+    // Additional logic to open the menu
+};
+
+const closeMenu = () => {
+    // Remove overflow-hidden class from the body
+    document.body.classList.remove('overflow-hidden');
+    // Additional logic to close the menu
+};
+
 
 function blink(element) {
     element.classList.add('blink');
@@ -15,19 +30,68 @@ function blink(element) {
     }, 1000);
 }
 
-function expandCard(cardId) {
-    let card = document.getElementById(cardId);
-    let container = document.getElementById('cardContainer');
-    for (let i = 0; i < container.children.length; i++) {
-        if (container.children[i] !== card.parentElement) {
-            container.children[i].style.display = 'none';
+const words = ["Priyank Sevak", "Web Developer", "Software Engineer"];
+let i = 0;
+let j = 0;
+let currentWord = "";
+let isDeleting = false;
+let typing = false;
+
+function type() {
+    if (!typing){
+        document.getElementById("typewriter").textContent = words[0];
+        return;
+    } 
+    currentWord = words[i];
+    let speed = 100;
+
+    if (isDeleting) {
+        document.getElementById("typewriter").textContent = currentWord.substring(0, j-1);
+        j--;
+        if (j == 0) {
+            isDeleting = false;
+            i++;
+            if (i == words.length) {
+                i = 0;
+            }
+        }
+    } else {
+        document.getElementById("typewriter").textContent = currentWord.substring(0, j+1);
+        j++;
+        if (j == currentWord.length) {
+            setTimeout(function() {
+                isDeleting = true;
+            }, 1000); // Wait for 1 sec before starting deletion
         }
     }
-    card.style.display = 'block';
+    setTimeout(type, speed);
 }
 
+//type();
 
-let selectedItemName = 'FrontEnd';
+const triggered_div = ['#skills_section', '#projects_section','#experience_section'];
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            typing = true;
+            type();
+        } else {
+            typing = false;
+        }
+    });
+});
+
+function checkDivInFocus() {
+    triggered_div.forEach(trigger => {
+
+        observer.observe(document.querySelector(trigger));
+    })
+}
+
+if (window.innerWidth > 768) {
+    checkDivInFocus();
+}
+
 const skills = [
         
         {'name': 'HTML', 'url': '../assets/html-5.png'},

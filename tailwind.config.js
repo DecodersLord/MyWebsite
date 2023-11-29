@@ -24,6 +24,7 @@ module.exports = {
                 'main-content': '75%'
             },
             screens: {
+                
                     'sm': {'min': '640px', 'max': '767px'},
                     // => @media (min-width: 640px and max-width: 767px) { ... }
 
