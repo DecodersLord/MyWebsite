@@ -38,10 +38,6 @@ let isDeleting = false;
 let typing = false;
 
 function type() {
-    if (!typing){
-        document.getElementById("typewriter").textContent = words[0];
-        return;
-    } 
     currentWord = words[i];
     let speed = 100;
 
@@ -67,30 +63,7 @@ function type() {
     setTimeout(type, speed);
 }
 
-//type();
 
-const triggered_div = ['#skills_section', '#projects_section','#experience_section'];
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            typing = true;
-            type();
-        } else {
-            typing = false;
-        }
-    });
-});
-
-function checkDivInFocus() {
-    triggered_div.forEach(trigger => {
-
-        observer.observe(document.querySelector(trigger));
-    })
-}
-
-if (window.innerWidth > 768) {
-    checkDivInFocus();
-}
 
 const skills = [
         
@@ -114,7 +87,7 @@ const softSkills = [
     {'name' : 'Self Motivated', 'url' : '../assets/html-5.png', 'detail' : 'Driven by self-motivation, I continuously seek opportunities to enhance my coding skills and stay updated with the latest industry trends.'}
     
 ]
-    function updateSkills() {
+    function displaySkills() {
         const skillsDiv = document.getElementById('skills-list');
         skillsDiv.innerHTML = '';
         skills.forEach((skill) => {
@@ -130,7 +103,7 @@ const softSkills = [
         });
     }
 
-    function updateSoftSkills(){
+    function displaySoftSkills(){
         const skillsDiv = document.getElementById('soft-skills-list');
         skillsDiv.innerHTML = '';
         softSkills.forEach((softSkills) => {
@@ -148,6 +121,34 @@ const softSkills = [
         });
     }
 
+    function displaySoftSkills_sm_screen(){
+        const skillsDiv = document.getElementById('soft-skills-list');
+        skillsDiv.innerHTML = '';
+        softSkills.forEach((softSkills) => {
+            const skillDiv = document.createElement('div');
+            skillDiv.innerHTML = `
+                <li class="bg-gray-800 p-4 rounded-lg flex flex-col items-center justify-center flex-wrap gap-8 my-2  mx-2  border-2 border-nav-color 2xl:flex-row">
+                    <img src=${softSkills.url} alt="" class="h-10 w-10">
+                    
+                    <h2 class="font-bold text-center mb-1">${softSkills.name}</h2>
+                </li>
+            `;
+            skillsDiv.appendChild(skillDiv);
+        });
+    }
+
     // Default to FrontEnd skills
-updateSkills();
-updateSoftSkills();
+function checkScreenWidth(){
+    if (window.innerWidth > 1048) {
+        //type();
+        displaySkills();
+        displaySoftSkills();
+    }
+    else{
+        displaySoftSkills_sm_screen();
+        displaySkills();
+    }
+}
+
+checkScreenWidth();
+
