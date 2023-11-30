@@ -30,38 +30,7 @@ function blink(element) {
     }, 1000);
 }
 
-const words = ["Priyank Sevak", "Web Developer", "Software Engineer"];
-let i = 0;
-let j = 0;
-let currentWord = "";
-let isDeleting = false;
-let typing = false;
 
-function type() {
-    currentWord = words[i];
-    let speed = 100;
-
-    if (isDeleting) {
-        document.getElementById("typewriter").textContent = currentWord.substring(0, j-1);
-        j--;
-        if (j == 0) {
-            isDeleting = false;
-            i++;
-            if (i == words.length) {
-                i = 0;
-            }
-        }
-    } else {
-        document.getElementById("typewriter").textContent = currentWord.substring(0, j+1);
-        j++;
-        if (j == currentWord.length) {
-            setTimeout(function() {
-                isDeleting = true;
-            }, 1000); // Wait for 1 sec before starting deletion
-        }
-    }
-    setTimeout(type, speed);
-}
 
 
 
@@ -86,6 +55,49 @@ const softSkills = [
     {'name' : 'Critical Thinker', 'url' : '../assets/html-5.png', 'detail' : 'My critical thinking skills allow me to anticipate potential challenges in software development and devise effective strategies to address them.'},
     {'name' : 'Self Motivated', 'url' : '../assets/html-5.png', 'detail' : 'Driven by self-motivation, I continuously seek opportunities to enhance my coding skills and stay updated with the latest industry trends.'}
     
+]
+
+const experienceList = [
+    {
+        'job_title': 'Software Engineer',
+        'company_name': 'Assistance Services Group – A Sykes Company',
+        'location' : 'London, ON',
+        'duration' : 'Sept 2021 - Present',
+        'isCurrentJob': true,
+        'job_duties': [
+            '> Led end-to-end SDLC processes',
+            '> Enhanced user experience by 25%',
+            '> Exemplary problem-solving skills',
+            '> Maintained high productivity under tight deadlines',
+            '> Streamlined API integration with Salesforce'
+        ]
+    },
+    {
+        'job_title': 'Technical Support Specialist',
+        'company_name': 'Assistance Services Group – A Sykes Company',
+        'location' : 'London, ON',
+        'duration' : 'March 2021 - Sept 2021',
+        'isCurrentJob': false,
+        'job_duties': [
+            "> Developed company's Asset Management Tool",
+            '> Resolved complex client issues effectively',
+            '> Proactive follow-up on specialized problems',
+            '> Improved support, increased issue resolution by 10%'
+        ]
+    },
+    {
+        'job_title': 'IT Operation Analyst I',
+        'company_name': 'Randstad  -  TD Canada Trust ',
+        'location' : 'London, ON',
+        'duration' : 'Jan 2021 - Feb 2021',
+        'isCurrentJob': false,
+        'job_duties': [
+            '> Assisted users with remote login and password resets',
+            '> Documented incidents and activities for issue tracking',
+            '> Resolved 40-50 inbound calls, focusing on access-related issues'
+        ]
+    }
+
 ]
     function displaySkills() {
         const skillsDiv = document.getElementById('skills-list');
@@ -137,17 +149,56 @@ const softSkills = [
         });
     }
 
+    function displayExperience() {
+        const experienceDiv = document.getElementById('experience_list');
+        experienceDiv.innerHTML = '';
+
+        experienceList.forEach((experience) => {
+            let duties = '';
+            experience.job_duties.forEach((duty) => {
+                duties += `<li>${duty}</li>`;
+            });
+
+            const experienceInnerDiv = document.createElement('div');
+            experienceInnerDiv.innerHTML = `
+                <div class="flex items-start">
+                    <div class="hidden pt-2 w-1/2 break-keep lg:flex xl:flex 2xl:flex lg:flex-col xl:flex-col 2xl:flex-col lg:w-1/4 xl:w-1/4 2xl:w-1/4">
+                        <p class="font-semibold">${experience.duration}</p>
+                        <p class="text-border-color">${experience.isCurrentJob ? 'Current Job' : ''}</p>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute top-0 bottom-0 border-2 bg-white lg:left-9 xl:left-9 2xl:left-9"></div>
+                        <div class="flex items-center mb-3">
+                            <div class="z-10 bg-border-color ring-black absolute top-0 -left-2 mt-2 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-offset-slate-900 lg:left-6 xl:left-6 2xl:left-6"></div>
+                            <div class="ml-6 mb-8 md:pr-4 md:pl-16 lg:pr-4 lg:pl-16 xl:pr-4 xl:pl-16 2xl:pr-4 2xl:pl-16">
+                                <h3 class="text-3xl font-bold text-border-color">${experience.job_title}</h3>
+                                <p class="font-bold pt-4 lg:hidden xl:hidden 2xl:hidden">${experience.duration} <span class="text-border-color"> ${experience.isCurrentJob ? '| Current Job' : ''}</span></p>
+
+                                <p class="font-bold pt-4">${experience.company_name} | ${experience.location}</p>
+                                <ul id="job_duties" class="font-bold list-none pt-4 leading-8 space-y-1">
+                                    ${duties}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            experienceDiv.appendChild(experienceInnerDiv);
+        });
+    }
+
+
     // Default to FrontEnd skills
 function checkScreenWidth(){
     if (window.innerWidth > 1048) {
         //type();
-        displaySkills();
         displaySoftSkills();
     }
     else{
         displaySoftSkills_sm_screen();
-        displaySkills();
     }
+    displaySkills();
+    displayExperience();
 }
 
 checkScreenWidth();
