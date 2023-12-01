@@ -203,3 +203,34 @@ function checkScreenWidth(){
 
 checkScreenWidth();
 
+function sendEmail(){
+    var params = {
+        from_name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value
+    };
+
+    const serviceId = 'service_omnr2td';
+    const templateId = 'template_0h1iqvi';
+    
+    const form = document.getElementById('contact-form');
+    const originalFormHTML = form.innerHTML; // Store the original HTML
+
+    emailjs.send(serviceId, templateId, params)
+    .then((res) => {
+        console.log('SUCCESS!', res.status, res.text);
+        form.innerHTML = `<div class="flex flex-col my- justify-center items-center">
+                                <img src="../assets/email-sent.png" class="w-20 h-20">
+                                <div class="text-green-500"><i class="fas fa-check-circle"></i> Message sent successfully</div>
+                        </div>`;
+        setTimeout(function() {
+            form.innerHTML = originalFormHTML; // Restore the original HTML
+        }, 5000); // Wait for 5 sec before showing the original form
+    })
+    .catch ((error) => {
+        console.log('FAILED...', error);
+    });
+}
+
+document.getElementById('contact-form').addEventListener('submit', sendEmail);

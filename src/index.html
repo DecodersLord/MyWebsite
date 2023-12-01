@@ -10,7 +10,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
     <link href="../dist/output.css" rel="stylesheet">
-
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+    (function(){
+        emailjs.init("p7DFF-OOvMycj2T5g");
+    })();
+    </script>
 </head>
 <body class="text-white font-space text-xl m-0 overflow-y-scroll no-scrollbar">
     <nav class="fixed top-0 mx-auto h-20 items-center bg-nav-color py-2 text-center text-white z-50 w-full md:w-full lg:w-full xl:w-full 2xl:w-full">
@@ -133,49 +138,48 @@
                     
 
                     <!-- Timeline Item 3 -->
-                    <div class="flex items-start">
-                        <div class="pt-2 w-1/2 break-keep lg:w-1/4 xl:w-1/4 2xl:w-1/4">
-                            <p class="font-semibold">Jan 2021 - Feb 2021</p>
-                        </div>
-                        <div class="relative">
-                            <div class="absolute top-0 bottom-0 border-2 bg-white left-[1.95rem] md:left-7 lg:left-8 xl:left-9 2xl:left-9"></div>
-                            <div class="flex items-center mb-3">
-                                <div class="z-10 bg-border-color ring-black absolute top-0 mt-2 flex h-6 w-6 items-center justify-center rounded-full ring-4 ring-offset-slate-900 left-[1.3rem] md:left-4 lg:left-4 xl:left-6 2xl:left-6"></div>
-                                <div class="ml-12 mb-8 pl-4 md:pr-4 md:pl-16 lg:pr-4 lg:pl-16 xl:pr-4 xl:pl-16 2xl:pr-4 2xl:pl-16">
-                                    <h3 class="text-3xl font-bold text-border-color">IT Operation Analyst I</h3>
-                                    <p class="font-bold w-full pt-4">Randstad  -  TD Canada Trust   |    London, ON   </p>
-                                    <ul class="font-bold list-none pt-4 leading-8 space-y-1">
-                                        <li> > Developed company's Asset Management Tool</li>
-                                        <li> > Resolved complex client issues effectively</li>
-                                        <li> > Proactive follow-up on specialized problems</li>
-                                        <li> > Improved support, increased issue resolution by 10%</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            
-                        </div>
+                    
                 </div>
             </section>
             <section id="contact_section" class="bg-nav-color container  mx-auto p-6 flex flex-col justify-start pt-24 mt-[-24px] shadow-2xl">
-                <aside class="py-8 lg:py-16 px-4 mx-auto w-full">
-                    <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Contact Us</h2>
-                    <p class="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Got a technical issue? Want to send feedback about a beta feature? Need details about our Business plan? Let us know.</p>
-                    <form action="#" class="space-y-8">
-                        <div>
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your email</label>
-                            <input type="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="name@flowbite.com" required>
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Contact Me</h2>
+                <div class="py-8 px-4 gap-8 lg:py-16 mx-auto w-full 2xl:grid 2xl:grid-cols-2">
+                    
+                    <div class="my-8 flex justify-center items-center">
+                        <!-- <p class="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Got a technical issue? Want to send feedback about a beta feature? Need details about our Business plan? Let us know.</p> -->
+                        <form class="space-y-8 w-full" role="form" id="contact-form">
+                            <div>
+                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your Name</label>
+                                <input type="name" id="name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="John Doe" required>
+                            </div>
+                            <div>
+                                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your email</label>
+                                <input type="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="john.doe@gmail.com" required>
+                            </div>
+                            <div>
+                                <label for="subject" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Subject</label>
+                                <input type="text" id="subject" class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Let me know how I can help you" required>
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your message</label>
+                                <textarea id="message" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Leave a comment..."></textarea>
+                            </div>
+                            <button type="submit"  value="send" id="sendButton" class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-border-color sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Send message</button>
+                        </form>
+                        
+                    </div>
+                    
+                    <div class="md:mb-12 lg:mb-0">
+                        <div
+                        class="relative h-[700px] rounded-lg shadow-lg dark:shadow-black/20">
+                        <iframe
+                            src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJC5uNqA7yLogRlWsFmmnXxyg&key=AIzaSyBToDVXopfKvTGocPEm5q_2WCFmJyIiBCw"
+                            class="absolute left-0 top-0 h-full w-full rounded-lg"
+                            frameborder="0"
+                            allowfullscreen></iframe>
                         </div>
-                        <div>
-                            <label for="subject" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Subject</label>
-                            <input type="text" id="subject" class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Let us know how we can help you" required>
-                        </div>
-                        <div class="sm:col-span-2">
-                            <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your message</label>
-                            <textarea id="message" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Leave a comment..."></textarea>
-                        </div>
-                        <button type="submit" class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-border-color sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Send message</button>
-                    </form>
-                </aside>
+                    </div>
+                </div>
             </section>
         </section>
         
