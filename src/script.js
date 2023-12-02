@@ -105,7 +105,7 @@ const experienceList = [
         skills.forEach((skill) => {
             const skillDiv = document.createElement('div');
             skillDiv.innerHTML = `
-                <li class="bg-gray-800 p-4 rounded-lg flex flex-col items-center justify-center flex-wrap gap-8 my-2  mx-2  border-2 border-nav-color 2xl:flex-row">
+                <li class="bg-gray-800 p-4 rounded-lg flex flex-col items-center justify-center flex-wrap gap-4 my-2  mx-2  border-2 border-nav-color 2xl:flex-row">
                     <img src=${skill.url} alt="" class="h-10 w-10">
                     
                     <h2 class="break-all font-bold text-center mb-1">${skill.name}</h2>
@@ -121,11 +121,17 @@ const experienceList = [
         softSkills.forEach((softSkills) => {
             const skillDiv = document.createElement('div');
             skillDiv.innerHTML = `
-                <li class="bg-gray-800 p-4 rounded-lg flex gap-6 mb-2 mx-2  border-2 border-nav-color">
-                    <img src=${softSkills.url} alt="" class="w-32 h-32">
-                    <div class="flex flex-col">
-                        <h2 class="break-all flex font-bold mb-1 text-border-color">${softSkills.name}</h2>
-                        <p class="break-keep">${softSkills.detail}</p>
+                <li class="bg-gray-800 p-4 rounded-lg flex flex-col items-center justify-center flex-wrap gap-4 my-2  mx-2  border-2 border-nav-color 2xl:flex-row">
+                    <div class="flex flex-col flex-wrap items-center justify-center gap-4 xl:hidden 2xl:hidden">
+                        <img src=${softSkills.url} alt="" class="h-10 w-10">
+                        <h2 class="font-bold text-center mb-1">${softSkills.name}</h2>
+                    </div>
+                    <div class="hidden xl:flex 2xl:flex">
+                        <img src=${softSkills.url} alt="" class="w-32 h-32">
+                        <div class="flex flex-col">
+                            <h2 class="break-all flex font-bold mb-1 text-border-color">${softSkills.name}</h2>
+                            <p class="break-keep">${softSkills.detail}</p>
+                        </div>
                     </div>
                 </li>
             `;
@@ -133,21 +139,6 @@ const experienceList = [
         });
     }
 
-    function displaySoftSkills_sm_screen(){
-        const skillsDiv = document.getElementById('soft-skills-list');
-        skillsDiv.innerHTML = '';
-        softSkills.forEach((softSkills) => {
-            const skillDiv = document.createElement('div');
-            skillDiv.innerHTML = `
-                <li class="bg-gray-800 p-4 rounded-lg flex flex-col items-center justify-center flex-wrap gap-8 my-2  mx-2  border-2 border-nav-color 2xl:flex-row">
-                    <img src=${softSkills.url} alt="" class="h-10 w-10">
-                    
-                    <h2 class="font-bold text-center mb-1">${softSkills.name}</h2>
-                </li>
-            `;
-            skillsDiv.appendChild(skillDiv);
-        });
-    }
 
     function displayExperience() {
         const experienceDiv = document.getElementById('experience_list');
@@ -188,20 +179,10 @@ const experienceList = [
     }
 
 
-    // Default to FrontEnd skills
-function checkScreenWidth(){
-    if (window.innerWidth > 1048) {
-        //type();
-        displaySoftSkills();
-    }
-    else{
-        displaySoftSkills_sm_screen();
-    }
-    displaySkills();
-    displayExperience();
-}
 
-checkScreenWidth();
+displaySoftSkills();
+displaySkills();
+displayExperience();
 
 function sendEmail(){
     var params = {
