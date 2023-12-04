@@ -17,11 +17,13 @@ module.exports = {
             },
             height: {
                 'half-screen': '50vh',
-                'quater-screen': '78vh'
+                'quater-screen': '78vh',
+                'icon-size': '4.5rem'
             },
             width:{
                 'sidebar': '13%',
-                'main-content': '75%'
+                'main-content': '75%',
+                'icon-size': '4.5rem'
             },
             screens: {
                 
