@@ -689,10 +689,6 @@ video {
   margin-left: 1.5rem;
 }
 
-.mt-14 {
-  margin-top: 3.5rem;
-}
-
 .mt-16 {
   margin-top: 4rem;
 }
@@ -715,14 +711,6 @@ video {
 
 .mt-auto {
   margin-top: auto;
-}
-
-.mt-10 {
-  margin-top: 2.5rem;
-}
-
-.mt-8 {
-  margin-top: 2rem;
 }
 
 .block {
@@ -769,40 +757,24 @@ video {
   height: 1.5rem;
 }
 
-.h-\[4\.5rem\] {
-  height: 4.5rem;
+.h-60 {
+  height: 15rem;
 }
 
 .h-\[700px\] {
   height: 700px;
 }
 
-.h-auto {
-  height: auto;
-}
-
 .h-full {
   height: 100%;
-}
-
-.h-half-screen {
-  height: 50vh;
-}
-
-.h-screen {
-  height: 100vh;
 }
 
 .h-icon-size {
   height: 4.5rem;
 }
 
-.h-60 {
-  height: 15rem;
-}
-
-.h-64 {
-  height: 16rem;
+.h-screen {
+  height: 100vh;
 }
 
 .min-h-screen {
@@ -829,6 +801,10 @@ video {
   width: 8rem;
 }
 
+.w-40 {
+  width: 10rem;
+}
+
 .w-5 {
   width: 1.25rem;
 }
@@ -837,24 +813,16 @@ video {
   width: 1.5rem;
 }
 
-.w-\[4\.5rem\] {
-  width: 4.5rem;
-}
-
 .w-full {
   width: 100%;
-}
-
-.w-screen {
-  width: 100vw;
 }
 
 .w-icon-size {
   width: 4.5rem;
 }
 
-.w-40 {
-  width: 10rem;
+.w-screen {
+  width: 100vw;
 }
 
 .max-w-full {
@@ -1003,6 +971,10 @@ video {
 
 .overflow-y-scroll {
   overflow-y: scroll;
+}
+
+.overscroll-contain {
+  overscroll-behavior: contain;
 }
 
 .break-all {

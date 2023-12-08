@@ -7,6 +7,7 @@
     <meta name="author" content="Priyank Sevak">
     <meta name="robots" content="index, follow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#373251"/>
     <title>Priyank Sevak</title>
     <link rel="icon" href="../assets/profile-pic.jpeg">
     <link rel="stylesheet" type="text/css" href="style.css" /> 
@@ -44,7 +45,7 @@
                 </button>
             </div>
         </div>
-        <div id="menu" class="hidden bg-nav-color h-screen w-screen overflow-hidden z-50 px-0 flex flex-col relative items-center justify-center space-y-8 animate-fade-in-down text-white lg:hidden xl:hidden 2xl:hidden" x-show="open" @click.away="open = false" style="pointer-events: auto;">
+        <dialog id="menu" class="hidden bg-nav-color h-screen w-screen overflow-hidden z-50 px-0 flex flex-col relative items-center overscroll-contain	justify-center space-y-8 animate-fade-in-down text-white lg:hidden xl:hidden 2xl:hidden" x-show="open" @click.away="open = false">
             <a href="#summary_section" class="block py-1 menu-item animate-fade-in-down delay-1000">Summary</a>
             <a href="#skills_section" class="block py-1 menu-item animate-fade-in-down delay-1000">Skills</a>
             <a href="#projects_section" class="block py-1 menu-item animate-fade-in-down delay-1000">Projects</a>
@@ -58,7 +59,7 @@
                 <a href="https://www.linkedin.com/in/priyank-sevak/" target="_blank" rel="noopener noreferrer"><img src="../assets/linkedin.svg" alt="linkedIn" class="h-16 w-16 pt-2"></a>
                 <a href="https://twitter.com/decodersLord" target="_blank" rel="noopener noreferrer"><img src="../assets/icons8-twitterx.svg" alt="twitter" class="h-16 w-16 pt-2"></a>
             </div>
-        </div>
+        </dialog>
     </nav>
 
 
