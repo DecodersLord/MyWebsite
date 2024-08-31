@@ -1,5 +1,8 @@
 {
-  "devDependencies": {
-    "tailwindcss": "^3.3.5"
-  }
+    "devDependencies": {
+        "tailwindcss": "^3.3.5"
+    },
+    "scripts": {
+        "postbuild": "purgecss --css build/static/css/*.css --content build/index.html build/static/js/*.js --output build/static/css"
+    }
 }

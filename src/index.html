@@ -1,227 +1,500 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Priyank Sevak Resume Portfolio">
-    <meta name="keywords" content="Priyank Sevak, Software engineer, JS, NodeJS, HTML, CSS, TailwindCSS">
-    <meta name="author" content="Priyank Sevak">
-    <meta name="robots" content="index, follow">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#373251"/>
-    <title>Priyank Sevak</title>
-    <link rel="icon" href="../assets/profile-pic.jpeg">
-    <link rel="stylesheet" type="text/css" href="style.css" /> 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&display=swap" rel="stylesheet">
-    <link href="../dist/output.css" rel="stylesheet">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script type="text/javascript">
-    (function(){
-        emailjs.init("p7DFF-OOvMycj2T5g");
-    })();
-    </script>
-</head>
-<body class="text-white font-space text-xl m-0 overflow-y-scroll no-scrollbar">
-    <nav class="fixed top-0 mx-auto h-20 items-center bg-nav-color py-2 text-center text-white z-50 w-full md:w-full lg:w-full xl:w-full 2xl:w-full">
-        <div class="container mx-auto flex h-full px-8 items-center justify-between">
-            <a href="#" id="typewriter" class="font-semibold text-3xl">Priyank Sevak</a>
-            <div class="hidden md:hidden lg:block xl:block 2xl:block">
-                <div class="mt-auto text-center">
-                    <a href="#skills_section" class="mx-2 font-bold" onclick="blink(this)">Skills</a>
-                    <a href="#projects_section" class="mx-2">Projects</a>
-                    <a href="#experience_section" class="mx-2">Experience</a>
-                    <a href="#contact_section" class="mx-2">Contact Me</a>
-                </div>
-            </div>
-            <div class="block lg:hidden xl:hidden 2xl:hidden" x-data="{ open: false }">
-                <button id="menuButton" class="w-10 h-10 relative focus:outline-none" @click="open = !open">
-                    <span class="sr-only">Open main menu</span>
-                    <div class="block w-5 absolute left-1/2 top-1/2   transform  -translate-x-1/2 -translate-y-1/2">
-                        <span aria-hidden="true" class="block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out" :class="{'rotate-45': open,' -translate-y-1.5': !open }"></span>
-                        <span aria-hidden="true" class="block absolute  h-0.5 w-5 bg-current   transform transition duration-500 ease-in-out" :class="{'opacity-0': open } "></span>
-                        <span aria-hidden="true" class="block absolute  h-0.5 w-5 bg-current transform  transition duration-500 ease-in-out" :class="{'-rotate-45': open, ' translate-y-1.5': !open}"></span>
-                    </div>
-                </button>
-            </div>
-        </div>
-        <dialog id="menu" class="hidden bg-nav-color h-screen w-screen overflow-hidden z-50 px-0 flex flex-col relative items-center overscroll-contain	justify-center space-y-8 animate-fade-in-down text-white lg:hidden xl:hidden 2xl:hidden" x-show="open" @click.away="open = false">
-            <a href="#summary_section" class="block py-1 menu-item animate-fade-in-down delay-1000">Summary</a>
-            <a href="#skills_section" class="block py-1 menu-item animate-fade-in-down delay-1000">Skills</a>
-            <a href="#projects_section" class="block py-1 menu-item animate-fade-in-down delay-1000">Projects</a>
-            <a href="#experience_section" class="block py-1 menu-item animate-fade-in-down delay-1000">Experience</a>
-            <a href="#contact_section" class="block py-1 menu-item animate-fade-in-down delay-1000">Contact Me</a>
-            <button onclick="window.open('../assets/Priyank Sevak.pdf', '_blank');" class="block px-2 py-2 text-center bg-border-color rounded w-40">
-                Read the CV
-            </button>
-            <div class="flex bottom-24 gap-2 absolute">
-                <a href="https://github.com/DecodersLord?tab=repositories" target="_blank" rel="noopener noreferrer"><img src="../assets/github.svg" alt="github" class="h-icon-size w-icon-size"></a>
-                <a href="https://www.linkedin.com/in/priyank-sevak/" target="_blank" rel="noopener noreferrer"><img src="../assets/linkedin.svg" alt="linkedIn" class="h-16 w-16 pt-2"></a>
-                <a href="https://twitter.com/decodersLord" target="_blank" rel="noopener noreferrer"><img src="../assets/icons8-twitterx.svg" alt="twitter" class="h-16 w-16 pt-2"></a>
-            </div>
-        </dialog>
-    </nav>
-
-
-    <div class="flex flex-row min-h-screen">
-        <section class="bg-div-2-color container mx-auto p-6 mt-16 hidden md:flex md:w-sidebar lg:flex lg:w-sidebar xl:flex xl:w-sidebar 2xl:flex 2xl:w-sidebar">
-            <!-- content for the first div here -->
-        </section>
-        <section class="bg-div-1-color flex flex-col flex-grow sm:w-full md:w-full lg:w-full xl:w-full 2xl:w-main-content">
-            <section id="summary_section" class="bg-div-1-color container mx-auto p-6 flex flex-col justify-start pt-24 mt-4 shadow-2xl lg:pt-8 xl:pt-8 2xl:pt-8">
-                <div class="flex flex-col sm:flex-col">
-                    <div class="flex flex-col gap-6 md:flex-col lg:h-half-screen xl:h-half-screen 2xl:h-half-screen lg:flex-row xl:flex-row 2xl:flex-row">
-                        <div class="flex flex-shrink-0 px-4 items-center justify-center">
-                            <img src="../assets/profile-pic.jpeg" alt="..." class="shadow-2xl rounded-full max-w-full h-60 align-middle border-nav-color border-2">
-                        </div>
-                        <div class="flex flex-col justify-center">
-                        
-                            <div class="flex justify-center items-center">
-                                <h1>Diving into the binary seas, I navigate as a software engineer, crafting websites with the finesse of a web developer and the strategic thinking of a game master.</h1>
-                            </div>
-                            <button onclick="window.open('../assets/Priyank Sevak.pdf', '_blank');" class="hidden lg:block xl:block 2xl:block px-2 py-2 mt-4 text-center bg-border-color rounded w-40">
-                                Read the CV
-                            </button>
-                        </div>
-                    </div>
-                    <button onclick="window.open('../assets/Priyank Sevak.pdf', '_blank');" class="block px-2 py-2 mt-4 text-center bg-border-color rounded w-40 lg:hidden xl:hidden 2xl:hidden">
-                            Read the CV
-                    </button>
-                    <div class="flex items-center justify-start w-full mt-4 md:mt-0">
-                    
-                        <ul id="soft-skills-list" class="grid grid-cols-2 list-none w-full">
-                            
-                            <!-- Repeat this section for each app --> 
-                            <!-- End repeat -->
-                        </ul>
-                    
-                    </div>
-
-                
-                </div>
-            </section>
-            <section id="skills_section" class="bg-div-1-color container  mx-auto p-6 flex flex-col justify-start pt-24 mt-[-24px] shadow-2xl">
-                <h2 class="text-4xl font-bold mb-4">Skills</h2>
-                <div class="mx-auto px-4 py-5">
-                    <div class="flex items-center justify-center">
-                    
-                        <ul id="skills-list" class="grid grid-cols-2 list-none xl:grid-cols-5 2xl:grid-cols-6">
-                            
-                            <!-- Repeat this section for each app --> 
-                            
-                                
-                            <!-- End repeat -->
-                        </ul>
-                    
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Priyank Sevak Resume Portfolio" />
+        <meta
+            name="keywords"
+            content="Priyank Sevak, Software engineer, JS, NodeJS, HTML, CSS, TailwindCSS"
+        />
+        <meta name="author" content="Priyank Sevak" />
+        <meta name="robots" content="index, follow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#373251" />
+        <title>Priyank Sevak</title>
+        <link rel="icon" href="../assets/profile-pic.jpeg" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600&display=swap"
+            rel="stylesheet"
+        />
+        <link href="../dist/output.css" rel="stylesheet" />
+        <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+        ></script>
+        <script type="text/javascript">
+            (function () {
+                emailjs.init("p7DFF-OOvMycj2T5g");
+            })();
+        </script>
+    </head>
+    <body
+        class="text-white font-space text-xl m-0 overflow-y-scroll no-scrollbar"
+    >
+        <nav
+            class="fixed top-0 mx-auto h-20 items-center bg-nav-color py-2 text-center text-white z-50 w-full md:w-full lg:w-full xl:w-full 2xl:w-full"
+        >
+            <div
+                class="container mx-auto flex h-full px-8 items-center justify-between"
+            >
+                <a href="#" id="typewriter" class="font-semibold text-3xl"
+                    >Priyank Sevak</a
+                >
+                <div class="hidden md:hidden lg:block xl:block 2xl:block">
+                    <div class="mt-auto text-center">
+                        <a
+                            href="#skills_section"
+                            class="mx-2 font-bold"
+                            onclick="blink(this)"
+                            >Skills</a
+                        >
+                        <a href="#projects_section" class="mx-2">Projects</a>
+                        <a href="#experience_section" class="mx-2"
+                            >Experience</a
+                        >
+                        <a href="#contact_section" class="mx-2">Contact Me</a>
                     </div>
                 </div>
-            </section>
-            <section id="projects_section" class="bg-div-1-color container  mx-auto p-6 flex flex-col justify-start pt-24 mt-[-24px] shadow-2xl">
-                <h2 class="text-4xl font-bold mb-4">Projects</h2>
-                <div class="flex flex-col xl:grid xl:grid-cols-3 2xl:grid 2xl:grid-cols-3 gap-4">
-                    <div class="flex flex-col justify-center items-center bg-white  border-2 border-nav-color rounded-lg shadow dark:bg-gray-800  bg-cover p-4  transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
-                        
-                        <h3 class="text-center text-border-color">Asset Management</h3>
-                        <p class="text-center mt-6">Modifying various aspects of <a href="https://github.com/snipe/snipe-it" target="_blank" rel="noopener noreferrer" class="text-sky-400 underline decoration-sky-500">SnipeIT</a> project to help manage company assets.</p>
-                        <div class="flex flex-row gap-2 mt-auto"> 
-                        
-                            <a href="https://github.com/DecodersLord/AssetManagement" target="_blank"  rel="noopener noreferrer" class="block px-2 py-2 mt-4 text-center bg-border-color rounded">View Source</a>
-                        </div>
-                    </div>
-                    <div class="flex flex-col justify-center items-center bg-white  border-2 border-nav-color rounded-lg shadow dark:bg-gray-800  bg-cover p-4  transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
-                    
-                        <h3 class="text-center text-border-color">Chat application</h3>
-                        <p class="text-center mt-6">A Basic Chat App that allows users to chat with each other in real time.</p>
-                        <div class="flex flex-row gap-2 mt-auto"> 
-                            <a href="https://one00x-assignment-1-chat-app.onrender.com" target="_blank" rel="noopener noreferrer" class="block px-2 py-2 mt-4 text-center bg-border-color rounded">View Project</a>
-                            <a href="https://github.com/DecodersLord/chat-app" target="_blank" rel="noopener noreferrer" class="block px-2 py-2 mt-4 text-center bg-border-color rounded">View Source</a>
-                        </div>
-                    </div>
-                    <div class="flex flex-col justify-center items-center bg-white border-2 border-nav-color rounded-lg shadow dark:bg-gray-800 bg-cover p-4 transition-transform duration-500 ease-in-out transform hover:scale-105" onclick="blink(this)">
-                    
-                        <h3 class="text-center text-border-color">Fitness Digital</h3>
-                        <p class="text-center mt-6">Developed and launched an E-commerce website for a fitness equipment and tracker company,
-                                                resulting in a 40% increase in online sales and a 25% growth in customer base within the first year.</p>
-                        <div class="flex flex-row gap-2 mt-auto"> 
-                            
-                            <a href="https://drive.google.com/file/d/1Xm-k_7PvqZKN7DmiS-FlQ1ySQBbRLUi2/view" rel="noopener noreferrer" target="_blank" class="block px-2 py-2 mt-4 text-center bg-border-color rounded">View Source</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section id="experience_section" class="bg-div-1-color container  mx-auto p-6 flex flex-col justify-start pt-24 mt-[-24px] shadow-2xl">
-                <h2 class="text-4xl font-bold mb-4">Experience</h2>
-
-                <div id="experience_list" class="flex flex-col w-full lg:flex xl:flex 2xl:flex">
-                    <!-- Timeline Item 1 -->
-                    
-
-                    <!-- Timeline Item 2 -->
-                    
-
-                    <!-- Timeline Item 3 -->
-                    
-                </div>
-            </section>
-            <section id="contact_section" class="bg-nav-color container  mx-auto p-6 flex flex-col justify-start pt-24 mt-[-24px] shadow-2xl">
-                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white">Contact Me</h2>
-                <div class="py-8 px-4 gap-8 lg:py-16 mx-auto w-full 2xl:grid 2xl:grid-cols-2">
-                    
-                    <div class="my-8 flex justify-center items-center">
-                        <!-- <p class="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Got a technical issue? Want to send feedback about a beta feature? Need details about our Business plan? Let us know.</p> -->
-                        <form class="space-y-8 w-full" role="form" id="contact-form">
-                            <div>
-                                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your Name</label>
-                                <input type="name" id="name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="John Doe" required>
-                            </div>
-                            <div>
-                                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your email</label>
-                                <input type="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="john.doe@gmail.com" required>
-                            </div>
-                            <div>
-                                <label for="subject" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Subject</label>
-                                <input type="text" id="subject" class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light" placeholder="Let me know how I can help you" required>
-                            </div>
-                            <div class="sm:col-span-2">
-                                <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">Your message</label>
-                                <textarea id="message" rows="6" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Leave a comment..."></textarea>
-                            </div>
-                            <button type="submit"  value="send" id="sendButton" class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-border-color sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Send message</button>
-                        </form>
-                        
-                    </div>
-                    
-                    <div class="md:mb-12 lg:mb-0">
+                <div
+                    class="block lg:hidden xl:hidden 2xl:hidden"
+                    x-data="{ open: false }"
+                >
+                    <button
+                        id="menuButton"
+                        class="w-10 h-10 relative focus:outline-none"
+                        @click="open = !open"
+                    >
+                        <span class="sr-only">Open main menu</span>
                         <div
-                        class="relative h-[700px] rounded-lg shadow-lg dark:shadow-black/20">
-                        <iframe
-                            src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJC5uNqA7yLogRlWsFmmnXxyg&key=AIzaSyBToDVXopfKvTGocPEm5q_2WCFmJyIiBCw"
-                            class="absolute left-0 top-0 h-full w-full rounded-lg"
-                            frameborder="0"
-                            allowfullscreen></iframe>
+                            class="block w-5 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                        >
+                            <span
+                                aria-hidden="true"
+                                class="block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out"
+                                :class="{'rotate-45': open,' -translate-y-1.5': !open }"
+                            ></span>
+                            <span
+                                aria-hidden="true"
+                                class="block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out"
+                                :class="{'opacity-0': open } "
+                            ></span>
+                            <span
+                                aria-hidden="true"
+                                class="block absolute h-0.5 w-5 bg-current transform transition duration-500 ease-in-out"
+                                :class="{'-rotate-45': open, ' translate-y-1.5': !open}"
+                            ></span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <dialog
+                id="menu"
+                class="hidden bg-nav-color h-screen w-screen overflow-hidden z-50 px-0 flex flex-col relative items-center overscroll-contain justify-center space-y-8 animate-fade-in-down text-white lg:hidden xl:hidden 2xl:hidden"
+                x-show="open"
+                @click.away="open = false"
+            >
+                <a
+                    href="#summary_section"
+                    class="block py-1 menu-item animate-fade-in-down delay-1000"
+                    >Summary</a
+                >
+                <a
+                    href="#skills_section"
+                    class="block py-1 menu-item animate-fade-in-down delay-1000"
+                    >Skills</a
+                >
+                <a
+                    href="#projects_section"
+                    class="block py-1 menu-item animate-fade-in-down delay-1000"
+                    >Projects</a
+                >
+                <a
+                    href="#experience_section"
+                    class="block py-1 menu-item animate-fade-in-down delay-1000"
+                    >Experience</a
+                >
+                <a
+                    href="#contact_section"
+                    class="block py-1 menu-item animate-fade-in-down delay-1000"
+                    >Contact Me</a
+                >
+                <button
+                    onclick="window.open('../assets/Priyank Sevak.pdf', '_blank');"
+                    class="block px-2 py-2 text-center bg-border-color rounded w-40"
+                >
+                    Read the CV
+                </button>
+                <div class="flex bottom-24 gap-2 absolute">
+                    <a
+                        href="https://github.com/DecodersLord?tab=repositories"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        ><img
+                            src="../assets/github.svg"
+                            alt="github"
+                            class="h-icon-size w-icon-size"
+                    /></a>
+                    <a
+                        href="https://www.linkedin.com/in/priyank-sevak/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        ><img
+                            src="../assets/linkedin.svg"
+                            alt="linkedIn"
+                            class="h-16 w-16 pt-2"
+                    /></a>
+                    <a
+                        href="https://twitter.com/decodersLord"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        ><img
+                            src="../assets/icons8-twitterx.svg"
+                            alt="twitter"
+                            class="h-16 w-16 pt-2"
+                    /></a>
+                </div>
+            </dialog>
+        </nav>
+
+        <div class="flex flex-row min-h-screen">
+            <section
+                class="bg-div-2-color container mx-auto p-6 mt-16 hidden md:flex md:w-sidebar lg:flex lg:w-sidebar xl:flex xl:w-sidebar 2xl:flex 2xl:w-sidebar"
+            >
+                <!-- content for the first div here -->
+            </section>
+            <section
+                class="bg-div-1-color flex flex-col flex-grow sm:w-full md:w-full lg:w-full xl:w-full 2xl:w-main-content"
+            >
+                <section
+                    id="summary_section"
+                    class="bg-div-1-color container mx-auto p-6 flex flex-col justify-start pt-24 mt-4 shadow-2xl lg:pt-8 xl:pt-8 2xl:pt-8"
+                >
+                    <div class="flex flex-col sm:flex-col">
+                        <div
+                            class="flex flex-col gap-6 md:flex-col lg:h-half-screen xl:h-half-screen 2xl:h-half-screen lg:flex-row xl:flex-row 2xl:flex-row"
+                        >
+                            <div
+                                class="flex flex-shrink-0 px-4 items-center justify-center"
+                            >
+                                <img
+                                    src="../assets/profile-pic.jpeg"
+                                    alt="..."
+                                    class="shadow-2xl rounded-full max-w-full h-60 align-middle border-nav-color border-2"
+                                />
+                            </div>
+                            <div class="flex flex-col justify-center">
+                                <div class="flex justify-center items-center">
+                                    <h1>
+                                        Diving into the binary seas, I navigate
+                                        as a software engineer, crafting
+                                        websites with the finesse of a web
+                                        developer and the strategic thinking of
+                                        a game master.
+                                    </h1>
+                                </div>
+                                <button
+                                    onclick="window.open('../assets/Priyank Sevak.pdf', '_blank');"
+                                    class="hidden lg:block xl:block 2xl:block px-2 py-2 mt-4 text-center bg-border-color rounded w-40"
+                                >
+                                    Read the CV
+                                </button>
+                            </div>
+                        </div>
+                        <button
+                            onclick="window.open('../assets/Priyank Sevak.pdf', '_blank');"
+                            class="block px-2 py-2 mt-4 text-center bg-border-color rounded w-40 lg:hidden xl:hidden 2xl:hidden"
+                        >
+                            Read the CV
+                        </button>
+                        <div
+                            class="flex items-center justify-start w-full mt-4 md:mt-0"
+                        >
+                            <ul
+                                id="soft-skills-list"
+                                class="grid grid-cols-2 list-none w-full"
+                            >
+                                <!-- Repeat this section for each app -->
+                                <!-- End repeat -->
+                            </ul>
                         </div>
                     </div>
-                </div>
+                </section>
+                <section
+                    id="skills_section"
+                    class="bg-div-1-color container mx-auto p-6 flex flex-col justify-start pt-24 mt-[-24px] shadow-2xl"
+                >
+                    <h2 class="text-4xl font-bold mb-4">Skills</h2>
+                    <div class="mx-auto px-4 py-5">
+                        <div class="flex items-center justify-center">
+                            <ul
+                                id="skills-list"
+                                class="grid grid-cols-2 list-none xl:grid-cols-5 2xl:grid-cols-6"
+                            >
+                                <!-- Repeat this section for each app -->
+
+                                <!-- End repeat -->
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                <section
+                    id="projects_section"
+                    class="bg-div-1-color container mx-auto p-6 flex flex-col justify-start pt-24 mt-[-24px] shadow-2xl"
+                >
+                    <h2 class="text-4xl font-bold mb-4">Projects</h2>
+                    <div
+                        class="flex flex-col xl:grid xl:grid-cols-3 2xl:grid 2xl:grid-cols-3 gap-4"
+                    >
+                        <div
+                            class="flex flex-col justify-center items-center bg-white border-2 border-nav-color rounded-lg shadow dark:bg-gray-800 bg-cover p-4 transition-transform duration-500 ease-in-out transform hover:scale-105"
+                            onclick="blink(this)"
+                        >
+                            <h3 class="text-center text-border-color">
+                                Asset Management
+                            </h3>
+                            <p class="text-center mt-6">
+                                Modifying various aspects of
+                                <a
+                                    href="https://github.com/snipe/snipe-it"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="text-sky-400 underline decoration-sky-500"
+                                    >SnipeIT</a
+                                >
+                                project to help manage company assets.
+                            </p>
+                            <div class="flex flex-row gap-2 mt-auto">
+                                <a
+                                    href="https://github.com/DecodersLord/AssetManagement"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="block px-2 py-2 mt-4 text-center bg-border-color rounded"
+                                    >View Source</a
+                                >
+                            </div>
+                        </div>
+                        <div
+                            class="flex flex-col justify-center items-center bg-white border-2 border-nav-color rounded-lg shadow dark:bg-gray-800 bg-cover p-4 transition-transform duration-500 ease-in-out transform hover:scale-105"
+                            onclick="blink(this)"
+                        >
+                            <h3 class="text-center text-border-color">
+                                Chat application
+                            </h3>
+                            <p class="text-center mt-6">
+                                A Basic Chat App that allows users to chat with
+                                each other in real time.
+                            </p>
+                            <div class="flex flex-row gap-2 mt-auto">
+                                <a
+                                    href="https://one00x-assignment-1-chat-app.onrender.com"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="block px-2 py-2 mt-4 text-center bg-border-color rounded"
+                                    >View Project</a
+                                >
+                                <a
+                                    href="https://github.com/DecodersLord/chat-app"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="block px-2 py-2 mt-4 text-center bg-border-color rounded"
+                                    >View Source</a
+                                >
+                            </div>
+                        </div>
+                        <div
+                            class="flex flex-col justify-center items-center bg-white border-2 border-nav-color rounded-lg shadow dark:bg-gray-800 bg-cover p-4 transition-transform duration-500 ease-in-out transform hover:scale-105"
+                            onclick="blink(this)"
+                        >
+                            <h3 class="text-center text-border-color">
+                                Fitness Digital
+                            </h3>
+                            <p class="text-center mt-6">
+                                Developed and launched an E-commerce website for
+                                a fitness equipment and tracker company,
+                                resulting in a 40% increase in online sales and
+                                a 25% growth in customer base within the first
+                                year.
+                            </p>
+                            <div class="flex flex-row gap-2 mt-auto">
+                                <a
+                                    href="https://drive.google.com/file/d/1Xm-k_7PvqZKN7DmiS-FlQ1ySQBbRLUi2/view"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                    class="block px-2 py-2 mt-4 text-center bg-border-color rounded"
+                                    >View Source</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section
+                    id="experience_section"
+                    class="bg-div-1-color container mx-auto p-6 flex flex-col justify-start pt-24 mt-[-24px] shadow-2xl"
+                >
+                    <h2 class="text-4xl font-bold mb-4">Experience</h2>
+
+                    <div
+                        id="experience_list"
+                        class="flex flex-col w-full lg:flex xl:flex 2xl:flex"
+                    >
+                        <!-- Timeline Item 1 -->
+
+                        <!-- Timeline Item 2 -->
+
+                        <!-- Timeline Item 3 -->
+                    </div>
+                </section>
+                <section
+                    id="contact_section"
+                    class="bg-nav-color container mx-auto p-6 flex flex-col justify-start pt-24 mt-[-24px] shadow-2xl"
+                >
+                    <h2
+                        class="mb-4 text-4xl tracking-tight font-extrabold text-center text-gray-900 dark:text-white"
+                    >
+                        Contact Me
+                    </h2>
+                    <div
+                        class="py-8 px-4 gap-8 lg:py-16 mx-auto w-full 2xl:grid 2xl:grid-cols-2"
+                    >
+                        <div class="my-8 flex justify-center items-center">
+                            <!-- <p class="mb-8 lg:mb-16 font-light text-center text-gray-500 dark:text-gray-400 sm:text-xl">Got a technical issue? Want to send feedback about a beta feature? Need details about our Business plan? Let us know.</p> -->
+                            <form
+                                class="space-y-8 w-full"
+                                role="form"
+                                id="contact-form"
+                            >
+                                <div>
+                                    <label
+                                        for="name"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                        >Your Name</label
+                                    >
+                                    <input
+                                        type="name"
+                                        id="name"
+                                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+                                        placeholder="John Doe"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label
+                                        for="email"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                        >Your email</label
+                                    >
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+                                        placeholder="john.doe@gmail.com"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label
+                                        for="subject"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                                        >Subject</label
+                                    >
+                                    <input
+                                        type="text"
+                                        id="subject"
+                                        class="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 shadow-sm focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500 dark:shadow-sm-light"
+                                        placeholder="Let me know how I can help you"
+                                        required
+                                    />
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label
+                                        for="message"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
+                                        >Your message</label
+                                    >
+                                    <textarea
+                                        id="message"
+                                        rows="6"
+                                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        placeholder="Leave a comment..."
+                                    ></textarea>
+                                </div>
+                                <button
+                                    type="submit"
+                                    value="send"
+                                    id="sendButton"
+                                    class="py-3 px-5 text-sm font-medium text-center text-white rounded-lg bg-border-color sm:w-fit hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                >
+                                    Send message
+                                </button>
+                            </form>
+                        </div>
+
+                        <div class="md:mb-12 lg:mb-0">
+                            <div
+                                class="relative h-[700px] rounded-lg shadow-lg dark:shadow-black/20"
+                            >
+                                <iframe
+                                    src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJC5uNqA7yLogRlWsFmmnXxyg&key=AIzaSyBToDVXopfKvTGocPEm5q_2WCFmJyIiBCw"
+                                    class="absolute left-0 top-0 h-full w-full rounded-lg"
+                                    frameborder="0"
+                                    allowfullscreen
+                                ></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </section>
-        </section>
-        
-        <section class="bg-div-2-color  mx-auto p-6 mt-16 flex-grow hidden md:flex md:w-sidebar lg:flex lg:w-sidebar xl:flex xl:w-sidebar 2xl:flex 2xl:w-sidebar">
-            <!-- content for the third div here -->
-            <div class="h-screen"></div>
-                <div id="scrollingDiv" class="md:hidden fixed flex-col right-0 top-1/3 bg-gray-800 p-4 rounded-lg items-center justify-center -mx-4 flex-wrap gap-4 my-2  border-2 border-border-color xl:flex xl:flex-col 2xl:flex 2xl:flex-col">
-                        <a href="https://github.com/DecodersLord?tab=repositories" target="_blank" rel="noopener noreferrer"><img src="../assets/github.svg" alt="github" class="h-16 w-16 pt-2"></a>
-                        <a href="https://www.linkedin.com/in/priyank-sevak/" target="_blank" rel="noopener noreferrer"><img src="../assets/linkedin.svg" alt="linkedIn" class="h-16 w-16 pt-2"></a>
-                        <a href="https://twitter.com/decodersLord" target="_blank" rel="noopener noreferrer"><img src="../assets/icons8-twitterx.svg" alt="twitter" class="h-16 w-16 pt-2"></a>
+
+            <section
+                class="bg-div-2-color mx-auto p-6 mt-16 flex-grow hidden md:flex md:w-sidebar lg:flex lg:w-sidebar xl:flex xl:w-sidebar 2xl:flex 2xl:w-sidebar"
+            >
+                <!-- content for the third div here -->
+                <div class="h-screen"></div>
+                <div
+                    id="scrollingDiv"
+                    class="md:hidden fixed flex-col right-0 top-1/3 bg-gray-800 p-4 rounded-lg items-center justify-center -mx-4 flex-wrap gap-4 my-2 border-2 border-border-color xl:flex xl:flex-col 2xl:flex 2xl:flex-col"
+                >
+                    <a
+                        href="https://github.com/DecodersLord?tab=repositories"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        ><img
+                            src="../assets/github.svg"
+                            alt="github"
+                            class="h-16 w-16 pt-2"
+                    /></a>
+                    <a
+                        href="https://www.linkedin.com/in/priyank-sevak/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        ><img
+                            src="../assets/linkedin.svg"
+                            alt="linkedIn"
+                            class="h-16 w-16 pt-2"
+                    /></a>
+                    <a
+                        href="https://twitter.com/decodersLord"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        ><img
+                            src="../assets/icons8-twitterx.svg"
+                            alt="twitter"
+                            class="h-16 w-16 pt-2"
+                    /></a>
                 </div>
-                <div class="h-screen">
-            </div>
+                <div class="h-screen"></div>
+            </section>
+        </div>
+        <!-- ... -->
 
-        </section>
-    </div>
-    <!-- ... -->
-
-<!-- ... -->
-<script src="script.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-</body>
+        <!-- ... -->
+        <script src="script.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
+            defer
+        ></script>
+    </body>
 </html>
