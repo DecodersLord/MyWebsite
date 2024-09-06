@@ -34,38 +34,38 @@ function blink(element) {
 }
 
 const skills = [
-    { name: "HTML", url: "/assets/html-5.png" },
-    { name: "CSS", url: "/assets/css-3.png" },
-    { name: "tailwind", url: "/assets/tailwind.png" },
-    { name: "javascript", url: "/assets/JS.png" },
-    { name: "React", url: "/assets/react.png" },
-    { name: "Node.js", url: "/assets/nodejs.png" },
-    { name: "Python", url: "/assets/python.png" },
-    { name: "Postgres", url: "/assets/postgres.png" },
-    { name: "MongoDB", url: "/assets/mongo.png" },
-    { name: "Git", url: "/assets/git.png" },
-    { name: "Docker", url: "/assets/docker.png" },
+    { name: "HTML", url: "assets/html-5.png" },
+    { name: "CSS", url: "assets/css-3.png" },
+    { name: "tailwind", url: "assets/tailwind.png" },
+    { name: "javascript", url: "assets/JS.png" },
+    { name: "React", url: "assets/react.png" },
+    { name: "Node.js", url: "assets/nodejs.png" },
+    { name: "Python", url: "assets/python.png" },
+    { name: "Postgres", url: "assets/postgres.png" },
+    { name: "MongoDB", url: "assets/mongo.png" },
+    { name: "Git", url: "assets/git.png" },
+    { name: "Docker", url: "assets/docker.png" },
 ];
 
 const softSkills = [
     {
         name: "Resilient",
-        url: "/assets/html-5.png",
+        url: "assets/html-5.png",
         detail: "As a software developer, my resilience enables me to adapt to new technologies and bounce back from project setbacks with renewed determination.",
     },
     {
         name: "Team Player",
-        url: "/assets/html-5.png",
+        url: "assets/html-5.png",
         detail: "Being a team player, I believe in collaborative problem-solving and actively seek input from my peers to deliver high-quality software solutions.",
     },
     {
         name: "Critical Thinker",
-        url: "/assets/html-5.png",
+        url: "assets/html-5.png",
         detail: "My critical thinking skills allow me to anticipate potential challenges in software development and devise effective strategies to address them.",
     },
     {
         name: "Self Motivated",
-        url: "/assets/html-5.png",
+        url: "assets/html-5.png",
         detail: "Driven by self-motivation, I continuously seek opportunities to enhance my coding skills and stay updated with the latest industry trends.",
     },
 ];
@@ -222,7 +222,7 @@ function sendEmail() {
         .then((res) => {
             console.log("SUCCESS!", res.status, res.text);
             form.innerHTML = `<div class="flex flex-col my- justify-center items-center">
-                                <img src="../assets/email-sent.png" class="w-20 h-20">
+                                <img src="assets/email-sent.png" class="w-20 h-20">
                                 <div class="text-green-500"><i class="fas fa-check-circle"></i> Message sent successfully</div>
                         </div>`;
             setTimeout(function () {
