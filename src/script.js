@@ -1,3 +1,5 @@
+let isMenuOpen = false;
+
 document.querySelectorAll(".menu-item").forEach(function (menuItem) {
     menuItem.addEventListener("click", function () {
         document.getElementById("menuButton").click();
@@ -6,19 +8,22 @@ document.querySelectorAll(".menu-item").forEach(function (menuItem) {
 
 document.getElementById("menuButton").addEventListener("click", function () {
     document.getElementById("menu").classList.toggle("hidden");
-    // document.getElementById('overlay').classList.toggle('hidden');
+    //console.log(document.body.classList.add("overflow-y-hidden"));
+    isMenuOpen = !isMenuOpen;
+
+    if (isMenuOpen) {
+        openMenu();
+    } else {
+        closeMenu();
+    }
 });
 
 const openMenu = () => {
-    // Add overflow-hidden class to the body
-    document.body.classList.add("overflow-hidden");
-    // Additional logic to open the menu
+    document.body.classList.add("overflow-y-hidden");
 };
 
 const closeMenu = () => {
-    // Remove overflow-hidden class from the body
-    document.body.classList.remove("overflow-hidden");
-    // Additional logic to close the menu
+    document.body.classList.remove("overflow-y-hidden");
 };
 
 function blink(element) {
