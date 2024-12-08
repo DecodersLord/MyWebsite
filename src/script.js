@@ -50,22 +50,22 @@ const skills = [
 const softSkills = [
     {
         name: "Resilient",
-        url: "assets/html-5.png",
+        url: "assets/phoenix.png",
         detail: "As a software developer, my resilience enables me to adapt to new technologies and bounce back from project setbacks with renewed determination.",
     },
     {
         name: "Team Player",
-        url: "assets/html-5.png",
+        url: "assets/team-player.png",
         detail: "Being a team player, I believe in collaborative problem-solving and actively seek input from my peers to deliver high-quality software solutions.",
     },
     {
         name: "Critical Thinker",
-        url: "assets/html-5.png",
+        url: "assets/critical-thinking.png",
         detail: "My critical thinking skills allow me to anticipate potential challenges in software development and devise effective strategies to address them.",
     },
     {
         name: "Self Motivated",
-        url: "assets/html-5.png",
+        url: "assets/motivation.png",
         detail: "Driven by self-motivation, I continuously seek opportunities to enhance my coding skills and stay updated with the latest industry trends.",
     },
 ];
@@ -75,8 +75,8 @@ const experienceList = [
         job_title: "Software Engineer",
         company_name: "Assistance Services Group – A Sykes Company",
         location: "London, ON",
-        duration: "Sept 2021 - Present",
-        isCurrentJob: true,
+        duration: "Sept 2021 - Dec 2024",
+        isCurrentJob: false,
         job_duties: [
             "> Led end-to-end SDLC processes",
             "> Enhanced user experience by 25%",
@@ -211,7 +211,7 @@ function sendEmail() {
         message: document.getElementById("message").value,
     };
 
-    const serviceId = "service_omnr2td";
+    const serviceId = "service_me9w7vc";
     const templateId = "template_0h1iqvi";
 
     const form = document.getElementById("contact-form");
