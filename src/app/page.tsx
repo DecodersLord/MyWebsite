@@ -16,7 +16,6 @@ type Stage = 0 | 1 | 2;
 
 export default function Home() {
     const isHydrated = useIsHydrated();
-
     const topControls = useAnimation();
     const bottomControls = useAnimation();
 
@@ -34,11 +33,9 @@ export default function Home() {
         "Passionate about real-time systems and AI",
     ];
 
-    // Gate animation wrapped in useCallback to keep stable reference
     const gateAnimation = useCallback(
         async (direction: "open" | "close") => {
             if (animating.current || !canScroll.current) return;
-
             animating.current = true;
             canScroll.current = false;
 
@@ -73,11 +70,7 @@ export default function Home() {
             }
 
             animating.current = false;
-
-            // Re-enable scrolling after animation completes + buffer
-            setTimeout(() => {
-                canScroll.current = true;
-            }, 1500);
+            setTimeout(() => (canScroll.current = true), 1500);
         },
         [bottomControls, topControls]
     );
@@ -86,21 +79,18 @@ export default function Home() {
         if (!canScroll.current) return;
         canScroll.current = false;
         setStage(newStage);
-        setTimeout(() => {
-            canScroll.current = true;
-        }, 1200);
+        setTimeout(() => (canScroll.current = true), 1200);
     }, []);
 
-    // Highlights carousel – start only after hydration
     useEffect(() => {
         if (!isHydrated) return;
-        const interval = setInterval(() => {
-            setCurrentHighlight((prev) => (prev + 1) % highlights.length);
-        }, 3000);
+        const interval = setInterval(
+            () => setCurrentHighlight((prev) => (prev + 1) % highlights.length),
+            3000
+        );
         return () => clearInterval(interval);
     }, [isHydrated, highlights.length]);
 
-    // Wheel + touch listeners – attach only after hydration
     useEffect(() => {
         if (!isHydrated) return;
 
@@ -130,22 +120,22 @@ export default function Home() {
             if (touchStartY.current == null || !canScroll.current) return;
 
             const deltaY = touchStartY.current - e.changedTouches[0].clientY;
-            const threshold = 30; // px
+            const threshold = 10;
+
             if (deltaY > threshold) {
-                // swipe up
                 if (stage === 0) {
                     gateAnimation("open");
                 } else if (stage === 1) {
                     handleStageChange(2);
                 }
             } else if (deltaY < -threshold) {
-                // swipe down
                 if (stage === 2) {
                     handleStageChange(1);
                 } else if (stage === 1) {
                     gateAnimation("close");
                 }
             }
+
             touchStartY.current = null;
         };
 
@@ -164,34 +154,48 @@ export default function Home() {
         <main className="relative min-h-screen">
             <div className="absolute inset-0 -z-10 bg-animated"></div>
 
+            {/* SVG Clip Path Definition */}
+            <svg className="absolute" width="0" height="0">
+                <defs>
+                    <clipPath
+                        id="curvedBottom"
+                        clipPathUnits="objectBoundingBox"
+                    >
+                        <path d="M 0,0 L 1,0 L 1,0.8 Q 0.5,1.2 0,0.8 Z" />
+                    </clipPath>
+                    <clipPath id="curvedTop" clipPathUnits="objectBoundingBox">
+                        <path d="M 0,0.2 Q 0.5,-0.2 1,0.2 L 1,1 L 0,1 Z" />
+                    </clipPath>
+                </defs>
+            </svg>
+
             {/* GATE */}
             <>
                 <motion.div
                     animate={topControls}
                     initial={{ y: 0 }}
-                    className="fixed top-0 left-0 right-0 h-1/2 bg-custom text-white flex items-center justify-center z-50"
+                    className="fixed top-0 left-0 right-0 bg-custom flex items-center justify-center z-50 text-accent h-[75%]"
                 >
                     <div className="flex flex-col items-center">
                         <Image
                             src="/profile-pic.jpeg"
                             alt="Priyank Sevak"
-                            width={160}
-                            height={160}
+                            width={200}
+                            height={200}
                             className="rounded-full border-4 border-white shadow-lg"
                             priority
                         />
-                        <h1 className="mt-4 text-2xl font-semibold flex items-center gap-2">
+                        <h1 className="mt-4 text-4xl font-semibold flex items-center gap-2">
                             <Image
                                 src="/hi.png"
-                                width={48}
-                                height={48}
+                                width={52}
+                                height={52}
                                 alt="Hi"
                             />
                             <span className="flex items-center mt-4">
                                 I&apos;m Priyank Sevak
                             </span>
                         </h1>
-
                         <SocialIcons />
                     </div>
                 </motion.div>
@@ -199,14 +203,17 @@ export default function Home() {
                 <motion.div
                     animate={bottomControls}
                     initial={{ y: 0 }}
-                    className="fixed bottom-0 left-0 right-0 h-1/2 bg-slate-100 text-gray-800 flex items-center justify-center z-50 bg-animated"
+                    className="fixed bottom-0 left-0 right-0 bg-slate-100 flex items-center justify-center z-50 bg-animated text-base"
+                    style={{
+                        height: "calc(25vh + 100px)",
+                        clipPath: "url(#curvedTop)",
+                    }}
                 >
                     <div className="text-center px-6">
-                        <h2 className="text-2xl font-bold text-gray-900">
+                        <h2 className="text-2xl font-bold text-heading">
                             My Developer Journey
                         </h2>
-                        <p className="text-xl font-medium leading-lg mt-2 text-gray-700 h-8 overflow-hidden relative">
-                            {/* Avoid hydration mismatch by only animating after hydration */}
+                        <p className="text-xl font-medium mt-2 h-8 overflow-hidden relative text-subtle">
                             {isHydrated ? (
                                 <AnimatePresence mode="wait">
                                     <motion.span
@@ -220,20 +227,17 @@ export default function Home() {
                                     </motion.span>
                                 </AnimatePresence>
                             ) : (
-                                // Render the initial, deterministic value on the server
                                 <span suppressHydrationWarning>
                                     {highlights[0]}
                                 </span>
                             )}
                         </p>
-                        <p className="mt-14 text-sm text-gray-500 animate-bounce">
+                        <p className="mt-14 text-sm animate-bounce text-subtle">
                             Scroll down to explore my milestones ↓
                         </p>
                     </div>
                 </motion.div>
             </>
-
-            {/* Scroll Sections */}
             {stage > 0 && <ScrollSections currentStage={stage as 1 | 2} />}
         </main>
     );

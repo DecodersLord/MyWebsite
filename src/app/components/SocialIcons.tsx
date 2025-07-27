@@ -60,7 +60,6 @@ const TooltipPortal = ({
 const SocialIcons = () => {
     const [hoveredIcon, setHoveredIcon] = useState<IconKey | null>(null);
 
-    // Individual refs
     const gitHubRef = useRef<HTMLDivElement>(null!);
     const leetCodeRef = useRef<HTMLDivElement>(null!);
     const linkedInRef = useRef<HTMLDivElement>(null!);
@@ -171,11 +170,9 @@ const SocialIcons = () => {
                             href={social.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="block p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 hover:btn-primary"
+                            className="block p-3 rounded-full shadow-md transition-all duration-300 bg-white text-gray-700 hover:bg-[var(--color-accent)] hover:text-white hover:scale-110 hover:shadow-lg"
                         >
-                            <div className="text-gray-700 hover:text-blue-600 transition-colors">
-                                {social.icon}
-                            </div>
+                            {social.icon}
                         </a>
                     </div>
 
@@ -196,9 +193,9 @@ const SocialIcons = () => {
                         }
                         triggerRef={iconRefs[social.name]}
                     >
-                        <div className="bg-custom text-white p-3 rounded-lg shadow-lg">
+                        <div className="bg-white text-gray-800 p-3 rounded-lg shadow-lg">
                             <div className="flex items-center gap-2">
-                                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[var(--color-accent)]"></div>
                                 <span className="text-sm">
                                     Loading stats...
                                 </span>
