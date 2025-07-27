@@ -1,14 +1,12 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, RefObject } from "react";
 import { createPortal } from "react-dom";
-import { FaGithub } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
-import { FaDev } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaDev } from "react-icons/fa";
 import Image from "next/image";
 
 interface SocialLink {
-    name: string;
+    name: IconKey;
     icon: React.ReactNode;
     url: string;
     onHover: (() => void) | null;
@@ -16,6 +14,8 @@ interface SocialLink {
     loading: boolean;
     renderStats: ((stats: null) => React.ReactNode) | null;
 }
+
+type IconKey = "GitHub" | "LeetCode" | "LinkedIn" | "Dev.to";
 
 // ---------- Tooltip Portal ----------
 const TooltipPortal = ({
@@ -25,12 +25,12 @@ const TooltipPortal = ({
 }: {
     children: React.ReactNode;
     isVisible: boolean;
-    triggerRef: React.RefObject<HTMLDivElement>;
+    triggerRef: RefObject<HTMLDivElement | null> | null;
 }) => {
     const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
-        if (isVisible && triggerRef.current) {
+        if (isVisible && triggerRef?.current) {
             const rect = triggerRef.current.getBoundingClientRect();
             setTooltipPosition({
                 x: rect.left + rect.width / 2,
@@ -58,19 +58,23 @@ const TooltipPortal = ({
 };
 
 const SocialIcons = () => {
-    const [hoveredIcon, setHoveredIcon] = useState<string | null>(null);
+    const [hoveredIcon, setHoveredIcon] = useState<IconKey | null>(null);
 
-    // Refs for tooltip positioning
-    const iconRefs = useRef<{ [key: string]: React.RefObject<HTMLDivElement> }>(
-        {
-            GitHub: useRef<HTMLDivElement>(null),
-            LeetCode: useRef<HTMLDivElement>(null),
-            LinkedIn: useRef<HTMLDivElement>(null),
-            "Dev.to": useRef<HTMLDivElement>(null),
-        }
-    );
+    // Individual refs
+    const gitHubRef = useRef<HTMLDivElement | null>(null);
+    const leetCodeRef = useRef<HTMLDivElement | null>(null);
+    const linkedInRef = useRef<HTMLDivElement | null>(null);
+    const devToRef = useRef<HTMLDivElement | null>(null);
 
-    // Replace with your actual usernames
+    // Typed record of refs
+    const iconRefs: Record<IconKey, RefObject<HTMLDivElement | null>> = {
+        GitHub: gitHubRef,
+        LeetCode: leetCodeRef,
+        LinkedIn: linkedInRef,
+        "Dev.to": devToRef,
+    };
+
+    // Usernames
     const GITHUB_USERNAME = "DecodersLord";
     const LEETCODE_USERNAME = "PriyankSevak";
     const LINKEDIN_USERNAME = "priyank-sevak";
@@ -82,7 +86,7 @@ const SocialIcons = () => {
             icon: <FaGithub className="w-6 h-6" />,
             url: `https://github.com/${GITHUB_USERNAME}`,
             onHover: null,
-            stats: null, // no stats object needed
+            stats: null,
             loading: false,
             renderStats: () => (
                 <a
@@ -156,7 +160,7 @@ const SocialIcons = () => {
             {socialLinks.map((social) => (
                 <div key={social.name}>
                     <div
-                        ref={iconRefs.current[social.name]}
+                        ref={iconRefs[social.name]}
                         className="relative group"
                         onMouseEnter={() => {
                             setHoveredIcon(social.name);
@@ -181,7 +185,7 @@ const SocialIcons = () => {
                         isVisible={
                             hoveredIcon === social.name && !!social.renderStats
                         }
-                        triggerRef={iconRefs.current[social.name]}
+                        triggerRef={iconRefs[social.name]}
                     >
                         {social.renderStats && social.renderStats(null)}
                     </TooltipPortal>
@@ -191,7 +195,7 @@ const SocialIcons = () => {
                         isVisible={
                             hoveredIcon === social.name && social.loading
                         }
-                        triggerRef={iconRefs.current[social.name]}
+                        triggerRef={iconRefs[social.name]}
                     >
                         <div className="bg-custom text-white p-3 rounded-lg shadow-lg">
                             <div className="flex items-center gap-2">
