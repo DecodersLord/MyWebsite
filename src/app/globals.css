@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+    --color-foreground: light-dark(#171717, #ededed);
+    --color-background: light-dark(#ffffff, #0a0a0a);
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
+}
+
+body {
+    background-color: theme(--color-background);
+    color: theme(--color-foreground);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.bg-custom {
+    background-color: #373251; /* Your main bg */
+}
+
+.btn-primary {
+    background-color: #22d3ee; /* Cyan button */
+    color: #373251; /* Dark text for readability */
+}
+
+.btn-primary:hover {
+    background-color: #ff6f61; /* Coral on hover */
+}
+
+.bg-animated {
+    background: radial-gradient(circle at center, #f0f4f8, #373251);
+    animation: bgPulse 4s infinite alternate;
+}
+
+@keyframes bgPulse {
+    from {
+        filter: brightness(1);
+    }
+    to {
+        filter: brightness(1.15);
+    }
+}
