@@ -61,18 +61,17 @@ const SocialIcons = () => {
     const [hoveredIcon, setHoveredIcon] = useState<IconKey | null>(null);
 
     // Individual refs
-    const gitHubRef = useRef<HTMLDivElement | null>(null);
-    const leetCodeRef = useRef<HTMLDivElement | null>(null);
-    const linkedInRef = useRef<HTMLDivElement | null>(null);
-    const devToRef = useRef<HTMLDivElement | null>(null);
+    const gitHubRef = useRef<HTMLDivElement>(null!);
+    const leetCodeRef = useRef<HTMLDivElement>(null!);
+    const linkedInRef = useRef<HTMLDivElement>(null!);
+    const devToRef = useRef<HTMLDivElement>(null!);
 
-    // Typed record of refs
-    const iconRefs: Record<IconKey, RefObject<HTMLDivElement | null>> = {
+    const iconRefs = {
         GitHub: gitHubRef,
         LeetCode: leetCodeRef,
         LinkedIn: linkedInRef,
         "Dev.to": devToRef,
-    };
+    } as const;
 
     // Usernames
     const GITHUB_USERNAME = "DecodersLord";
