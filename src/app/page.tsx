@@ -1,18 +1,31 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { motion, useAnimation, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import ScrollSections from "./ScrollPinnedSections";
 import SocialIcons from "./components/SocialIcons";
 
+function useIsHydrated() {
+    const [hydrated, setHydrated] = useState(false);
+    useEffect(() => setHydrated(true), []);
+    return hydrated;
+}
+
+type Stage = 0 | 1 | 2;
+
 export default function Home() {
+    const isHydrated = useIsHydrated();
+
     const topControls = useAnimation();
     const bottomControls = useAnimation();
-    const [stage, setStage] = useState<0 | 1 | 2>(0);
+
+    const [stage, setStage] = useState<Stage>(0);
+    const [currentHighlight, setCurrentHighlight] = useState(0);
+
     const animating = useRef(false);
     const canScroll = useRef(true);
-    const [currentHighlight, setCurrentHighlight] = useState(0);
+    const touchStartY = useRef<number | null>(null);
 
     const highlights = [
         "From Game Developer to Full-Stack Engineer",
@@ -21,71 +34,76 @@ export default function Home() {
         "Passionate about real-time systems and AI",
     ];
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentHighlight((prev) => (prev + 1) % highlights.length);
-        }, 3000); // Change every 3s
-        return () => clearInterval(interval);
-    }, []);
+    // Gate animation wrapped in useCallback to keep stable reference
+    const gateAnimation = useCallback(
+        async (direction: "open" | "close") => {
+            if (animating.current || !canScroll.current) return;
 
-    const gateAnimation = async (direction: "open" | "close") => {
-        if (animating.current || !canScroll.current) return;
+            animating.current = true;
+            canScroll.current = false;
 
-        animating.current = true;
-        canScroll.current = false;
+            if (direction === "open") {
+                await Promise.all([
+                    topControls.start({
+                        y: ["0%", "-110%", "-100%"],
+                        transition: { duration: 1.2, ease: [0.25, 1, 0.5, 1] },
+                    }),
+                    bottomControls.start({
+                        y: ["0%", "110%", "100%"],
+                        transition: { duration: 1.2, ease: [0.25, 1, 0.5, 1] },
+                    }),
+                ]);
+                setStage(1);
+            } else {
+                setStage(0);
+                await Promise.all([
+                    topControls.start({
+                        y: ["-100%", "5%", "0%"],
+                        transition: { duration: 1.2, ease: [0.25, 1, 0.5, 1] },
+                    }),
+                    bottomControls.start({
+                        y: ["100%", "-5%", "0%"],
+                        transition: { duration: 1.2, ease: [0.25, 1, 0.5, 1] },
+                    }),
+                ]);
+                setTimeout(
+                    () => window.scrollTo({ top: 0, behavior: "smooth" }),
+                    200
+                );
+            }
 
-        if (direction === "open") {
-            await Promise.all([
-                topControls.start({
-                    y: ["0%", "-110%", "-100%"],
-                    transition: { duration: 1.2, ease: [0.25, 1, 0.5, 1] },
-                }),
-                bottomControls.start({
-                    y: ["0%", "110%", "100%"],
-                    transition: { duration: 1.2, ease: [0.25, 1, 0.5, 1] },
-                }),
-            ]);
-            setStage(1);
-        } else {
-            setStage(0);
-            await Promise.all([
-                topControls.start({
-                    y: ["-100%", "5%", "0%"],
-                    transition: { duration: 1.2, ease: [0.25, 1, 0.5, 1] },
-                }),
-                bottomControls.start({
-                    y: ["100%", "-5%", "0%"],
-                    transition: { duration: 1.2, ease: [0.25, 1, 0.5, 1] },
-                }),
-            ]);
-            setTimeout(
-                () => window.scrollTo({ top: 0, behavior: "smooth" }),
-                200
-            );
-        }
+            animating.current = false;
 
-        animating.current = false;
+            // Re-enable scrolling after animation completes + buffer
+            setTimeout(() => {
+                canScroll.current = true;
+            }, 1500);
+        },
+        [bottomControls, topControls]
+    );
 
-        // Re-enable scrolling after animation completes + buffer
-        setTimeout(() => {
-            canScroll.current = true;
-        }, 1500); // 1.2s animation + 300ms buffer
-    };
-
-    const handleStageChange = (newStage: 0 | 1 | 2) => {
-        // Fix: Type the parameter correctly
+    const handleStageChange = useCallback((newStage: Stage) => {
         if (!canScroll.current) return;
-
         canScroll.current = false;
         setStage(newStage);
-
-        // Re-enable scrolling after a short delay
         setTimeout(() => {
             canScroll.current = true;
-        }, 1200); // Fix: Increased delay for consistent behavior
-    };
+        }, 1200);
+    }, []);
 
+    // Highlights carousel – start only after hydration
     useEffect(() => {
+        if (!isHydrated) return;
+        const interval = setInterval(() => {
+            setCurrentHighlight((prev) => (prev + 1) % highlights.length);
+        }, 3000);
+        return () => clearInterval(interval);
+    }, [isHydrated, highlights.length]);
+
+    // Wheel + touch listeners – attach only after hydration
+    useEffect(() => {
+        if (!isHydrated) return;
+
         const onWheel = (e: WheelEvent) => {
             if (!canScroll.current) return;
 
@@ -104,13 +122,48 @@ export default function Home() {
             }
         };
 
-        window.addEventListener("wheel", onWheel);
-        return () => window.removeEventListener("wheel", onWheel);
-    }, [stage]);
+        const onTouchStart = (e: TouchEvent) => {
+            touchStartY.current = e.touches[0].clientY;
+        };
+
+        const onTouchEnd = (e: TouchEvent) => {
+            if (touchStartY.current == null || !canScroll.current) return;
+
+            const deltaY = touchStartY.current - e.changedTouches[0].clientY;
+            const threshold = 30; // px
+            if (deltaY > threshold) {
+                // swipe up
+                if (stage === 0) {
+                    gateAnimation("open");
+                } else if (stage === 1) {
+                    handleStageChange(2);
+                }
+            } else if (deltaY < -threshold) {
+                // swipe down
+                if (stage === 2) {
+                    handleStageChange(1);
+                } else if (stage === 1) {
+                    gateAnimation("close");
+                }
+            }
+            touchStartY.current = null;
+        };
+
+        window.addEventListener("wheel", onWheel, { passive: true });
+        window.addEventListener("touchstart", onTouchStart, { passive: true });
+        window.addEventListener("touchend", onTouchEnd, { passive: true });
+
+        return () => {
+            window.removeEventListener("wheel", onWheel);
+            window.removeEventListener("touchstart", onTouchStart);
+            window.removeEventListener("touchend", onTouchEnd);
+        };
+    }, [isHydrated, stage, gateAnimation, handleStageChange]);
 
     return (
         <main className="relative min-h-screen">
             <div className="absolute inset-0 -z-10 bg-animated"></div>
+
             {/* GATE */}
             <>
                 <motion.div
@@ -125,6 +178,7 @@ export default function Home() {
                             width={160}
                             height={160}
                             className="rounded-full border-4 border-white shadow-lg"
+                            priority
                         />
                         <h1 className="mt-4 text-2xl font-semibold flex items-center gap-2">
                             <Image
@@ -138,7 +192,6 @@ export default function Home() {
                             </span>
                         </h1>
 
-                        {/* Social Icons */}
                         <SocialIcons />
                     </div>
                 </motion.div>
@@ -153,17 +206,25 @@ export default function Home() {
                             My Developer Journey
                         </h2>
                         <p className="text-xl font-medium leading-lg mt-2 text-gray-700 h-8 overflow-hidden relative">
-                            <AnimatePresence mode="wait">
-                                <motion.span
-                                    key={currentHighlight}
-                                    initial={{ opacity: 0, x: 50 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: -50 }}
-                                    transition={{ duration: 0.5 }}
-                                >
-                                    {highlights[currentHighlight]}
-                                </motion.span>
-                            </AnimatePresence>
+                            {/* Avoid hydration mismatch by only animating after hydration */}
+                            {isHydrated ? (
+                                <AnimatePresence mode="wait">
+                                    <motion.span
+                                        key={currentHighlight}
+                                        initial={{ opacity: 0, x: 50 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: -50 }}
+                                        transition={{ duration: 0.5 }}
+                                    >
+                                        {highlights[currentHighlight]}
+                                    </motion.span>
+                                </AnimatePresence>
+                            ) : (
+                                // Render the initial, deterministic value on the server
+                                <span suppressHydrationWarning>
+                                    {highlights[0]}
+                                </span>
+                            )}
                         </p>
                         <p className="mt-14 text-sm text-gray-500 animate-bounce">
                             Scroll down to explore my milestones ↓
