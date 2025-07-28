@@ -120,7 +120,7 @@ export default function Home() {
             if (touchStartY.current == null || !canScroll.current) return;
 
             const deltaY = touchStartY.current - e.changedTouches[0].clientY;
-            const threshold = 5;
+            const threshold = 1;
 
             if (deltaY > threshold) {
                 if (stage === 0) {
@@ -185,7 +185,7 @@ export default function Home() {
                             height={200}
                             priority
                         />
-                        <h1 className="text-xl sm:text-xl md:text-4xl font-semibold flex items-center gap-2 flex-wrap justify-center">
+                        <h1 className="text-accent text-xl sm:text-xl md:text-4xl font-semibold flex items-center gap-2 flex-wrap justify-center">
                             <span>Priyank Sevak</span>
                         </h1>
                         <div className="flex flex-wrap justify-center gap-3 w-full max-w-xs sm:max-w-sm">
