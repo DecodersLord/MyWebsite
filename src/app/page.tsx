@@ -120,7 +120,7 @@ export default function Home() {
             if (touchStartY.current == null || !canScroll.current) return;
 
             const deltaY = touchStartY.current - e.changedTouches[0].clientY;
-            const threshold = 10;
+            const threshold = 5;
 
             if (deltaY > threshold) {
                 if (stage === 0) {
@@ -176,27 +176,21 @@ export default function Home() {
                     initial={{ y: 0 }}
                     className="fixed top-0 left-0 right-0 bg-custom flex items-center justify-center z-50 text-accent h-[75%]"
                 >
-                    <div className="flex flex-col items-center">
+                    <div className="flex flex-col items-center text-center px-4 py-6 space-y-4 small-height:flex-row small-height:space-y-0">
                         <Image
                             src="/profile-pic.jpeg"
                             alt="Priyank Sevak"
+                            className="rounded-full border-4 border-white shadow-lg object-cover w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40"
                             width={200}
                             height={200}
-                            className="rounded-full border-4 border-white shadow-lg"
                             priority
                         />
-                        <h1 className="mt-4 text-4xl font-semibold flex items-center gap-2">
-                            <Image
-                                src="/hi.png"
-                                width={52}
-                                height={52}
-                                alt="Hi"
-                            />
-                            <span className="flex items-center mt-4">
-                                I&apos;m Priyank Sevak
-                            </span>
+                        <h1 className="text-xl sm:text-xl md:text-4xl font-semibold flex items-center gap-2 flex-wrap justify-center">
+                            <span>Priyank Sevak</span>
                         </h1>
-                        <SocialIcons />
+                        <div className="flex flex-wrap justify-center gap-3 w-full max-w-xs sm:max-w-sm">
+                            <SocialIcons />
+                        </div>
                     </div>
                 </motion.div>
 
@@ -209,11 +203,12 @@ export default function Home() {
                         clipPath: "url(#curvedTop)",
                     }}
                 >
-                    <div className="text-center px-6">
-                        <h2 className="text-2xl font-bold text-heading">
+                    <div className="flex flex-col items-center justify-center px-4 py-6 text-center space-y-3 sm:space-y-4">
+                        <h2 className="text-base sm:text-lg md:text-2xl font-bold text-heading leading-snug">
                             My Developer Journey
                         </h2>
-                        <p className="text-xl font-medium mt-2 h-8 overflow-hidden relative text-subtle">
+
+                        <p className="text-md sm:text-md md:text-xl font-medium text-subtle text-balance max-w-[90%] break-words leading-relaxed">
                             {isHydrated ? (
                                 <AnimatePresence mode="wait">
                                     <motion.span
@@ -222,6 +217,7 @@ export default function Home() {
                                         animate={{ opacity: 1, x: 0 }}
                                         exit={{ opacity: 0, x: -50 }}
                                         transition={{ duration: 0.5 }}
+                                        className="inline-block"
                                     >
                                         {highlights[currentHighlight]}
                                     </motion.span>
@@ -232,7 +228,8 @@ export default function Home() {
                                 </span>
                             )}
                         </p>
-                        <p className="mt-14 text-sm animate-bounce text-subtle">
+
+                        <p className="text-[10px] sm:text-xs animate-bounce text-subtle">
                             Scroll down to explore my milestones ↓
                         </p>
                     </div>
