@@ -23,7 +23,7 @@ export function ProjectsGrid({
             <AnimatePresence mode="wait">
                 <motion.div
                     key={currentPage}
-                    className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 overflow-visible"
+                    className="grid responsive-grid grid-cols-2 md:grid-cols-4 gap-6 overflow-visible small-height:grid-column"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}

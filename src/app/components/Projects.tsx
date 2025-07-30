@@ -5,22 +5,93 @@ import { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../firebaseConfig";
 import { AnimatePresence, motion } from "framer-motion";
-import { ProjectCard } from "./ProjectCard";
 import { Project, Category, TechTag, TECHS } from "../types";
-import { FilterRail } from "./FilterRail";
 import { MobileFilterDrawer } from "./MobileFilterDrawer";
 import { PaginationContainer } from "./PaginationContainer";
 import { ProjectsGrid } from "./ProjectsGrid";
-
-const PROJECTS_PER_PAGE = 8; // 4x2 grid on desktop, 2x2 on mobile
 
 export default function Projects() {
     const [projects, setProjects] = useState<Project[]>([]);
     const [loading, setLoading] = useState(true);
     const [selectedTechs, setSelectedTechs] = useState<Set<TechTag>>(new Set());
     const [showMobileFilter, setShowMobileFilter] = useState(false);
+    const [projectsPerPage, setProjectsPerPage] = useState(8);
     const [hoveredProject, setHoveredProject] = useState<string | null>(null);
     const [currentPage, setCurrentPage] = useState(0);
+
+    useEffect(() => {
+        const calculateProjectsPerPage = () => {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            if (width < 640 || height < 750) return 2; // 2x2 grid
+            if (width <= 1024) return 4; // 2x2 grid
+            return 8; // 4x2
+        };
+
+        const updateLayout = () => {
+            const newProjectsPerPage = calculateProjectsPerPage();
+            setProjectsPerPage((prev) => {
+                // Only update if the value actually changed to prevent unnecessary re-renders
+                return prev !== newProjectsPerPage ? newProjectsPerPage : prev;
+            });
+        };
+
+        updateLayout(); // Set on mount
+
+        // Listen to multiple events that can change viewport dimensions
+        window.addEventListener("resize", updateLayout);
+        window.addEventListener("orientationchange", updateLayout);
+
+        // Use ResizeObserver for more reliable detection of size changes
+        let resizeObserver: ResizeObserver | null = null;
+        if (typeof ResizeObserver !== "undefined") {
+            resizeObserver = new ResizeObserver(() => {
+                // Small delay to ensure the viewport has fully updated
+                setTimeout(updateLayout, 100);
+            });
+            resizeObserver.observe(document.documentElement);
+        }
+
+        // Also listen for zoom/scale changes via matchMedia
+        const mediaQueries = [
+            window.matchMedia("(max-width: 639px)"),
+            window.matchMedia("(min-width: 640px) and (max-width: 1023px)"),
+            window.matchMedia("(min-width: 1024px)"),
+        ];
+
+        const handleMediaChange = () => {
+            // Small delay to ensure all layout changes are complete
+            setTimeout(updateLayout, 50);
+        };
+
+        mediaQueries.forEach((mq) => {
+            if (mq.addEventListener) {
+                mq.addEventListener("change", handleMediaChange);
+            } else {
+                // Fallback for older browsers
+                mq.addListener(handleMediaChange);
+            }
+        });
+
+        return () => {
+            window.removeEventListener("resize", updateLayout);
+            window.removeEventListener("orientationchange", updateLayout);
+
+            if (resizeObserver) {
+                resizeObserver.disconnect();
+            }
+
+            mediaQueries.forEach((mq) => {
+                if (mq.removeEventListener) {
+                    mq.removeEventListener("change", handleMediaChange);
+                } else {
+                    // Fallback for older browsers
+                    mq.removeListener(handleMediaChange);
+                }
+            });
+        };
+    }, []);
 
     useEffect(() => {
         async function fetchProjects() {
@@ -52,19 +123,26 @@ export default function Projects() {
     }, [projects, selectedTechs]);
 
     // Pagination logic
-    const totalPages = Math.ceil(filteredProjects.length / PROJECTS_PER_PAGE);
+    const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
     const currentProjects = useMemo(() => {
-        const startIndex = currentPage * PROJECTS_PER_PAGE;
-        return filteredProjects.slice(
-            startIndex,
-            startIndex + PROJECTS_PER_PAGE
-        );
-    }, [filteredProjects, currentPage]);
+        const startIndex = currentPage * projectsPerPage;
+        return filteredProjects.slice(startIndex, startIndex + projectsPerPage);
+    }, [filteredProjects, currentPage, projectsPerPage]);
 
     // Reset to first page when filters change
     useEffect(() => {
         setCurrentPage(0);
     }, [selectedTechs]);
+
+    // Reset page when projectsPerPage changes and current page becomes invalid
+    useEffect(() => {
+        const newTotalPages = Math.ceil(
+            filteredProjects.length / projectsPerPage
+        );
+        if (currentPage >= newTotalPages && newTotalPages > 0) {
+            setCurrentPage(newTotalPages - 1);
+        }
+    }, [projectsPerPage, filteredProjects.length, currentPage]);
 
     const toggleTech = useCallback((tech: TechTag) => {
         setSelectedTechs((prev) => {
@@ -135,20 +213,11 @@ export default function Projects() {
                 <div className="mt-2 h-[2px] bg-black" />
             </div>
 
-            {/* Desktop filter (sticky right) */}
-            <aside className="hidden lg:block fixed right-6 top-40 w-16 z-30">
-                <FilterRail
-                    selectedTechs={selectedTechs}
-                    toggleTech={toggleTech}
-                    techs={TECHS}
-                />
-            </aside>
-
             {/* Mobile dock toggle */}
             <button
                 aria-label="Open filters"
                 onClick={() => setShowMobileFilter(true)}
-                className="lg:hidden fixed right-4 bottom-4 z-50 rounded-full p-3 shadow-lg bg-white text-[var(--color-foreground)] hover:scale-110 transition-transform"
+                className="block fixed right-4 bottom-4 z-9999 rounded-full p-3 shadow-lg bg-white text-[var(--color-foreground)] hover:scale-110 transition-transform"
             >
                 <svg
                     width="22"
@@ -191,7 +260,7 @@ export default function Projects() {
                     currentPage={currentPage}
                     hoveredProject={hoveredProject}
                     onHover={setHoveredProject}
-                    PROJECTS_PER_PAGE={PROJECTS_PER_PAGE}
+                    PROJECTS_PER_PAGE={projectsPerPage}
                 />
 
                 {/* No projects message */}
