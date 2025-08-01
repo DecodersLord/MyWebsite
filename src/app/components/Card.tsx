@@ -33,7 +33,7 @@ export default function Card({
     return (
         <div
             className={clsx(
-                "rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 transition-colors duration-300",
+                "rounded-xl border border-gray-700 bg-[var(--color-card)] transition-colors duration-300",
                 shadowClasses,
                 paddingClasses,
                 className

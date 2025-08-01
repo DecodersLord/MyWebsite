@@ -92,7 +92,7 @@ export const ProjectCard = React.memo(function ProjectCard({
 
                         {/* Basic info */}
                         <div className="flex-1 min-w-0">
-                            <h4 className="text-lg font-semibold text-accent mb-1 truncate">
+                            <h4 className="text-lg font-semibold text-accent mb-1 text-wrap">
                                 {project.title}
                             </h4>
                             <p className="text-sm text-white mb-2 line-clamp-2">
@@ -100,7 +100,7 @@ export const ProjectCard = React.memo(function ProjectCard({
                             </p>
 
                             {/* Category badge - always visible */}
-                            <span className="inline-flex items-center gap-1 px-2 py-1 bg-[var(--color-background)]/60 text-accent rounded-full text-xs">
+                            <span className="inline-flex items-center gap-1 px-2 py-1 bg-[var(--color-tag)]/60 text-accent rounded-full text-xs">
                                 {getCategoryIcon(project.category)}
                                 <span className="capitalize">
                                     {project.category}
@@ -131,7 +131,7 @@ export const ProjectCard = React.memo(function ProjectCard({
                                             transition={{ delay: 0.1 }}
                                             className="mb-4"
                                         >
-                                            <h5 className="text-xs font-semibold text-white uppercase tracking-wide mb-2">
+                                            <h5 className="text-xs font-semibold  text-accent uppercase tracking-wide mb-2">
                                                 Technologies
                                             </h5>
                                             <div className="flex flex-wrap gap-2">
@@ -154,18 +154,20 @@ export const ProjectCard = React.memo(function ProjectCard({
                                                                         0.05,
                                                                 duration: 0.2,
                                                             }}
-                                                            className="inline-flex items-center gap-1 px-2 py-1 text-xs bg-[var(--color-background)]/60 text-accent rounded-full"
+                                                            className="inline-flex items-center gap-1 px-2 py-1 text-xs bg-[var(--color-tag)]/60 text-accent rounded-full"
                                                             title={
                                                                 TECHS[tech]
                                                                     ?.label
                                                             }
                                                         >
-                                                            {TECHS[tech]?.icon}
+                                                            {TECHS[tech]
+                                                                ?.icon || (
+                                                                <FiExternalLink />
+                                                            )}
                                                             <span className="hidden sm:inline">
-                                                                {
-                                                                    TECHS[tech]
-                                                                        ?.label
-                                                                }
+                                                                {TECHS[tech]
+                                                                    ?.label ||
+                                                                    tech}
                                                             </span>
                                                         </motion.span>
                                                     )

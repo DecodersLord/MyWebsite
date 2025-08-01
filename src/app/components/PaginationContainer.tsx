@@ -32,7 +32,7 @@ export const PaginationContainer = function PaginationContainer({
                     <button
                         onClick={onPrevPage}
                         disabled={currentPage === 0}
-                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white shadow-md hover:bg-[var(--color-accent)] hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-[var(--color-foreground)]"
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white shadow-md hover:bg-[var(--color-card)]/75 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-[var(--color-foreground)]"
                         aria-label="Previous page"
                     >
                         <svg
@@ -54,8 +54,8 @@ export const PaginationContainer = function PaginationContainer({
                                 onClick={() => onGoToPage(i)}
                                 className={`w-10 h-10 rounded-lg font-medium transition-all ${
                                     i === currentPage
-                                        ? "bg-[var(--color-accent)] text-white"
-                                        : "bg-white hover:bg-[var(--color-accent)]/10"
+                                        ? "bg-[var(--color-card)] text-white"
+                                        : "bg-white hover:bg-[var(--color-card)]/75 hover:text-white"
                                 }`}
                                 aria-label={`Go to page ${i + 1}`}
                             >
@@ -67,7 +67,7 @@ export const PaginationContainer = function PaginationContainer({
                     <button
                         onClick={onNextPage}
                         disabled={currentPage === totalPages - 1}
-                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white shadow-md hover:bg-[var(--color-accent)] hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-[var(--color-foreground)]"
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white shadow-md hover:bg-[var(--color-card)]/75 hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:text-[var(--color-foreground)]"
                         aria-label="Next page"
                     >
                         Next
@@ -98,7 +98,7 @@ export const PaginationContainer = function PaginationContainer({
                     <button
                         onClick={onPrevPage}
                         disabled={currentPage === 0}
-                        className="p-3 rounded-full bg-white shadow-md hover:bg-[var(--color-accent)] hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="p-3 rounded-full bg-white shadow-md hover:bg-[var(--color-card)] hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                         aria-label="Previous page"
                     >
                         <svg
@@ -119,8 +119,8 @@ export const PaginationContainer = function PaginationContainer({
                                 onClick={() => onGoToPage(i)}
                                 className={`w-3 h-3 rounded-full transition-all ${
                                     i === currentPage
-                                        ? "bg-[var(--color-accent)] w-8"
-                                        : "bg-gray-300 hover:bg-[var(--color-accent)]/50"
+                                        ? "bg-[var(--color-card)] w-8"
+                                        : "var(--color-card) hover:bg-[var(--color-card)]/50"
                                 }`}
                                 aria-label={`Go to page ${i + 1}`}
                             />
@@ -130,7 +130,7 @@ export const PaginationContainer = function PaginationContainer({
                     <button
                         onClick={onNextPage}
                         disabled={currentPage === totalPages - 1}
-                        className="p-3 rounded-full bg-white shadow-md hover:bg-[var(--color-accent)] hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="p-3 rounded-full bg-white shadow-md hover:bg-[var(--color-card)] hover:text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                         aria-label="Next page"
                     >
                         <svg

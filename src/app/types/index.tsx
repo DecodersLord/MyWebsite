@@ -11,6 +11,7 @@ import {
     SiNextdotjs,
     SiPostgresql,
     SiFirebase,
+    SiDocker,
 } from "react-icons/si";
 import { FiGithub, FiExternalLink } from "react-icons/fi";
 
@@ -28,7 +29,9 @@ export type TechTag =
     | "postgres"
     | "unity"
     | "python"
-    | "firebase";
+    | "firebase"
+    | "github"
+    | "docker";
 
 export interface Project {
     id: string;
@@ -57,4 +60,6 @@ export const TECHS: Record<
     unity: { label: "Unity", icon: <SiUnity /> },
     python: { label: "Python", icon: <SiPython /> },
     firebase: { label: "Firebase", icon: <SiFirebase /> },
+    github: { label: "GitHub", icon: <FiGithub /> },
+    docker: { label: "Docker", icon: <SiDocker /> },
 };
