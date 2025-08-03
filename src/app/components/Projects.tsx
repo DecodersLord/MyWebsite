@@ -36,7 +36,7 @@ export default function Projects() {
             // Use CSS pixels for consistent behavior
             if (width < 640 || height < 750) return 2; // Mobile: 1x2
             if (width < 1024) return 4; // Tablet: 2x2
-            if (width < 1440) return 4; // Small desktop: 3x2
+            if (width < 1600) return 4; // Small desktop: 3x2
             return 8; // Large desktop: 4x2
         };
 
