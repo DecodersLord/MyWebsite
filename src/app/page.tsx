@@ -94,7 +94,28 @@ export default function Home() {
     useEffect(() => {
         if (!isHydrated) return;
 
+        const isWithinScrollableContainer = (element: Element): boolean => {
+            let current = element;
+            while (current && current !== document.body) {
+                if (current.hasAttribute("data-scrollable")) {
+                    const container = current as HTMLElement;
+                    const { scrollTop, scrollHeight, clientHeight } = container;
+
+                    // Check if container is actually scrollable and not at boundaries
+                    return scrollHeight > clientHeight;
+                }
+                current = current.parentElement as Element;
+            }
+            return false;
+        };
+
         const onWheel = (e: WheelEvent) => {
+            const target = e.target as Element;
+
+            if (isWithinScrollableContainer(target)) {
+                return; // Don't trigger page navigation
+            }
+
             if (!canScroll.current) return;
 
             if (e.deltaY > 0) {
@@ -113,22 +134,42 @@ export default function Home() {
         };
 
         const onTouchStart = (e: TouchEvent) => {
+            const target = e.target as Element;
+
+            if (isWithinScrollableContainer(target)) {
+                return;
+            }
+
             touchStartY.current = e.touches[0].clientY;
         };
 
         const onTouchEnd = (e: TouchEvent) => {
-            if (touchStartY.current == null || !canScroll.current) return;
+            const target = e.target as Element;
+
+            if (
+                isWithinScrollableContainer(target) ||
+                touchStartY.current == null ||
+                !canScroll.current
+            ) {
+                touchStartY.current = null;
+                return;
+            }
 
             const deltaY = touchStartY.current - e.changedTouches[0].clientY;
-            const threshold = 1;
+            const threshold = 75; // Higher threshold for mobile
 
-            if (deltaY > threshold) {
+            if (Math.abs(deltaY) < threshold) {
+                touchStartY.current = null;
+                return; // Not enough movement to trigger navigation
+            }
+
+            if (deltaY > 0) {
                 if (stage === 0) {
                     gateAnimation("open");
                 } else if (stage === 1) {
                     handleStageChange(2);
                 }
-            } else if (deltaY < -threshold) {
+            } else {
                 if (stage === 2) {
                     handleStageChange(1);
                 } else if (stage === 1) {
@@ -139,9 +180,9 @@ export default function Home() {
             touchStartY.current = null;
         };
 
-        window.addEventListener("wheel", onWheel, { passive: true });
-        window.addEventListener("touchstart", onTouchStart, { passive: true });
-        window.addEventListener("touchend", onTouchEnd, { passive: true });
+        window.addEventListener("wheel", onWheel);
+        window.addEventListener("touchstart", onTouchStart);
+        window.addEventListener("touchend", onTouchEnd);
 
         return () => {
             window.removeEventListener("wheel", onWheel);
