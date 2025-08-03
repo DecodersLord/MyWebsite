@@ -25,72 +25,40 @@ export default function Projects() {
             const width = window.innerWidth;
             const height = window.innerHeight;
 
-            if (width < 640 || height < 750) return 2; // 2x2 grid
-            if (width <= 1024) return 4; // 2x2 grid
-            return 8; // 4x2
+            // Detect zoom level (approximate)
+            const zoom = window.devicePixelRatio || 1;
+            const actualWidth = width * zoom;
+
+            console.log(
+                `CSS width: ${width}, Zoom: ${zoom}, Actual: ${actualWidth}`
+            );
+
+            // Use CSS pixels for consistent behavior
+            if (width < 640 || height < 750) return 2; // Mobile: 1x2
+            if (width < 1024) return 4; // Tablet: 2x2
+            if (width < 1440) return 4; // Small desktop: 3x2
+            return 8; // Large desktop: 4x2
         };
 
         const updateLayout = () => {
             const newProjectsPerPage = calculateProjectsPerPage();
             setProjectsPerPage((prev) => {
-                // Only update if the value actually changed to prevent unnecessary re-renders
                 return prev !== newProjectsPerPage ? newProjectsPerPage : prev;
             });
         };
 
-        updateLayout(); // Set on mount
+        updateLayout();
 
-        // Listen to multiple events that can change viewport dimensions
-        window.addEventListener("resize", updateLayout);
-        window.addEventListener("orientationchange", updateLayout);
-
-        // Use ResizeObserver for more reliable detection of size changes
-        let resizeObserver: ResizeObserver | null = null;
-        if (typeof ResizeObserver !== "undefined") {
-            resizeObserver = new ResizeObserver(() => {
-                // Small delay to ensure the viewport has fully updated
-                setTimeout(updateLayout, 100);
-            });
-            resizeObserver.observe(document.documentElement);
-        }
-
-        // Also listen for zoom/scale changes via matchMedia
-        const mediaQueries = [
-            window.matchMedia("(max-width: 639px)"),
-            window.matchMedia("(min-width: 640px) and (max-width: 1023px)"),
-            window.matchMedia("(min-width: 1024px)"),
-        ];
-
-        const handleMediaChange = () => {
-            // Small delay to ensure all layout changes are complete
-            setTimeout(updateLayout, 50);
-        };
-
-        mediaQueries.forEach((mq) => {
-            if (mq.addEventListener) {
-                mq.addEventListener("change", handleMediaChange);
-            } else {
-                // Fallback for older browsers
-                mq.addListener(handleMediaChange);
-            }
+        const resizeObserver = new ResizeObserver(() => {
+            setTimeout(updateLayout, 100);
         });
+        resizeObserver.observe(document.documentElement);
+
+        window.addEventListener("resize", updateLayout);
 
         return () => {
             window.removeEventListener("resize", updateLayout);
-            window.removeEventListener("orientationchange", updateLayout);
-
-            if (resizeObserver) {
-                resizeObserver.disconnect();
-            }
-
-            mediaQueries.forEach((mq) => {
-                if (mq.removeEventListener) {
-                    mq.removeEventListener("change", handleMediaChange);
-                } else {
-                    // Fallback for older browsers
-                    mq.removeListener(handleMediaChange);
-                }
-            });
+            resizeObserver.disconnect();
         };
     }, []);
 

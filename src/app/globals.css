@@ -96,29 +96,6 @@ h5 {
     color: var(--color-secondary);
 }
 
-@layer utilities {
-    .zoom-125\:grid-cols-2 {
-        @apply grid-cols-2;
-    }
-
-    .zoom-150\:grid-cols-2 {
-        @apply grid-cols-2;
-    }
-
-    .zoom-100\:grid-cols-4 {
-        @apply grid-cols-4;
-    }
-
-    .zoom-125::before,
-    .zoom-150::before,
-    .zoom-100::before {
-        content: "Zoom active!";
-        display: block;
-        background: yellow;
-        text-align: center;
-    }
-}
-
 @media (max-height: 650px) {
     .small-height\:flex-row {
         flex-direction: row !important;
