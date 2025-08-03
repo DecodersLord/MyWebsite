@@ -44,6 +44,17 @@ export interface Project {
     live?: string;
 }
 
+export interface Experience {
+    id: string;
+    company_name: string;
+    Description: string;
+    start_date: string;
+    end_date: string;
+    role: string;
+    skills: string[];
+    sequence?: number;
+}
+
 export const TECHS: Record<
     TechTag,
     { label: string; icon: React.ReactNode; color?: string }

@@ -163,3 +163,9 @@ h5 {
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     }
 }
+
+@keyframes shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}

@@ -2,6 +2,7 @@ import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Project } from "../types";
 import { ProjectCard } from "./ProjectCard";
+import { useHoverSystem } from "../hooks/useHoverSystem";
 
 export interface ProjectsGridProps {
     projects: Project[];
@@ -14,10 +15,28 @@ export interface ProjectsGridProps {
 export function ProjectsGrid({
     projects,
     currentPage,
-    hoveredProject,
-    onHover,
     PROJECTS_PER_PAGE,
 }: ProjectsGridProps) {
+    // Initialize hover system for projects
+    const projectHover = useHoverSystem({
+        scaleOnHover: 1.1,
+        staggerDelay: 0.05,
+        springConfig: {
+            stiffness: 400,
+            damping: 25,
+            mass: 0.8,
+        },
+        gridConfig: {
+            projectsPerPage: PROJECTS_PER_PAGE,
+            columnsPerRow:
+                typeof window !== "undefined" && window.innerWidth >= 768
+                    ? 4
+                    : 2,
+            isDesktop:
+                typeof window !== "undefined" && window.innerWidth >= 768,
+        },
+    });
+
     return (
         <div className="relative min-h-[600px] md:min-h-[800px] overflow-visible">
             <AnimatePresence mode="wait">
@@ -30,17 +49,10 @@ export function ProjectsGrid({
                     transition={{ duration: 0.3, ease: "easeInOut" }}
                 >
                     {projects.map((project, index) => {
-                        // Detect if card is in bottom row
-                        const isDesktop =
-                            typeof window !== "undefined" &&
-                            window.innerWidth >= 768;
-                        const columnsPerRow = isDesktop ? 4 : 2;
-                        const rowIndex = Math.floor(index / columnsPerRow);
-                        const totalRows = Math.ceil(
-                            PROJECTS_PER_PAGE / columnsPerRow
+                        const hoverProps = projectHover.getHoverProps(
+                            project.id,
+                            index
                         );
-                        const isBottomRow = rowIndex === totalRows - 1;
-                        const isHovered = hoveredProject === project.id;
 
                         return (
                             <motion.div
@@ -54,35 +66,33 @@ export function ProjectsGrid({
                                 }}
                                 className="aspect-square relative"
                                 style={{
-                                    zIndex: isHovered ? 50 : 10,
+                                    zIndex: hoverProps.isHovered ? 50 : 10,
                                 }}
                             >
                                 <div
                                     className={`w-full h-full transition-transform duration-300 ease-out ${
-                                        isBottomRow && isHovered
-                                            ? "scale-110 -translate-y-8 md:-translate-y-32"
-                                            : isHovered
-                                            ? "scale-110 translate-y-2 md:translate-y-3"
+                                        hoverProps.isHovered
+                                            ? "" // Remove the old transform classes
                                             : ""
                                     }`}
                                     style={{
-                                        transformOrigin: isBottomRow
-                                            ? "bottom center"
-                                            : "center",
+                                        transform: hoverProps.isHovered
+                                            ? hoverProps.customTransform
+                                            : "none",
+                                        transformOrigin:
+                                            hoverProps.transformOrigin,
                                     }}
                                 >
                                     <ProjectCard
                                         project={project}
-                                        isHovered={isHovered}
-                                        onHover={() => onHover(project.id)}
-                                        onLeave={() => onHover(null)}
+                                        {...hoverProps}
                                     />
                                 </div>
                             </motion.div>
                         );
                     })}
 
-                    {/* Fill empty slots to maintain grid structure */}
+                    {/* Fill empty slots */}
                     {Array.from(
                         { length: PROJECTS_PER_PAGE - projects.length },
                         (_, i) => (

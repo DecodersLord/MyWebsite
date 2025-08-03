@@ -9,6 +9,7 @@ import { Project, Category, TechTag, TECHS } from "../types";
 import { MobileFilterDrawer } from "./MobileFilterDrawer";
 import { PaginationContainer } from "./PaginationContainer";
 import { ProjectsGrid } from "./ProjectsGrid";
+import { ProjectsGridSkeleton } from "./ProjectsGridSkeleton";
 
 export default function Projects() {
     const [projects, setProjects] = useState<Project[]>([]);
@@ -197,14 +198,6 @@ export default function Projects() {
         return () => window.removeEventListener("keydown", handleKeyDown);
     }, [nextPage, prevPage]);
 
-    if (loading) {
-        return (
-            <div className="min-h-[40vh] flex items-center justify-center">
-                <p className="text-center text-subtle">Loading projects...</p>
-            </div>
-        );
-    }
-
     return (
         <section className="min-h-screen px-2 py-10">
             {/* Title with rule */}
@@ -255,13 +248,17 @@ export default function Projects() {
                 />
 
                 {/* Projects Grid */}
-                <ProjectsGrid
-                    projects={currentProjects}
-                    currentPage={currentPage}
-                    hoveredProject={hoveredProject}
-                    onHover={setHoveredProject}
-                    PROJECTS_PER_PAGE={projectsPerPage}
-                />
+                {loading ? (
+                    <ProjectsGridSkeleton PROJECTS_PER_PAGE={projectsPerPage} />
+                ) : (
+                    <ProjectsGrid
+                        projects={currentProjects}
+                        currentPage={currentPage}
+                        hoveredProject={hoveredProject}
+                        onHover={setHoveredProject}
+                        PROJECTS_PER_PAGE={projectsPerPage}
+                    />
+                )}
 
                 {/* No projects message */}
                 {filteredProjects.length === 0 && (
