@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { HoverableCard } from "./hoverCard";
 import { Experience } from "../types";
-import { c } from "node_modules/framer-motion/dist/types.d-Bq-Qm38R";
 
 interface ExperienceCardProps {
     experience: Experience;
