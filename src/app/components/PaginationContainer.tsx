@@ -120,7 +120,7 @@ export const PaginationContainer = function PaginationContainer({
                                 className={`w-3 h-3 rounded-full transition-all ${
                                     i === currentPage
                                         ? "bg-[var(--color-card)] w-8"
-                                        : "var(--color-card) hover:bg-[var(--color-card)]/50"
+                                        : "bg-white hover:bg-[var(--color-card)]/50"
                                 }`}
                                 aria-label={`Go to page ${i + 1}`}
                             />

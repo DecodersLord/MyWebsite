@@ -169,7 +169,7 @@ export default function Projects() {
     return (
         <section className="min-h-screen px-2 py-10">
             {/* Title with rule */}
-            <div className="max-w-7xl mx-auto mb-10">
+            <div className="max-w-9/10 mx-auto mb-10">
                 <h2 className="text-4xl font-bold text-heading">Projects</h2>
                 <div className="mt-2 h-[2px] bg-black" />
             </div>
@@ -204,7 +204,7 @@ export default function Projects() {
             </AnimatePresence>
 
             {/* Projects content */}
-            <div className="max-w-7xl mx-auto">
+            <div className="max-w-9/10 mx-auto">
                 {/* Pagination Container */}
                 <PaginationContainer
                     currentPage={currentPage}

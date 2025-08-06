@@ -127,7 +127,7 @@ export default function Experience() {
     return (
         <section className="min-h-screen px-2 py-10">
             {/* Title with rule */}
-            <div className="max-w-7xl mx-auto mb-10">
+            <div className="max-w-9/10 mx-auto mb-10">
                 <h2 className="text-4xl font-bold text-heading">Experience</h2>
                 <div className="mt-2 h-[2px] bg-black" />
             </div>
@@ -135,40 +135,42 @@ export default function Experience() {
             {/* SCROLLABLE CONTAINER FOR ENTIRE SECTION */}
             <section
                 className="h-screen overflow-y-auto overscroll-contain style-7"
-                onWheel={(e) => {
+                style={{
+                    WebkitOverflowScrolling: "touch",
+                    overscrollBehavior: "contain",
+                    touchAction: "pan-y",
+                }}
+                onTouchMove={(e) => {
                     const element = e.currentTarget;
                     const { scrollTop, scrollHeight, clientHeight } = element;
 
-                    // Only prevent page navigation if we're scrolling within this section
-                    if (
-                        (e.deltaY > 0 &&
-                            scrollTop < scrollHeight - clientHeight) || // Scrolling down and not at bottom
-                        (e.deltaY < 0 && scrollTop > 0) // Scrolling up and not at top
-                    ) {
-                        e.stopPropagation();
+                    // Only prevent if scrolling within bounds
+                    if (scrollHeight > clientHeight) {
+                        const atTop = scrollTop <= 5;
+                        const atBottom =
+                            scrollTop >= scrollHeight - clientHeight - 5;
+
+                        if (!atTop || !atBottom) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }
                     }
                 }}
-                onTouchMove={(e) => e.stopPropagation()}
             >
                 {/* Desktop version - now scrollable */}
-                <div className="relative max-w-6xl mx-auto hidden md:block px-4 py-8">
+                <div className="relative max-w-9/10 mx-auto hidden md:block px-4 py-8">
                     {/* Calculate dynamic height based on content */}
                     <div
                         className="relative"
                         style={{
                             minHeight: `${Math.max(
-                                uniqueYears.length * 250 + 200,
+                                uniqueYears.length * 250 + 500,
                                 800
                             )}px`,
                         }}
                     >
                         {/* Centered vertical line - dynamic height */}
-                        <div
-                            className="absolute left-1/2 transform -translate-x-1/2 top-0 w-[2px] bg-slate-700"
-                            style={{
-                                height: `${uniqueYears.length * 250 + 100}px`,
-                            }}
-                        />
+                        <div className="absolute left-1/2 transform -translate-x-1/2 top-0 w-[2px] bg-slate-700 h-full" />
 
                         {/* Year markers on the timeline */}
                         {uniqueYears.map((year, index) => (

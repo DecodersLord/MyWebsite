@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { HoverableCard } from "./hoverCard";
 import { Experience } from "../types";
+import { c } from "node_modules/framer-motion/dist/types.d-Bq-Qm38R";
 
 interface ExperienceCardProps {
     experience: Experience;
@@ -32,6 +33,14 @@ export const ExperienceCard = React.memo(function ExperienceCard({
     springConfig,
     staggerDelay,
 }: ExperienceCardProps) {
+    const gradientTitle =
+        `from-violet-600 via-indigo-600 to-transparent -z-10` +
+        ` ${
+            isLeft
+                ? "bg-gradient-to-l rounded-r-full"
+                : "bg-gradient-to-r rounded-l-full"
+        }`;
+
     return (
         <div className={`w-5/12 ${isLeft ? "pr-8" : "pl-8"}`}>
             <HoverableCard
@@ -48,15 +57,20 @@ export const ExperienceCard = React.memo(function ExperienceCard({
                 }}
             >
                 <div className={`${isLeft ? "text-right" : "text-left"}`}>
-                    <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
-                        {experience.role}
-                    </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                        {experience.company_name}
-                    </p>
-                    <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
-                        {experience.start_date} - {experience.end_date}
-                    </p>
+                    <div className={`${gradientTitle} px-6`}>
+                        <h3 className={`text-xl font-semibold text-white py-2`}>
+                            {experience.role}
+                        </h3>
+                    </div>
+
+                    <div className="px-4">
+                        <h4 className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                            {experience.company_name}
+                        </h4>
+                        <h4 className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                            {experience.start_date} - {experience.end_date}
+                        </h4>
+                    </div>
                 </div>
                 <ul
                     className={`list-disc mt-3 space-y-1 text-sm text-gray-700 dark:text-gray-300 ${
@@ -64,7 +78,7 @@ export const ExperienceCard = React.memo(function ExperienceCard({
                     }`}
                 >
                     {experience.Description.split("\n").map((bullet, j) => (
-                        <li key={j} className={isLeft ? "list-none" : ""}>
+                        <li key={j} className="list-none">
                             {bullet}
                         </li>
                     ))}

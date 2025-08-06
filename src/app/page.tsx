@@ -181,7 +181,7 @@ export default function Home() {
         };
 
         window.addEventListener("wheel", onWheel);
-        window.addEventListener("touchstart", onTouchStart);
+        window.addEventListener("touchstart", onTouchStart, { passive: false });
         window.addEventListener("touchend", onTouchEnd);
 
         return () => {

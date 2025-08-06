@@ -64,23 +64,24 @@ export function ProjectsGrid({
                                     duration: 0.3,
                                     ease: "easeOut",
                                 }}
-                                className="aspect-square relative"
+                                className="relative"
                                 style={{
-                                    zIndex: hoverProps.isHovered ? 50 : 10,
+                                    minHeight: "300px",
                                 }}
                             >
                                 <div
-                                    className={`w-full h-full transition-transform duration-300 ease-out ${
+                                    className={
                                         hoverProps.isHovered
-                                            ? "" // Remove the old transform classes
-                                            : ""
-                                    }`}
+                                            ? "absolute inset-0 w-full"
+                                            : "relative w-full h-full"
+                                    }
                                     style={{
                                         transform: hoverProps.isHovered
                                             ? hoverProps.customTransform
                                             : "none",
                                         transformOrigin:
                                             hoverProps.transformOrigin,
+                                        zIndex: hoverProps.isHovered ? 50 : 10,
                                     }}
                                 >
                                     <ProjectCard

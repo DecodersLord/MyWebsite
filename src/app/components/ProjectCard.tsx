@@ -74,7 +74,7 @@ export const ProjectCard = React.memo(function ProjectCard({
             {/* Main content container */}
             <div className="relative">
                 {/* Base card content - always visible */}
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-2">
                     {/* Project Image/Icon */}
                     <div className="flex-shrink-0">
                         <div
