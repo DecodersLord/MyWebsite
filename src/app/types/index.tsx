@@ -12,10 +12,51 @@ import {
     SiPostgresql,
     SiFirebase,
     SiDocker,
+    SiGnubash,
 } from "react-icons/si";
-import { FiGithub, FiExternalLink } from "react-icons/fi";
+import { FiGithub, FiExternalLink, FiCloud } from "react-icons/fi";
+import { FaGamepad, FaPalette, FaServer, FaLinux } from "react-icons/fa";
 
-export type Category = "Front-end" | "Back-end" | "Game-dev";
+export type CategoryKey = "Front-end" | "Back-end" | "Game-dev" | "dev-ops";
+
+export interface CategoryInfo {
+    label: string;
+    icon: React.ReactNode;
+    color: string;
+}
+
+export const CATEGORIES: Record<CategoryKey, CategoryInfo> = {
+    "Front-end": {
+        label: "Front-end",
+        icon: <FaPalette className="text-blue-500" />,
+        color: "from-blue-500/20 to-cyan-500/20",
+    },
+    "Back-end": {
+        label: "Back-end",
+        icon: <FaServer className="text-gray-600" />,
+        color: "from-green-500/20 to-emerald-500/20",
+    },
+    "Game-dev": {
+        label: "Game-dev",
+        icon: <FaGamepad className="text-green-500" />,
+        color: "from-purple-500/20 to-pink-500/20",
+    },
+    "dev-ops": {
+        label: "DevOps",
+        icon: <FiCloud className="text-blue-400" />,
+        color: "from-green-500/20 to-cyan-500/20",
+    },
+} as const;
+
+export type Category = CategoryKey;
+
+// Helper functions
+export const getCategoryIcon = (category: Category) =>
+    CATEGORIES[category]?.icon;
+export const getCategoryLabel = (category: Category) =>
+    CATEGORIES[category]?.label;
+export const getCategoryColor = (category: Category) =>
+    CATEGORIES[category]?.color;
 
 export type TechTag =
     | "react"
@@ -31,7 +72,9 @@ export type TechTag =
     | "python"
     | "firebase"
     | "github"
-    | "docker";
+    | "docker"
+    | "bash"
+    | "linux";
 
 export interface Project {
     id: string;
@@ -39,7 +82,7 @@ export interface Project {
     description: string;
     category: Category;
     technologies: TechTag[];
-    image?: string;
+    imageURL?: string;
     github?: string;
     live?: string;
 }
@@ -73,4 +116,6 @@ export const TECHS: Record<
     firebase: { label: "Firebase", icon: <SiFirebase /> },
     github: { label: "GitHub", icon: <FiGithub /> },
     docker: { label: "Docker", icon: <SiDocker /> },
+    bash: { label: "Bash", icon: <SiGnubash /> },
+    linux: { label: "Linux", icon: <FaLinux /> },
 };

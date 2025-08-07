@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
         domains: [
             "leetcard.jacoblin.cool",
             "github-readme-streak-stats.herokuapp.com",
+            "i.postimg.cc",
         ],
         dangerouslyAllowSVG: true,
     },
