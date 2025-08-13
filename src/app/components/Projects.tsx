@@ -167,7 +167,7 @@ export default function Projects() {
     }, [nextPage, prevPage]);
 
     return (
-        <section className="min-h-screen px-2 py-10">
+        <section className="min-h-screen px-2 py-10 ">
             {/* Title with rule */}
             <div className="max-w-9/10 mx-auto mb-10">
                 <h2 className="text-4xl font-bold text-heading">Projects</h2>
@@ -204,7 +204,7 @@ export default function Projects() {
             </AnimatePresence>
 
             {/* Projects content */}
-            <div className="max-w-9/10 mx-auto">
+            <div className="max-w-9/10 mx-auto overflow-y-auto overscroll-contain">
                 {/* Pagination Container */}
                 <PaginationContainer
                     currentPage={currentPage}
@@ -218,18 +218,8 @@ export default function Projects() {
                 {/* Projects Grid */}
                 {loading ? (
                     <ProjectsGridSkeleton PROJECTS_PER_PAGE={projectsPerPage} />
-                ) : (
-                    <ProjectsGrid
-                        projects={currentProjects}
-                        currentPage={currentPage}
-                        hoveredProject={hoveredProject}
-                        onHover={setHoveredProject}
-                        PROJECTS_PER_PAGE={projectsPerPage}
-                    />
-                )}
-
-                {/* No projects message */}
-                {filteredProjects.length === 0 && (
+                ) : filteredProjects.length === 0 ? (
+                    /* No projects message */
                     <div className="text-center py-12">
                         <p className="text-subtle text-lg">
                             {selectedTechs.size > 0
@@ -245,6 +235,12 @@ export default function Projects() {
                             </button>
                         )}
                     </div>
+                ) : (
+                    <ProjectsGrid
+                        projects={currentProjects}
+                        currentPage={currentPage}
+                        PROJECTS_PER_PAGE={projectsPerPage}
+                    />
                 )}
             </div>
         </section>

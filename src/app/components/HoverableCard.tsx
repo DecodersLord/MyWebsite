@@ -7,13 +7,14 @@ import { Project, Experience, TECHS } from "../types";
 interface HoverableCardProps {
     children: ReactNode;
     isHovered: boolean;
+    isExpanded: boolean;
     onHover: () => void;
     onLeave: () => void;
     hoverAnimation: {
         scale: number;
         y: number;
         zIndex: number;
-    };
+    } | null;
     springConfig: {
         stiffness: number;
         damping: number;
@@ -31,13 +32,18 @@ interface HoverableCardProps {
         data: Project | Experience;
         techsMap?: typeof TECHS; // For projects
     };
+    onExpand: () => void;
+    onRetract: () => void;
 }
 
-export function HoverableCard({
+export default function HoverableCard({
     children,
     isHovered,
+    isExpanded,
     onHover,
     onLeave,
+    onExpand,
+    onRetract,
     hoverAnimation,
     springConfig,
     staggerDelay = 0,
@@ -139,28 +145,15 @@ export function HoverableCard({
                     <h5 className="text-xs font-semibold text-accent uppercase tracking-wide mb-2">
                         Key Skills
                     </h5>
-                    <div className="flex flex-wrap gap-2">
-                        {experience.skills.map((skill, index) => (
-                            <motion.span
-                                key={skill}
-                                initial={{
-                                    opacity: 0,
-                                    scale: 0.8,
-                                }}
-                                animate={{
-                                    opacity: 1,
-                                    scale: 1,
-                                }}
-                                transition={{
-                                    delay: 0.15 + index * 0.05,
-                                    duration: 0.2,
-                                }}
-                                className="px-2 py-1 text-xs bg-[var(--color-tag)]/60 text-accent rounded-full"
-                            >
-                                {skill}
-                            </motion.span>
+                    <ul
+                        className={`list-disc mt-3 space-y-1 text-sm text-gray-700 dark:text-gray-300`}
+                    >
+                        {experience.Description.split("\n").map((bullet, j) => (
+                            <li key={j} className="list-none">
+                                {bullet}
+                            </li>
                         ))}
-                    </div>
+                    </ul>
                 </motion.div>
             )}
         </>
@@ -172,9 +165,9 @@ export function HoverableCard({
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{
                 opacity: 1,
-                scale: hoverAnimation.scale,
-                y: hoverAnimation.y,
-                zIndex: hoverAnimation.zIndex,
+                scale: hoverAnimation?.scale,
+                y: hoverAnimation?.y,
+                zIndex: hoverAnimation?.zIndex,
             }}
             transition={{
                 type: "spring",
@@ -198,7 +191,7 @@ export function HoverableCard({
                 {/* Expanded content - Netflix overlay style */}
                 {expandableContent && (
                     <AnimatePresence>
-                        {isHovered && (
+                        {(isHovered || isExpanded) && (
                             <motion.div
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
@@ -222,17 +215,6 @@ export function HoverableCard({
                     </AnimatePresence>
                 )}
             </Card>
-
-            {/* Optional glow effect */}
-            {isHovered && (
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="absolute inset-0 -z-10 bg-gradient-to-r from-[var(--color-accent)]/5 to-transparent rounded-lg blur-xl"
-                    style={{ transform: "scale(1.1)" }}
-                />
-            )}
         </motion.div>
     );
 }

@@ -3,25 +3,32 @@
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../firebaseConfig";
-import { motion } from "framer-motion";
-import Card from "../components/Card";
+import { motion, AnimatePresence } from "framer-motion";
+import { useDeviceType } from "../hooks/useDeviceType";
 import { useHoverSystem } from "../hooks/useHoverSystem";
 import { ExperienceCard } from "./ExperienceCard";
 import { type Experience } from "../types";
 
 export default function Experience() {
+    const deviceType = useDeviceType();
     const [experiences, setExperiences] = useState<Experience[]>([]);
     const [loading, setLoading] = useState(true);
+    const [hasExpandedCards, setHasExpandedCards] = useState(false);
 
-    // Initialize hover system for experience
+    // Initialize hover system for experience with device-aware settings
     const experienceHover = useHoverSystem({
-        scaleOnHover: 1.02,
-        translateOnHover: -4, // Subtle movement
+        scaleOnHover: deviceType.hasHover ? 1.02 : 1.0,
+        translateOnHover: deviceType.hasHover ? -4 : 0,
         staggerDelay: 0.1,
         springConfig: {
             stiffness: 300,
             damping: 30,
             mass: 1,
+        },
+        gridConfig: {
+            projectsPerPage: experiences.length,
+            columnsPerRow: 1,
+            isDesktop: deviceType.isDesktop,
         },
     });
 
@@ -59,7 +66,7 @@ export default function Experience() {
         uniqueYears: number[]
     ): number => {
         const yearIndex = uniqueYears.indexOf(year);
-        return yearIndex * 250;
+        return yearIndex * 150;
     };
 
     // Helper function to get experiences for a specific year with their positions
@@ -76,8 +83,24 @@ export default function Experience() {
             })
             .map((exp, index) => ({
                 ...exp,
-                dotOffset: index * 8, // 8px offset for each additional experience in the same year
+                dotOffset: index * 20, // 8px offset for each additional experience in the same year
             }));
+    };
+
+    // Container classes based on device and expansion state
+    const getContainerClasses = () => {
+        const baseClasses = "relative";
+        const scrollClasses =
+            hasExpandedCards || deviceType.isMobile
+                ? "overflow-y-auto overscroll-contain scrollbar-hide"
+                : "overflow-y-auto overscroll-contain style-7";
+
+        if (deviceType.isMobile) {
+            return `${baseClasses} ${scrollClasses} h-screen max-h-[80vh]`;
+        }
+        return `${baseClasses} ${scrollClasses} h-screen ${
+            hasExpandedCards ? "max-h-[85vh]" : ""
+        }`;
     };
 
     useEffect(() => {
@@ -132,29 +155,13 @@ export default function Experience() {
                 <div className="mt-2 h-[2px] bg-black" />
             </div>
 
-            {/* SCROLLABLE CONTAINER FOR ENTIRE SECTION */}
+            {/* Enhanced scrollable container */}
             <section
-                className="h-screen overflow-y-auto overscroll-contain style-7"
+                className={getContainerClasses()}
                 style={{
                     WebkitOverflowScrolling: "touch",
                     overscrollBehavior: "contain",
                     touchAction: "pan-y",
-                }}
-                onTouchMove={(e) => {
-                    const element = e.currentTarget;
-                    const { scrollTop, scrollHeight, clientHeight } = element;
-
-                    // Only prevent if scrolling within bounds
-                    if (scrollHeight > clientHeight) {
-                        const atTop = scrollTop <= 5;
-                        const atBottom =
-                            scrollTop >= scrollHeight - clientHeight - 5;
-
-                        if (!atTop || !atBottom) {
-                            e.preventDefault();
-                            e.stopPropagation();
-                        }
-                    }
                 }}
             >
                 {/* Desktop version - now scrollable */}
@@ -172,22 +179,9 @@ export default function Experience() {
                         {/* Centered vertical line - dynamic height */}
                         <div className="absolute left-1/2 transform -translate-x-1/2 top-0 w-[2px] bg-slate-700 h-full" />
 
-                        {/* Year markers on the timeline */}
-                        {uniqueYears.map((year, index) => (
-                            <div
-                                key={year}
-                                className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center"
-                                style={{ top: `${index * 250 + 50}px` }}
-                            >
-                                <div className="bg-indigo-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg z-20">
-                                    {year}
-                                </div>
-                            </div>
-                        ))}
-
                         {/* Experience cards positioned by actual years */}
-                        <div className="pt-10">
-                            {uniqueYears.map((year) => {
+                        <div className="relative pt-10">
+                            {uniqueYears.map((year, index) => {
                                 const yearExperiences = getExperiencesForYear(
                                     year,
                                     experiences
@@ -202,11 +196,14 @@ export default function Experience() {
                                         (e) => e.id === exp.id
                                     );
                                     const isLeft = expIndex % 2 === 0;
-                                    const hoverProps =
-                                        experienceHover.getHoverProps(
-                                            exp.id,
-                                            globalIndex
-                                        );
+                                    const cardProps = deviceType.hasHover
+                                        ? experienceHover.getHoverProps(
+                                              exp.id,
+                                              expIndex
+                                          )
+                                        : experienceHover.getExpandProps(
+                                              exp.id
+                                          );
 
                                     return (
                                         <motion.div
@@ -233,10 +230,21 @@ export default function Experience() {
                                                 top: `${
                                                     yearPosition +
                                                     50 +
-                                                    expIndex * 100
+                                                    globalIndex * 100
                                                 }px`,
                                             }}
                                         >
+                                            {expIndex == 0 && (
+                                                <div
+                                                    key={year}
+                                                    className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center -top-15"
+                                                >
+                                                    <div className="bg-indigo-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg z-20">
+                                                        {year}
+                                                    </div>
+                                                </div>
+                                            )}
+
                                             {/* Timeline dot */}
                                             <div
                                                 className="absolute left-1/2 top-8 transform h-4 w-4 rounded-full bg-green-500 border-4 border-white dark:border-gray-900 shadow-lg z-10"
@@ -245,10 +253,19 @@ export default function Experience() {
                                                 }}
                                             ></div>
 
+                                            {/* Mobile experience card */}
                                             <ExperienceCard
                                                 experience={exp}
-                                                isLeft={isLeft}
-                                                {...hoverProps}
+                                                isLeft={false}
+                                                isMobile={false}
+                                                {...cardProps}
+                                                springConfig={
+                                                    experienceHover.springConfig || {
+                                                        stiffness: 300,
+                                                        damping: 30,
+                                                        mass: 1,
+                                                    }
+                                                }
                                             />
 
                                             {/* Horizontal connector line */}
@@ -270,100 +287,120 @@ export default function Experience() {
                     </div>
                 </div>
 
-                {/* Mobile version - also within scrollable container */}
-                <div className="md:hidden relative max-w-md mx-auto px-4 py-8">
-                    <div
-                        className="relative"
-                        style={{ minHeight: `${experiences.length * 180}px` }}
-                    >
-                        <div
-                            className="absolute left-6 top-0 w-[2px] bg-slate-300 dark:bg-slate-700"
-                            style={{ height: `${experiences.length * 180}px` }}
-                        />
+                {/* Enhanced Mobile Timeline */}
+                <div className="md:hidden relative max-w-md mx-auto px-4 py-6">
+                    <AnimatePresence>
+                        <motion.div
+                            className={`relative ${
+                                hasExpandedCards ? "pb-20" : "pb-8"
+                            }`}
+                            style={{
+                                minHeight: `${
+                                    experiences.length *
+                                    (hasExpandedCards ? 220 : 180)
+                                }px`,
+                            }}
+                            layout
+                            transition={{ duration: 0.3, ease: "easeInOut" }}
+                        >
+                            <motion.div
+                                className="absolute left-6 top-0 w-[2px] bg-slate-300 dark:bg-slate-700"
+                                style={{
+                                    height: `${
+                                        experiences.length *
+                                        (hasExpandedCards ? 250 : 250)
+                                    }px`,
+                                }}
+                                layout
+                                transition={{ duration: 0.3 }}
+                            />
 
-                        {experiences.map((exp, i) => {
-                            const hoverProps = experienceHover.getHoverProps(
-                                `mobile-${exp.id}`,
-                                i
-                            );
-                            const startYear = getYearFromDate(exp.start_date);
+                            {uniqueYears.map((year, index) => {
+                                const yearExperiences = getExperiencesForYear(
+                                    year,
+                                    experiences
+                                );
+                                const yearPosition = getPositionForYear(
+                                    year,
+                                    uniqueYears
+                                );
 
-                            return (
-                                <motion.div
-                                    key={`mobile-${i}`}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 0.45 }}
-                                    viewport={{ once: true, amount: 0.3 }}
-                                    className="relative mb-10 pl-16"
-                                >
-                                    {/* Year indicator for mobile */}
-                                    <div className="absolute left-6 transform -translate-x-1/2 top-0 flex items-center justify-center">
-                                        <div className="bg-indigo-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg z-20">
-                                            {startYear}
-                                        </div>
-                                    </div>
+                                return yearExperiences.map((exp, expIndex) => {
+                                    const globalIndex = experiences.findIndex(
+                                        (e) => e.id === exp.id
+                                    );
+                                    const cardProps = deviceType.hasHover
+                                        ? experienceHover.getHoverProps(
+                                              `mobile-${exp.id}`,
+                                              expIndex
+                                          )
+                                        : experienceHover.getExpandProps(
+                                              `mobile-${exp.id}`
+                                          );
 
-                                    {/* Mobile card with hover system */}
-                                    <motion.div
-                                        animate={{
-                                            scale: hoverProps.hoverAnimation
-                                                .scale,
-                                            y: hoverProps.hoverAnimation.y,
-                                        }}
-                                        transition={{
-                                            type: "spring",
-                                            ...hoverProps.springConfig,
-                                        }}
-                                        onHoverStart={hoverProps.onHover}
-                                        onHoverEnd={hoverProps.onLeave}
-                                    >
-                                        <Card
-                                            shadow={
-                                                hoverProps.isHovered
-                                                    ? "lg"
-                                                    : "sm"
-                                            }
+                                    return (
+                                        <motion.div
+                                            key={`mobile-${expIndex}`}
+                                            initial={{ opacity: 0, x: -20 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            transition={{ duration: 0.45 }}
+                                            viewport={{
+                                                once: true,
+                                                amount: 0.3,
+                                            }}
+                                            className="relative pl-16"
+                                            style={{
+                                                marginBottom:
+                                                    cardProps.isExpanded
+                                                        ? "2rem"
+                                                        : "1rem",
+                                            }}
+                                            layout
+                                            layoutId={`mobile-${exp.id}`}
                                         >
-                                            <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
-                                                {exp.role}
-                                            </h3>
-                                            <p className="text-sm text-gray-500 dark:text-gray-400">
-                                                {exp.company_name}
-                                            </p>
-                                            <p className="text-xs text-gray-400 dark:text-gray-500">
-                                                {exp.start_date} -{" "}
-                                                {exp.end_date}
-                                            </p>
-                                            <ul className="list-disc ml-5 mt-3 space-y-1 text-sm text-gray-700 dark:text-gray-300">
-                                                {exp.Description.split(
-                                                    "\n"
-                                                ).map((b, j) => (
-                                                    <li key={j}>{b}</li>
-                                                ))}
-                                            </ul>
-                                        </Card>
-
-                                        {/* Mobile glow effect */}
-                                        {hoverProps.isHovered && (
+                                            {expIndex == 0 && (
+                                                <div
+                                                    key={year}
+                                                    className="absolute left-6 transform -translate-x-1/2 -top-4 flex items-center justify-center"
+                                                >
+                                                    <div className="bg-indigo-500 text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg z-20">
+                                                        {year}
+                                                    </div>
+                                                </div>
+                                            )}
+                                            {/* Timeline dot for mobile */}
                                             <motion.div
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: 1 }}
-                                                exit={{ opacity: 0 }}
-                                                className="absolute inset-0 -z-10 bg-gradient-to-r from-indigo-500/5 to-transparent rounded-lg blur-xl"
-                                                style={{
-                                                    transform: "scale(1.1)",
-                                                }}
+                                                className="absolute left-6 transform -translate-x-1/2 top-6 h-3 w-3 rounded-full bg-green-500 border-2 border-white dark:border-gray-900 shadow-lg z-10"
+                                                layout
                                             />
-                                        )}
-                                    </motion.div>
-                                </motion.div>
-                            );
-                        })}
-                    </div>
 
-                    {/* Bottom spacer for mobile */}
-                    <div className="h-20" />
+                                            {/* Mobile experience card */}
+                                            <ExperienceCard
+                                                experience={exp}
+                                                isLeft={false}
+                                                isMobile={true}
+                                                {...cardProps}
+                                                springConfig={
+                                                    experienceHover.springConfig || {
+                                                        stiffness: 300,
+                                                        damping: 30,
+                                                        mass: 1,
+                                                    }
+                                                }
+                                                staggerDelay={expIndex * 0.1}
+                                            />
+
+                                            {/* Horizontal connector for mobile */}
+                                            <motion.div
+                                                className="absolute left-6 top-7 w-10 h-[2px] bg-slate-300 dark:bg-slate-700"
+                                                layout
+                                            />
+                                        </motion.div>
+                                    );
+                                });
+                            })}
+                        </motion.div>
+                    </AnimatePresence>
                 </div>
             </section>
         </section>

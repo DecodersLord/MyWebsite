@@ -19,6 +19,7 @@ export interface HoverSystemConfig {
 
 export function useHoverSystem(config: HoverSystemConfig = {}) {
     const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+    const [expandedItem, setExpandedItem] = useState<string | null>(null);
 
     const {
         scaleOnHover = 1.05,
@@ -34,6 +35,10 @@ export function useHoverSystem(config: HoverSystemConfig = {}) {
 
     const handleHover = useCallback((id: string | null) => {
         setHoveredItem(id);
+    }, []);
+
+    const handleExpand = useCallback((id: string | null) => {
+        setExpandedItem(id);
     }, []);
 
     const getHoverProps = useCallback(
@@ -67,16 +72,18 @@ export function useHoverSystem(config: HoverSystemConfig = {}) {
 
             return {
                 isHovered,
+                isExpanded: false, // still required by type
                 onHover: () => handleHover(id),
                 onLeave: () => handleHover(null),
+                onExpand: () => {}, // no-op for hover devices
+                onRetract: () => {}, // no-op for hover devices
                 hoverAnimation: {
-                    scale: gridConfig ? 1 : isHovered ? scaleOnHover : 1, // Don't apply scale if using grid config
-                    y: gridConfig ? 0 : isHovered ? translateOnHover : 0, // Don't apply y if using grid config
+                    scale: gridConfig ? 1 : isHovered ? scaleOnHover : 1,
+                    y: gridConfig ? 0 : isHovered ? translateOnHover : 0,
                     zIndex: isHovered ? 50 : 10,
                 },
                 springConfig,
                 staggerDelay: index * staggerDelay,
-                // Grid-specific properties
                 isBottomRow,
                 customTransform,
                 transformOrigin,
@@ -93,9 +100,35 @@ export function useHoverSystem(config: HoverSystemConfig = {}) {
         ]
     );
 
+    const getExpandProps = useCallback(
+        (id: string) => {
+            const isExpanded = expandedItem === id;
+
+            return {
+                isHovered: false,
+                isExpanded,
+                onHover: () => {},
+                onLeave: () => {},
+                onExpand: () => handleExpand(id),
+                onRetract: () => handleExpand(null),
+                hoverAnimation: { scale: 1, y: 0, zIndex: 1 },
+                springConfig,
+                staggerDelay,
+                isBottomRow: false,
+                customTransform: "",
+                transformOrigin: "center center",
+            };
+        },
+        [expandedItem, handleExpand, springConfig]
+    );
+
     return {
         hoveredItem,
+        expandedItem,
         handleHover,
+        handleExpand,
         getHoverProps,
+        getExpandProps,
+        springConfig,
     };
 }
