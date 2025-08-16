@@ -167,3 +167,18 @@ body {
 .scrollbar-hide::-webkit-scrollbar {
     display: none; /* Safari and Chrome */
 }
+
+.scrollable-content {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+/* Hide scrollbar but keep functionality for scrollable content */
+.scrollable-content::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollable-content {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}

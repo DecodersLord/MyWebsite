@@ -7,7 +7,7 @@ export interface ProjectsGridSkeletonProps {
 
 function SkeletonCard() {
     return (
-        <div className="w-full h-full bg-gray-100 dark:bg-gray-800 rounded-lg overflow-hidden relative">
+        <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-lg relative">
             {/* Shimmer effect */}
             <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 

@@ -10,7 +10,7 @@ export default function ScrollSections({
     currentStage: 1 | 2;
 }) {
     return (
-        <div className="relative w-full h-screen overflow-hidden">
+        <>
             <AnimatePresence mode="wait">
                 {currentStage === 1 && (
                     <motion.div
@@ -37,6 +37,6 @@ export default function ScrollSections({
                     </motion.div>
                 )}
             </AnimatePresence>
-        </div>
+        </>
     );
 }

@@ -93,13 +93,15 @@ export default function Experience() {
         const scrollClasses =
             hasExpandedCards || deviceType.isMobile
                 ? "overflow-y-auto overscroll-contain scrollbar-hide"
-                : "overflow-y-auto overscroll-contain style-7";
+                : "max-w-9/10 mx-auto overflow-y-auto overscroll-contain style-7";
 
         if (deviceType.isMobile) {
             return `${baseClasses} ${scrollClasses} h-screen max-h-[80vh]`;
         }
-        return `${baseClasses} ${scrollClasses} h-screen ${
-            hasExpandedCards ? "max-h-[85vh]" : ""
+        return `${baseClasses} ${scrollClasses} ${
+            hasExpandedCards
+                ? "max-h-[calc(100vh-200px)]"
+                : "min-h-[calc(100vh-150px)]"
         }`;
     };
 
@@ -148,7 +150,7 @@ export default function Experience() {
     const uniqueYears = getUniqueYears(experiences);
 
     return (
-        <section className="min-h-screen px-2 py-10">
+        <section className="pt-5">
             {/* Title with rule */}
             <div className="max-w-9/10 mx-auto mb-10">
                 <h2 className="text-4xl font-bold text-heading">Experience</h2>
@@ -165,19 +167,19 @@ export default function Experience() {
                 }}
             >
                 {/* Desktop version - now scrollable */}
-                <div className="relative max-w-9/10 mx-auto hidden md:block px-4 py-8">
+                <div className="relative hidden md:block px-8 py-8">
                     {/* Calculate dynamic height based on content */}
-                    <div
-                        className="relative"
-                        style={{
-                            minHeight: `${Math.max(
-                                uniqueYears.length * 250 + 500,
-                                800
-                            )}px`,
-                        }}
-                    >
+                    <div className="relative flex flex-col">
                         {/* Centered vertical line - dynamic height */}
-                        <div className="absolute left-1/2 transform -translate-x-1/2 top-0 w-[2px] bg-slate-700 h-full" />
+                        <div
+                            className="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-[2px] bg-slate-700"
+                            style={{
+                                height: `${Math.max(
+                                    uniqueYears.length * 250 + 100,
+                                    600
+                                )}px`,
+                            }}
+                        />
 
                         {/* Experience cards positioned by actual years */}
                         <div className="relative pt-10">

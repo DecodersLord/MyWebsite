@@ -84,7 +84,7 @@ export function ProjectsGrid({
     };
 
     return (
-        <div className={getContainerClasses()}>
+        <div className={getContainerClasses()} data-scrollable>
             <AnimatePresence mode="wait">
                 <motion.div
                     key={currentPage}
@@ -96,7 +96,7 @@ export function ProjectsGrid({
                     style={{
                         // Dynamic grid row sizing for expanded cards
                         gridAutoRows: hasExpandedCards
-                            ? "minmax(500px, auto)"
+                            ? "minmax(400px, auto)"
                             : "300px",
                     }}
                 >
