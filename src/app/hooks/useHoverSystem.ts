@@ -59,7 +59,7 @@ export function useHoverSystem(config: HoverSystemConfig = {}) {
 
                 if (isBottomRow) {
                     customTransform = `scale(${scaleOnHover}) translateY(${
-                        isDesktop ? -128 : -32
+                        isDesktop ? -50 : -32
                     }px)`;
                     transformOrigin = "bottom center";
                 } else {

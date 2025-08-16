@@ -68,12 +68,12 @@ export function ProjectsGrid({
             return `${baseClasses} ${scrollClasses} min-h-[400px] max-h-[80vh]`;
         }
         if (deviceType.isTablet) {
-            return `${baseClasses} ${scrollClasses} min-h-[500px] ${
-                hasExpandedCards ? "max-h-[80vh]" : ""
+            return `${baseClasses} ${scrollClasses} ${
+                hasExpandedCards ? "max-h-[80vh]" : "min-h-[70vh]"
             }`;
         }
-        return `${baseClasses} ${scrollClasses} min-h-[600px] md:min-h-[800px] ${
-            hasExpandedCards ? "max-h-[80vh]" : ""
+        return `${baseClasses} ${scrollClasses} ${
+            hasExpandedCards ? "max-h-[80vh]" : "min-h-[70vh]"
         }`;
     };
 

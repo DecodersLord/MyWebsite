@@ -36,7 +36,7 @@ export function ProjectsGridSkeleton({
     PROJECTS_PER_PAGE,
 }: ProjectsGridSkeletonProps) {
     return (
-        <div className="relative min-h-[600px] md:min-h-[800px] overflow-visible">
+        <div className="relative overflow-visible">
             <motion.div
                 className="grid responsive-grid grid-cols-2 md:grid-cols-4 gap-6 overflow-visible small-height:grid-column"
                 initial={{ opacity: 0, y: 20 }}
