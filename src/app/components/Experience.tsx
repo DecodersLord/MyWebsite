@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../../firebaseConfig";
+import { db } from "@/lib/firebase";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDeviceType } from "../hooks/useDeviceType";
 import { useHoverSystem } from "../hooks/useHoverSystem";
@@ -98,11 +98,10 @@ export default function Experience() {
         if (deviceType.isMobile) {
             return `${baseClasses} ${scrollClasses} h-screen max-h-[80vh]`;
         }
-        return `${baseClasses} ${scrollClasses} ${
-            hasExpandedCards
-                ? "max-h-[calc(100vh-200px)]"
-                : "min-h-[calc(100vh-150px)]"
-        }`;
+        return `${baseClasses} ${scrollClasses} ${hasExpandedCards
+            ? "max-h-[calc(100vh-200px)]"
+            : "min-h-[calc(100vh-150px)]"
+            }`;
     };
 
     useEffect(() => {
@@ -200,12 +199,12 @@ export default function Experience() {
                                     const isLeft = expIndex % 2 === 0;
                                     const cardProps = deviceType.hasHover
                                         ? experienceHover.getHoverProps(
-                                              exp.id,
-                                              expIndex
-                                          )
+                                            exp.id,
+                                            expIndex
+                                        )
                                         : experienceHover.getExpandProps(
-                                              exp.id
-                                          );
+                                            exp.id
+                                        );
 
                                     return (
                                         <motion.div
@@ -223,20 +222,18 @@ export default function Experience() {
                                                 once: true,
                                                 amount: 0.3,
                                             }}
-                                            className={`absolute flex ${
-                                                isLeft
-                                                    ? "justify-start"
-                                                    : "justify-end"
-                                            } w-full`}
+                                            className={`absolute flex ${isLeft
+                                                ? "justify-start"
+                                                : "justify-end"
+                                                } w-full`}
                                             style={{
-                                                top: `${
-                                                    yearPosition +
+                                                top: `${yearPosition +
                                                     50 +
                                                     globalIndex * 100
-                                                }px`,
+                                                    }px`,
                                             }}
                                         >
-                                            {expIndex == 0 && (
+                                            {expIndex === 0 && (
                                                 <div
                                                     key={year}
                                                     className="absolute left-1/2 transform -translate-x-1/2 flex items-center justify-center -top-15"
@@ -272,11 +269,10 @@ export default function Experience() {
 
                                             {/* Horizontal connector line */}
                                             <div
-                                                className={`absolute w-28 h-[2px] bg-slate-300 dark:bg-slate-700 ${
-                                                    isLeft
-                                                        ? "right-1/2 "
-                                                        : "left-1/2"
-                                                }`}
+                                                className={`absolute w-28 h-[2px] bg-slate-300 dark:bg-slate-700 ${isLeft
+                                                    ? "right-1/2 "
+                                                    : "left-1/2"
+                                                    }`}
                                                 style={{
                                                     top: `calc(2rem + 6px + ${exp.dotOffset}px)`,
                                                 }}
@@ -293,14 +289,12 @@ export default function Experience() {
                 <div className="md:hidden relative max-w-md mx-auto px-4 py-6">
                     <AnimatePresence>
                         <motion.div
-                            className={`relative ${
-                                hasExpandedCards ? "pb-20" : "pb-8"
-                            }`}
+                            className={`relative ${hasExpandedCards ? "pb-20" : "pb-8"
+                                }`}
                             style={{
-                                minHeight: `${
-                                    experiences.length *
+                                minHeight: `${experiences.length *
                                     (hasExpandedCards ? 220 : 180)
-                                }px`,
+                                    }px`,
                             }}
                             layout
                             transition={{ duration: 0.3, ease: "easeInOut" }}
@@ -308,10 +302,9 @@ export default function Experience() {
                             <motion.div
                                 className="absolute left-6 top-0 w-[2px] bg-slate-300 dark:bg-slate-700"
                                 style={{
-                                    height: `${
-                                        experiences.length *
+                                    height: `${experiences.length *
                                         (hasExpandedCards ? 250 : 250)
-                                    }px`,
+                                        }px`,
                                 }}
                                 layout
                                 transition={{ duration: 0.3 }}
@@ -333,12 +326,12 @@ export default function Experience() {
                                     );
                                     const cardProps = deviceType.hasHover
                                         ? experienceHover.getHoverProps(
-                                              `mobile-${exp.id}`,
-                                              expIndex
-                                          )
+                                            `mobile-${exp.id}`,
+                                            expIndex
+                                        )
                                         : experienceHover.getExpandProps(
-                                              `mobile-${exp.id}`
-                                          );
+                                            `mobile-${exp.id}`
+                                        );
 
                                     return (
                                         <motion.div
@@ -360,7 +353,7 @@ export default function Experience() {
                                             layout
                                             layoutId={`mobile-${exp.id}`}
                                         >
-                                            {expIndex == 0 && (
+                                            {expIndex === 0 && (
                                                 <div
                                                     key={year}
                                                     className="absolute left-6 transform -translate-x-1/2 -top-4 flex items-center justify-center"

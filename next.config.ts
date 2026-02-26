@@ -2,10 +2,10 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
     images: {
-        domains: [
-            "leetcard.jacoblin.cool",
-            "github-readme-streak-stats.herokuapp.com",
-            "i.postimg.cc",
+        remotePatterns: [
+            { hostname: "leetcard.jacoblin.cool" },
+            { hostname: "github-readme-streak-stats.herokuapp.com" },
+            { hostname: "i.postimg.cc" },
         ],
         dangerouslyAllowSVG: true,
     },

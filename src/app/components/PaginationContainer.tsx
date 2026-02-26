@@ -1,6 +1,6 @@
 import React from "react";
 
-export interface PaginationContainer {
+export interface PaginationContainerProps {
     currentPage: number;
     totalPages: number;
     totalProjects: number;
@@ -16,7 +16,7 @@ export const PaginationContainer = function PaginationContainer({
     onPrevPage,
     onNextPage,
     onGoToPage,
-}: PaginationContainer) {
+}: PaginationContainerProps) {
     if (totalPages <= 1) return null;
 
     return (
@@ -52,11 +52,10 @@ export const PaginationContainer = function PaginationContainer({
                             <button
                                 key={i}
                                 onClick={() => onGoToPage(i)}
-                                className={`w-10 h-10 rounded-lg font-medium transition-all ${
-                                    i === currentPage
+                                className={`w-10 h-10 rounded-lg font-medium transition-all ${i === currentPage
                                         ? "bg-[var(--color-card)] text-white"
                                         : "bg-white hover:bg-[var(--color-card)]/75 hover:text-white"
-                                }`}
+                                    }`}
                                 aria-label={`Go to page ${i + 1}`}
                             >
                                 {i + 1}
@@ -117,11 +116,10 @@ export const PaginationContainer = function PaginationContainer({
                             <button
                                 key={i}
                                 onClick={() => onGoToPage(i)}
-                                className={`w-3 h-3 rounded-full transition-all ${
-                                    i === currentPage
+                                className={`w-3 h-3 rounded-full transition-all ${i === currentPage
                                         ? "bg-[var(--color-card)] w-8"
                                         : "bg-white hover:bg-[var(--color-card)]/50"
-                                }`}
+                                    }`}
                                 aria-label={`Go to page ${i + 1}`}
                             />
                         ))}

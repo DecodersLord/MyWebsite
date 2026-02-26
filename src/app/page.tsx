@@ -14,6 +14,13 @@ function useIsHydrated() {
 
 type Stage = 0 | 1 | 2;
 
+const highlights = [
+    "From Game Developer to Full-Stack Engineer",
+    "4+ years building scalable web apps",
+    "Expert in Node.js, React, Python, Docker and Cloud",
+    "Passionate about real-time systems and AI",
+];
+
 export default function Home() {
     const isHydrated = useIsHydrated();
     const topControls = useAnimation();
@@ -30,13 +37,6 @@ export default function Home() {
     const homeRef = useRef<HTMLDivElement>(null);
     const projectsRef = useRef<HTMLDivElement>(null);
     const experienceRef = useRef<HTMLDivElement>(null);
-
-    const highlights = [
-        "From Game Developer to Full-Stack Engineer",
-        "4+ years building scalable web apps",
-        "Expert in Node.js, React, Python, Docker and Cloud",
-        "Passionate about real-time systems and AI",
-    ];
 
     const gateAnimation = useCallback(
         async (direction: "open" | "close") => {
@@ -255,7 +255,7 @@ export default function Home() {
             3000
         );
         return () => clearInterval(interval);
-    }, [isHydrated, highlights.length]);
+    }, [isHydrated]);
 
     return (
         <>
@@ -309,7 +309,7 @@ export default function Home() {
                     <motion.div
                         animate={bottomControls}
                         initial={{ y: 0 }}
-                        className="fixed bottom-0 left-0 right-0 bg-slate-100 flex items-center justify-center z-50 bg-animated text-base"
+                        className="fixed bottom-0 left-0 right-0 bg-slate-100 flex items-center justify-center z-50 bg-animated text-body"
                         style={{
                             height: "calc(25vh + 100px)",
                             clipPath: "url(#curvedTop)",
@@ -390,14 +390,12 @@ export default function Home() {
                                     }
                                 }
                             }}
-                            className={`w-3 h-3 rounded-full border-2 transition-all duration-300 ${
-                                currentStage === stageIndex
-                                    ? "bg-accent border-accent"
-                                    : "bg-transparent border-accent/50 hover:border-accent"
-                            }`}
-                            aria-label={`Go to ${
-                                ["Home", "Projects", "Experience"][stageIndex]
-                            }`}
+                            className={`w-3 h-3 rounded-full border-2 transition-all duration-300 ${currentStage === stageIndex
+                                ? "bg-accent border-accent"
+                                : "bg-transparent border-accent/50 hover:border-accent"
+                                }`}
+                            aria-label={`Go to ${["Home", "Projects", "Experience"][stageIndex]
+                                }`}
                         />
                     ))}
                 </div>

@@ -10,22 +10,16 @@
     --color-secondary: #6366f1;
     --color-card: #0f172a;
     --color-tag: #374151;
-
-    --font-mono: "Fira Code", "Courier New", monospace;
 }
 
 body {
     background-color: theme(--color-background);
     color: theme(--color-foreground);
-    font-family: var(--font-mono);
+    font-family: var(--font-fira-code), monospace;
     line-height: 1.6;
     letter-spacing: 0.015em;
 }
 
-* {
-    transition: background-color 0.3s ease, color 0.3s ease,
-        border-color 0.3s ease;
-}
 
 .btn-primary {
     background: var(--color-accent);
@@ -47,12 +41,10 @@ body {
 }
 
 .bg-animated {
-    background: radial-gradient(
-        circle at center,
-        #38bdf8 0%,
-        #6366f1 60%,
-        #969595 100%
-    );
+    background: radial-gradient(circle at center,
+            #38bdf8 0%,
+            #6366f1 60%,
+            #969595 100%);
     animation: bgPulse 6s infinite alternate;
 }
 
@@ -60,6 +52,7 @@ body {
     from {
         filter: brightness(1);
     }
+
     to {
         filter: brightness(1.2);
     }
@@ -73,7 +66,7 @@ body {
     color: var(--color-subtle);
 }
 
-.text-base {
+.text-body {
     color: var(--color-foreground);
 }
 
@@ -91,7 +84,7 @@ body {
         gap: 1rem;
     }
 
-    .small-height\:space-y-0 > * + * {
+    .small-height\:space-y-0>*+* {
         margin-top: 0 !important;
     }
 
@@ -110,7 +103,7 @@ body {
         gap: 1rem;
     }
 
-    .short-screen\:space-y-0 > * + * {
+    .short-screen\:space-y-0>*+* {
         margin-top: 0 !important;
     }
 
@@ -152,20 +145,22 @@ body {
 
 .style-7::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: linear-gradient(
-        to top,
-        rgb(122, 153, 217) 44%,
-        rgb(73, 125, 189) 72%,
-        rgb(28, 58, 148) 86%
-    );
+    background: linear-gradient(to top,
+            rgb(122, 153, 217) 44%,
+            rgb(73, 125, 189) 72%,
+            rgb(28, 58, 148) 86%);
 }
 
 .scrollbar-hide {
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
 }
+
 .scrollbar-hide::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
+    display: none;
+    /* Safari and Chrome */
 }
 
 .scrollable-content {

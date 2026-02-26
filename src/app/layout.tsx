@@ -1,14 +1,8 @@
 import type { Metadata } from "next";
-import { Inter, Fira_Code } from "next/font/google";
+import { Fira_Code } from "next/font/google";
 import "./globals.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
-
-const inter = Inter({
-    subsets: ["latin"],
-    weight: ["400", "600", "700"],
-    variable: "--font-inter",
-});
 
 const firaCode = Fira_Code({
     subsets: ["latin"],
@@ -29,10 +23,12 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                className={`${inter.variable} ${firaCode.variable} antialiased`}
+                className={`${firaCode.variable} antialiased`}
                 suppressHydrationWarning
             >
                 {children}
+                <SpeedInsights />
+                <Analytics />
             </body>
         </html>
     );

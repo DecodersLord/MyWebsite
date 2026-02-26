@@ -3,7 +3,7 @@
 import React from "react";
 import { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../../../firebaseConfig";
+import { db } from "@/lib/firebase";
 import { AnimatePresence, motion } from "framer-motion";
 import { Project, Category, TechTag, TECHS } from "../types";
 import { MobileFilterDrawer } from "./MobileFilterDrawer";
@@ -29,9 +29,7 @@ export default function Projects() {
             const zoom = window.devicePixelRatio || 1;
             const actualWidth = width * zoom;
 
-            console.log(
-                `CSS width: ${width}, Zoom: ${zoom}, Actual: ${actualWidth}`
-            );
+
 
             // Use CSS pixels for consistent behavior
             if (width < 640 || height < 750) return 2; // Mobile: 1x2

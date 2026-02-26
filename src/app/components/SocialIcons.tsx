@@ -9,10 +9,7 @@ interface SocialLink {
     name: IconKey;
     icon: React.ReactNode;
     url: string;
-    onHover: (() => void) | null;
-    stats: null;
-    loading: boolean;
-    renderStats: ((stats: null) => React.ReactNode) | null;
+    renderStats: (() => React.ReactNode) | null;
 }
 
 type IconKey = "GitHub" | "LeetCode" | "LinkedIn" | "Dev.to";
@@ -83,9 +80,6 @@ const SocialIcons = () => {
             name: "GitHub",
             icon: <FaGithub className="w-6 h-6" />,
             url: `https://github.com/${GITHUB_USERNAME}`,
-            onHover: null,
-            stats: null,
-            loading: false,
             renderStats: () => (
                 <a
                     href={`https://github.com/${GITHUB_USERNAME}`}
@@ -114,9 +108,6 @@ const SocialIcons = () => {
                 </svg>
             ),
             url: `https://leetcode.com/${LEETCODE_USERNAME}`,
-            onHover: null,
-            stats: null,
-            loading: false,
             renderStats: () => (
                 <a
                     href={`https://leetcode.com/${LEETCODE_USERNAME}`}
@@ -137,18 +128,12 @@ const SocialIcons = () => {
             name: "LinkedIn",
             icon: <FaLinkedin className="w-6 h-6" />,
             url: `https://linkedin.com/in/${LINKEDIN_USERNAME}`,
-            onHover: null,
-            stats: null,
-            loading: false,
             renderStats: null,
         },
         {
             name: "Dev.to",
             icon: <FaDev className="w-6 h-6" />,
             url: `https://dev.to/${DEV_TO_USERNAME}`,
-            onHover: null,
-            stats: null,
-            loading: false,
             renderStats: null,
         },
     ];
@@ -160,10 +145,7 @@ const SocialIcons = () => {
                     <div
                         ref={iconRefs[social.name]}
                         className="relative group"
-                        onMouseEnter={() => {
-                            setHoveredIcon(social.name);
-                            social.onHover?.();
-                        }}
+                        onMouseEnter={() => setHoveredIcon(social.name)}
                         onMouseLeave={() => setHoveredIcon(null)}
                     >
                         <a
@@ -183,24 +165,7 @@ const SocialIcons = () => {
                         }
                         triggerRef={iconRefs[social.name]}
                     >
-                        {social.renderStats && social.renderStats(null)}
-                    </TooltipPortal>
-
-                    {/* Loading Tooltip */}
-                    <TooltipPortal
-                        isVisible={
-                            hoveredIcon === social.name && social.loading
-                        }
-                        triggerRef={iconRefs[social.name]}
-                    >
-                        <div className="bg-white text-gray-800 p-3 rounded-lg shadow-lg">
-                            <div className="flex items-center gap-2">
-                                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[var(--color-accent)]"></div>
-                                <span className="text-sm">
-                                    Loading stats...
-                                </span>
-                            </div>
-                        </div>
+                        {social.renderStats && social.renderStats()}
                     </TooltipPortal>
                 </div>
             ))}

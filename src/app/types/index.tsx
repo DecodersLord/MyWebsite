@@ -14,7 +14,7 @@ import {
     SiDocker,
     SiGnubash,
 } from "react-icons/si";
-import { FiGithub, FiExternalLink, FiCloud } from "react-icons/fi";
+import { FiGithub, FiCloud } from "react-icons/fi";
 import { FaGamepad, FaPalette, FaServer, FaLinux } from "react-icons/fa";
 
 export type CategoryKey = "Front-end" | "Back-end" | "Game-dev" | "dev-ops";
